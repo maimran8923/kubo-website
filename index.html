@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>naoking tokyo | 町のリフォーム屋さん</title>
+  <title>naoking tokyo | 町のリフォーム屋</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -49,13 +49,14 @@
 
     .nav-logo {
       font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 1.35rem;
-      color: #ffffff;
-      letter-spacing: -0.5px;
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.2em;
+      text-transform: lowercase;
       white-space: nowrap;
     }
-    .nav-logo span { color: #555555; }
+    .nav-logo span { color: rgba(255,255,255,0.4); }
 
     .nav-links {
       display: flex;
@@ -134,9 +135,9 @@
     }
 
     /* ─── SHARED LAYOUT ───────────────────────────── */
-    .container { max-width: 1100px; margin: 0 auto; }
+    .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
 
-    section { padding: 6rem 2rem; }
+    section { padding: 6rem 2rem; position: relative; }
 
     .section-header { text-align: center; margin-bottom: 3.5rem; }
 
@@ -218,18 +219,19 @@
       position: relative;
       overflow: hidden;
       padding: 7rem 2rem 5rem;
-      background: #0a0a0a;
+      background-image: url('Background/House interior.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
-    /* subtle grid texture */
+    /* dark overlay for text legibility */
     .hero::before {
       content: '';
       position: absolute;
       inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-      background-size: 48px 48px;
+      background: rgba(0,0,0,0.72);
+      z-index: 0;
     }
 
     /* warm glow blob */
@@ -268,20 +270,23 @@
 
     .hero-name {
       font-family: 'Montserrat', sans-serif;
-      font-size: clamp(3rem, 10vw, 5.5rem);
-      font-weight: 900;
-      color: #ffffff;
-      line-height: 1;
-      letter-spacing: -2px;
-      margin-bottom: .5rem;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.2em;
+      text-transform: lowercase;
+      opacity: 0.6;
+      margin-bottom: 1.2rem;
     }
-    .hero-name .hl { color: #555555; }
+    .hero-name .hl { color: inherit; }
 
     .hero-tagline {
-      font-size: clamp(1.2rem, 4vw, 1.9rem);
-      color: rgba(255,255,255,.88);
-      font-weight: 300;
-      letter-spacing: 6px;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      color: #ffffff;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
       margin-bottom: .75rem;
     }
 
@@ -290,6 +295,55 @@
       color: rgba(255,255,255,.55);
       font-weight: 300;
       margin-bottom: 2.6rem;
+    }
+
+    .hero-cta .btn {
+      background: none;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-color: rgba(255,255,255,0.4);
+      transition: text-decoration-color .2s, color .2s;
+    }
+    .hero-cta .btn:hover {
+      background: none;
+      transform: none;
+      box-shadow: none;
+      color: rgba(255,255,255,0.75);
+      text-decoration-color: rgba(255,255,255,0.75);
+    }
+
+    .hero-free-badge {
+      display: inline-block;
+      background: none;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .hero-free-badge .badge-main {
+      display: block;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: 0.04em;
+      line-height: 1.4;
+    }
+    .hero-free-badge .badge-sub {
+      display: block;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.65);
+      margin-top: 0.3rem;
+      letter-spacing: 0.03em;
     }
 
     .hero-cta {
@@ -349,7 +403,23 @@
     }
 
     /* ─── SERVICES ────────────────────────────────── */
-    #services { background: #111111; }
+    #services {
+      background-color: #000000;
+      background-image: url('Background/Textural patterns.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    #services::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      z-index: 0;
+    }
+    #services .section-label { color: #444444; letter-spacing: 0.4em; font-size: 0.7rem; }
+    #services .section-title { color: #ffffff; font-weight: 900; }
+    #services .divider { background: #ffffff; width: 32px; height: 1px; }
 
     .services-grid {
       display: grid;
@@ -359,52 +429,84 @@
 
     .svc-card {
       border-radius: 0;
-      overflow: hidden;
-      border: 1px solid #222222;
-      transition: transform .35s, border-color .35s;
+      overflow: visible;
+      background: #000000;
+      border: 1px solid #ffffff;
+      box-shadow: none;
+      position: relative;
+      transition: opacity .3s;
     }
-    .svc-card:hover {
-      transform: translateY(-6px);
-      border-color: #444444;
+    .svc-card::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      width: 20px;
+      height: 20px;
+      border-top: 3px solid #ffffff;
+      border-left: 3px solid #ffffff;
+      pointer-events: none;
     }
+    .svc-card:hover { opacity: 0.85; }
 
     .svc-head {
-      padding: 2.2rem 2rem 1.6rem;
-      position: relative;
+      padding: 2.2rem 2rem 1.4rem;
+      background: #000000;
     }
-    /* Card 1: inverted — white header, black text. Bold stamp effect. */
-    .svc-card:nth-child(1) .svc-head { background: #ffffff; }
-    .svc-card:nth-child(1) .svc-head h3   { color: #0a0a0a; }
-    .svc-card:nth-child(1) .svc-head .en-tag { color: rgba(0,0,0,.45); }
-    .svc-card:nth-child(2) .svc-head { background: #1a1a1a; }
-    .svc-card:nth-child(3) .svc-head { background: #141414; }
 
-    .svc-icon { font-size: 2.8rem; margin-bottom: .9rem; }
-    .svc-head h3 { color: #ffffff; font-size: 1.35rem; font-weight: 900; margin-bottom: .2rem; }
+    .svc-numeral {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 4rem;
+      font-weight: 900;
+      color: #ffffff;
+      opacity: 1;
+      letter-spacing: -0.05em;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .svc-head h3 {
+      color: #ffffff;
+      font-size: 1.4rem;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      margin-bottom: .3rem;
+    }
     .svc-head .en-tag {
       font-family: 'Montserrat', sans-serif;
-      font-size: .7rem;
-      font-weight: 700;
-      letter-spacing: 2px;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: #555555;
+      color: #444444;
     }
 
-    .svc-body { padding: 1.6rem 2rem 2rem; background: #1a1a1a; }
-    .svc-body p { color: var(--muted); line-height: 1.85; font-size: .92rem; margin-bottom: 1rem; }
+    .svc-body { padding: 1.4rem 2rem 2rem; background: #000000; border-top: 1px solid #1a1a1a; }
+    .svc-body p { color: #666666; line-height: 1.8; font-size: 0.9rem; margin-bottom: 1rem; }
     .svc-body ul { list-style: none; }
     .svc-body li {
-      padding: .38rem 0;
-      font-size: .88rem;
-      color: #888888;
-      display: flex;
-      align-items: center;
-      gap: .55rem;
+      padding: .28rem 0 .28rem 12px;
+      font-size: .87rem;
+      color: #aaaaaa;
+      border-left: 1px solid #ffffff;
+      margin-bottom: 0;
+      line-height: 1.5;
     }
-    .svc-body li::before { content: '—'; color: #ffffff; font-weight: 700; }
 
     /* ─── GALLERY ─────────────────────────────────── */
-    #gallery { background: var(--warm); }
+    #gallery {
+      background-color: #111111;
+      background-image: url('Background/Living room.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    #gallery::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      z-index: 0;
+    }
 
     .gallery-grid {
       display: grid;
@@ -457,7 +559,20 @@
     .gallery-item:hover .gal-label { opacity: 1; }
 
     /* ─── ABOUT ───────────────────────────────────── */
-    #about { background: #0a0a0a; }
+    #about {
+      background-color: #0a0a0a;
+      background-image: url('Background/Outside the house.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    #about::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      z-index: 0;
+    }
 
     .about-grid {
       display: grid;
@@ -544,6 +659,146 @@
     .feat-text h4 { font-size: .88rem; font-weight: 700; color: #ffffff; margin-bottom: .2rem; }
     .feat-text p  { font-size: .78rem; color: var(--muted); margin: 0; }
 
+    /* ─── INSTAGRAM ──────────────────────────────── */
+    #instagram { background: #0a0a0a; }
+
+    .insta-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .insta-heading {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.4rem;
+    }
+    .insta-sub {
+      font-size: 1rem;
+      color: #888888;
+      margin-bottom: 2rem;
+      letter-spacing: 0.04em;
+    }
+    .insta-btn {
+      display: inline-block;
+      background: #ffffff;
+      color: #000000;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: 1rem;
+      font-weight: 900;
+      text-decoration: none;
+      padding: 1rem 2.2rem;
+      border: 3px solid #ffffff;
+      letter-spacing: 0.04em;
+      box-shadow: 5px 5px 0px rgba(255,255,255,0.25);
+      transition: background .2s, color .2s, box-shadow .2s;
+    }
+    .insta-btn:hover {
+      background: #000000;
+      color: #ffffff;
+      box-shadow: 5px 5px 0px rgba(255,255,255,0.5);
+    }
+    .insta-note {
+      margin-top: 1.4rem;
+      font-size: 0.82rem;
+      color: #555555;
+      font-style: italic;
+      letter-spacing: 0.03em;
+    }
+
+    /* ─── COMPANY PROFILE TABLE ──────────────────── */
+    .company-profile {
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid #222222;
+    }
+    .company-profile .section-label { margin-bottom: 0.5rem; }
+    .company-profile h2 {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 900;
+      color: #ffffff;
+      margin-bottom: 2rem;
+    }
+    .cp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    .cp-table tr {
+      border-bottom: 1px solid #1e1e1e;
+    }
+    .cp-table tr:first-child { border-top: 1px solid #1e1e1e; }
+    .cp-table th {
+      width: 30%;
+      padding: 1rem 1.2rem;
+      text-align: left;
+      font-weight: 700;
+      color: #aaaaaa;
+      background: #111111;
+      white-space: nowrap;
+      vertical-align: top;
+    }
+    .cp-table td {
+      padding: 1rem 1.2rem;
+      color: #dddddd;
+      line-height: 1.7;
+      vertical-align: top;
+    }
+    .cp-table td a {
+      color: #dddddd;
+      text-decoration: none;
+      border-bottom: 1px solid #444444;
+    }
+    .cp-table td a:hover { color: #ffffff; border-color: #ffffff; }
+    @media (max-width: 560px) {
+      .cp-table th { width: 38%; padding: 0.75rem 0.8rem; font-size: 0.82rem; }
+      .cp-table td { padding: 0.75rem 0.8rem; font-size: 0.85rem; }
+    }
+
+    /* ─── SERVICE AREA ───────────────────────────── */
+    #area { background: #0d0d0d; }
+
+    .area-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 2.5rem 0 1.8rem;
+    }
+    .area-card {
+      border: 3px solid #ffffff;
+      padding: 2rem 1.8rem;
+      text-align: center;
+      position: relative;
+      box-shadow: 5px 5px 0px #ffffff;
+    }
+    .area-card-region {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 900;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+    .area-card-note {
+      font-size: 0.82rem;
+      color: #888888;
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+    }
+    .area-disclaimer {
+      font-size: 0.8rem;
+      color: #666666;
+      font-style: italic;
+      line-height: 1.7;
+      text-align: center;
+    }
+    @media (max-width: 560px) {
+      .area-cards { grid-template-columns: 1fr; gap: 1.2rem; }
+      .area-card { box-shadow: 4px 4px 0px #ffffff; }
+    }
+
     /* ─── STRIP CTA ───────────────────────────────── */
     .strip {
       background: #ffffff;
@@ -576,10 +831,56 @@
 
     /* ─── QUOTE FORM ──────────────────────────────── */
     #quote {
-      background: #111111;
+      background-color: #111111;
+      background-image: url('Background/Cupboard setup.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    #quote::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      z-index: 0;
     }
     #quote .section-label { color: #555555; }
     #quote .section-title { color: #ffffff; }
+
+    .contact-info {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .contact-info-label {
+      font-size: 0.88rem;
+      color: #888888;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.6rem;
+    }
+    .contact-phone {
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: #ffffff;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      border-bottom: 2px solid rgba(255,255,255,0.2);
+      padding-bottom: 0.1em;
+      transition: color .2s, border-color .2s;
+    }
+    .contact-phone:hover { color: #cccccc; border-color: rgba(255,255,255,0.5); }
+    .contact-email {
+      display: block;
+      margin-top: 0.75rem;
+      font-size: 0.88rem;
+      color: #888888;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color .2s;
+    }
+    .contact-email:hover { color: #ffffff; }
 
     .form-card {
       background: #1a1a1a;
@@ -816,9 +1117,13 @@
   <div class="hero-content">
     <img src="logo.PNG" alt="naoking tokyo ロゴ" class="hero-logo-img">
     <div class="hero-badge">Tokyo Renovation Specialist</div>
+    <p class="hero-tagline">町のリフォーム屋</p>
     <h1 class="hero-name">naoking <span class="hl">tokyo</span></h1>
-    <p class="hero-tagline">町のリフォーム屋さん</p>
     <p class="hero-sub">地域に根ざした、信頼のリフォーム工事</p>
+    <div class="hero-free-badge">
+      <span class="badge-main">🆓 現地調査 無料</span>
+      <span class="badge-sub">‼️ お気軽にご連絡ください</span>
+    </div>
     <div class="hero-cta">
       <a href="#quote"    class="btn btn-fill">無料見積りを依頼する</a>
       <a href="#services" class="btn btn-ghost">サービスを見る</a>
@@ -839,7 +1144,7 @@
 
       <div class="svc-card reveal">
         <div class="svc-head">
-          <div class="svc-icon">🏠</div>
+          <div class="svc-numeral">01</div>
           <h3>内装リフォーム</h3>
           <p class="en-tag">Interior Renovation</p>
         </div>
@@ -857,7 +1162,7 @@
 
       <div class="svc-card reveal">
         <div class="svc-head">
-          <div class="svc-icon">🏗️</div>
+          <div class="svc-numeral">02</div>
           <h3>外装リフォーム</h3>
           <p class="en-tag">Exterior Renovation</p>
         </div>
@@ -875,7 +1180,7 @@
 
       <div class="svc-card reveal">
         <div class="svc-head">
-          <div class="svc-icon">✨</div>
+          <div class="svc-numeral">03</div>
           <h3>全面リフォーム</h3>
           <p class="en-tag">Full Renovation</p>
         </div>
@@ -960,7 +1265,7 @@
       <div class="about-text reveal">
         <p class="section-label">About Us</p>
         <h2>地域に根ざした<br>信頼のリフォーム</h2>
-        <p>naoking tokyoは、東京を拠点に地域のお客様に密着したリフォームサービスを提供しています。「町のリフォーム屋さん」として、小さな修繕から大規模改修まで、誠実・丁寧に対応いたします。</p>
+        <p>naoking tokyoは、東京を拠点に地域のお客様に密着したリフォームサービスを提供しています。町のリフォーム屋として、小さな修繕から大規模改修まで、誠実・丁寧に対応いたします。</p>
         <p>熟練の職人がお客様の大切な住まいを、より良い空間へと生まれ変わらせます。透明な価格設定と確かな技術で、安心してお任せください。</p>
         <div class="features">
           <div class="feat">
@@ -995,6 +1300,74 @@
       </div>
 
     </div>
+
+    <div class="company-profile reveal">
+      <p class="section-label">Company Profile</p>
+      <h2>会社概要</h2>
+      <table class="cp-table">
+        <tbody>
+          <tr>
+            <th>社名</th>
+            <td>株式会社久保工務店</td>
+          </tr>
+          <tr>
+            <th>資本金</th>
+            <td>900万円</td>
+          </tr>
+          <tr>
+            <th>拠点</th>
+            <td>東京支社 / 大阪支社</td>
+          </tr>
+          <tr>
+            <th>対応エリア</th>
+            <td>関東・関西全域（時期により例外あり）</td>
+          </tr>
+          <tr>
+            <th>メール</th>
+            <td><a href="mailto:kubokoumutenn@yahoo.co.jp">kubokoumutenn@yahoo.co.jp</a></td>
+          </tr>
+          <tr>
+            <th>電話（24時間）</th>
+            <td><a href="tel:09022602222">090-2260-2222</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ SERVICE AREA ══════════ -->
+<section id="area">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-label">Service Area</p>
+      <h2 class="section-title">対応エリア</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="area-cards">
+      <div class="area-card reveal">
+        <div class="area-card-region">関東全域</div>
+        <div class="area-card-note">東京・神奈川・埼玉・千葉 など</div>
+      </div>
+      <div class="area-card reveal">
+        <div class="area-card-region">関西全域</div>
+        <div class="area-card-note">大阪・京都・兵庫 など</div>
+      </div>
+    </div>
+    <p class="area-disclaimer reveal">※時期によっては対応エリア外となる場合がございます。まずはお気軽にお問い合わせください。</p>
+  </div>
+</section>
+
+<!-- ══════════ INSTAGRAM ══════════ -->
+<section id="instagram">
+  <div class="container">
+    <div class="insta-inner reveal">
+      <h2 class="insta-heading">🔰 社長日記</h2>
+      <p class="insta-sub">Instagramで毎日更新中！</p>
+      <a href="https://www.instagram.com/naokingtokyo" target="_blank" rel="noopener" class="insta-btn">→ @naokingtokyo をフォローする</a>
+      <p class="insta-note">施工事例・現場レポートをほぼ毎日投稿しています</p>
+    </div>
   </div>
 </section>
 
@@ -1012,6 +1385,12 @@
       <h2 class="section-title">無料お見積り依頼</h2>
       <div class="divider"></div>
     </div>
+    <div class="contact-info reveal">
+      <p class="contact-info-label">24時間 ⏰ いつでもご連絡ください</p>
+      <a href="tel:09022602222" class="contact-phone">090-2260-2222</a>
+      <a href="mailto:kubokoumutenn@yahoo.co.jp" class="contact-email">kubokoumutenn@yahoo.co.jp</a>
+    </div>
+
     <div class="form-card reveal">
 
       <!-- ── Success state (shown after submit) ── -->
@@ -1091,7 +1470,7 @@
   <div class="footer-top">
     <div class="ft-brand">
       <div class="ft-logo">naoking <span>tokyo</span></div>
-      <p>町のリフォーム屋さん</p>
+      <p>町のリフォーム屋</p>
       <p style="margin-top:.3rem">東京都のリフォーム専門店</p>
     </div>
     <div class="ft-contact">

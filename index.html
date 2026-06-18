@@ -32,6 +32,8 @@
       overflow-x: hidden;
     }
 
+    .ph { font-variant-emoji: text; color: #ffffff; }
+
     /* ─── NAV ─────────────────────────────────────── */
     nav {
       position: fixed;
@@ -65,12 +67,12 @@
     }
     .nav-links a {
       text-decoration: none;
-      color: #555555;
+      color: #ffffff;
       font-size: 0.88rem;
       font-weight: 500;
       transition: color .25s;
     }
-    .nav-links a:hover { color: #ffffff; }
+    .nav-links a:hover { color: #aaaaaa; }
 
     .nav-cta {
       font-family: 'Montserrat', sans-serif;
@@ -230,7 +232,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.72);
+      background: rgba(0,0,0,0.45);
       z-index: 0;
     }
 
@@ -256,26 +258,26 @@
     .hero-badge {
       display: inline-block;
       background: transparent;
-      color: #555555;
+      color: #e0e0e0;
       font-family: 'Montserrat', sans-serif;
       font-size: .7rem;
-      font-weight: 700;
-      padding: .4rem 1.2rem;
-      border-radius: 0;
-      border: 1px solid #333333;
+      font-weight: 600;
+      padding: 0;
+      border: none;
       letter-spacing: 4px;
       text-transform: uppercase;
       margin-bottom: 1.6rem;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.8);
     }
 
     .hero-name {
       font-family: 'Montserrat', sans-serif;
       font-size: 0.85rem;
-      font-weight: 400;
-      color: rgba(255,255,255,0.6);
+      font-weight: 600;
+      color: #ffffff;
       letter-spacing: 0.2em;
       text-transform: lowercase;
-      opacity: 0.6;
+      opacity: 1;
       margin-bottom: 1.2rem;
     }
     .hero-name .hl { color: inherit; }
@@ -288,13 +290,15 @@
       letter-spacing: -0.02em;
       line-height: 1.1;
       margin-bottom: .75rem;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.8);
     }
 
     .hero-sub {
-      font-size: 1rem;
-      color: rgba(255,255,255,.55);
-      font-weight: 300;
+      font-size: 1.05rem;
+      color: #ffffff;
+      font-weight: 700;
       margin-bottom: 2.6rem;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.8);
     }
 
     .hero-cta .btn {
@@ -414,10 +418,10 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.72);
+      background: rgba(0,0,0,0.45);
       z-index: 0;
     }
-    #services .section-label { color: #444444; letter-spacing: 0.4em; font-size: 0.7rem; }
+    #services .section-label { color: #aaaaaa; letter-spacing: 0.4em; font-size: 0.7rem; }
     #services .section-title { color: #ffffff; font-weight: 900; }
     #services .divider { background: #ffffff; width: 32px; height: 1px; }
 
@@ -481,12 +485,12 @@
     }
 
     .svc-body { padding: 1.4rem 2rem 2rem; background: #000000; border-top: 1px solid #1a1a1a; }
-    .svc-body p { color: #666666; line-height: 1.8; font-size: 0.9rem; margin-bottom: 1rem; }
+    .svc-body p { color: #cccccc; line-height: 1.9; font-size: 0.9rem; margin-bottom: 1rem; }
     .svc-body ul { list-style: none; }
     .svc-body li {
       padding: .28rem 0 .28rem 12px;
       font-size: .87rem;
-      color: #aaaaaa;
+      color: #cccccc;
       border-left: 1px solid #ffffff;
       margin-bottom: 0;
       line-height: 1.5;
@@ -504,7 +508,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.72);
+      background: rgba(0,0,0,0.45);
       z-index: 0;
     }
 
@@ -570,7 +574,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.72);
+      background: rgba(0,0,0,0.45);
       z-index: 0;
     }
 
@@ -626,8 +630,8 @@
       margin: .5rem 0 1.4rem;
     }
     .about-text p {
-      color: var(--muted);
-      line-height: 2;
+      color: #cccccc;
+      line-height: 1.9;
       font-size: .93rem;
       margin-bottom: .9rem;
     }
@@ -658,6 +662,37 @@
     }
     .feat-text h4 { font-size: .88rem; font-weight: 700; color: #ffffff; margin-bottom: .2rem; }
     .feat-text p  { font-size: .78rem; color: var(--muted); margin: 0; }
+
+    /* ─── BACKGROUND-IMAGE SECTION TEXT ──────────── */
+    /* Applies to hero, services, gallery, about, quote — any section
+       with a background photo. Ensures minimum legibility. */
+    #services h2, #services h3, #services .section-title,
+    #gallery  h2, #gallery  .section-title,
+    #about    h2, #about    .section-title,
+    #quote    h2, #quote    .section-title,
+    #area     h2, #area     .section-title,
+    #instagram h2 {
+      color: #ffffff;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.85);
+    }
+
+    #services p, #services li,
+    #gallery  p, #gallery  li,
+    #about    p, #about    li,
+    #quote    p, #quote    li,
+    #area     p, #area     li {
+      color: #cccccc;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+      line-height: 1.9;
+    }
+
+    /* Section labels (small uppercase tags above headings) */
+    #services .section-label,
+    #gallery  .section-label,
+    #about    .section-label,
+    #quote    .section-label {
+      text-shadow: 0 1px 4px rgba(0,0,0,0.85);
+    }
 
     /* ─── INSTAGRAM ──────────────────────────────── */
     #instagram { background: #0a0a0a; }
@@ -841,10 +876,10 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.72);
+      background: rgba(0,0,0,0.45);
       z-index: 0;
     }
-    #quote .section-label { color: #555555; }
+    #quote .section-label { color: #aaaaaa; }
     #quote .section-title { color: #ffffff; }
 
     .contact-info {
@@ -1096,7 +1131,7 @@
     <li><a href="#about">会社概要</a></li>
     <li><a href="#quote">お見積り</a></li>
   </ul>
-  <a class="nav-cta" href="tel:09022602222">📞 090-2260-2222</a>
+  <a class="nav-cta" href="tel:09022602222"><span class="ph">📞</span> 090-2260-2222</a>
   <button class="hamburger" id="burger" aria-label="メニューを開く">
     <span></span><span></span><span></span>
   </button>
@@ -1109,7 +1144,7 @@
   <a href="#gallery"  class="mob-link">施工事例</a>
   <a href="#about"    class="mob-link">会社概要</a>
   <a href="#quote"    class="mob-link">お見積り</a>
-  <a href="tel:09022602222" style="color:#ffffff;font-weight:700;font-family:'Montserrat',sans-serif;">📞 090-2260-2222</a>
+  <a href="tel:09022602222" style="color:#ffffff;font-weight:700;font-family:'Montserrat',sans-serif;"><span class="ph">📞</span> 090-2260-2222</a>
 </div>
 
 <!-- ══════════ HERO ══════════ -->
@@ -1374,7 +1409,7 @@
 <!-- ══════════ STRIP CTA ══════════ -->
 <div class="strip">
   <p>まずはお気軽にご相談ください — 無料でお見積りいたします</p>
-  <a href="tel:09022602222">📞 今すぐ電話する</a>
+  <a href="tel:09022602222"><span class="ph">📞</span> 今すぐ電話する</a>
 </div>
 
 <!-- ══════════ QUOTE FORM ══════════ -->
@@ -1453,7 +1488,7 @@
         </div>
 
         <div class="form-error" id="formError">
-          送信に失敗しました。お急ぎの場合は 📞 090-2260-2222 までお電話ください。
+          送信に失敗しました。お急ぎの場合は <span class="ph">📞</span> 090-2260-2222 までお電話ください。
         </div>
 
         <div class="form-submit">
@@ -1474,7 +1509,7 @@
       <p style="margin-top:.3rem">東京都のリフォーム専門店</p>
     </div>
     <div class="ft-contact">
-      <div class="ft-phone"><a href="tel:09022602222">📞 090-2260-2222</a></div>
+      <div class="ft-phone"><a href="tel:09022602222"><span class="ph">📞</span> 090-2260-2222</a></div>
       <div class="ft-insta">
         <a href="https://www.instagram.com/naokingtokyo" target="_blank" rel="noopener noreferrer">
           📷 @naokingtokyo

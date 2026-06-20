@@ -1282,8 +1282,8 @@
     .photo-wrapper img {
       width: 100%;
       height: auto;
-      object-fit: contain;
-      background: #1a1a1a;
+      object-fit: cover;
+      background: transparent;
       display: block;
     }
     .photo-label {
@@ -1379,7 +1379,7 @@
       }
     }
 
-    /* ═══ MAIN PAGE PORTFOLIO PHOTOS FULL WIDTH ═══ */
+    /* ═══ MAIN PAGE PORTFOLIO PHOTOS — FINAL ═══ */
     .portfolio-pair {
       display: grid !important;
       grid-template-columns: 1fr !important;
@@ -1393,16 +1393,18 @@
     .portfolio-item {
       width: 100% !important;
       max-width: 100% !important;
+      flex: none !important;
     }
     .portfolio-pair .photo-wrapper {
       width: 100% !important;
+      position: relative !important;
     }
     .portfolio-pair .photo-wrapper img {
       width: 100% !important;
       height: auto !important;
       aspect-ratio: auto !important;
       object-fit: cover !important;
-      background: #1a1a1a !important;
+      background: transparent !important;
       display: block !important;
     }
   </style>

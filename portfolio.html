@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>施工事例 | naoking tokyo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: #111111;
+      color: #cccccc;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      width: 100%;
+      padding: 0.9rem 20px;
+      box-sizing: border-box;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 60px;
+    }
+    .nav-logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: #ffffff;
+      letter-spacing: 0.15em;
+      text-transform: lowercase;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    .nav-logo span { color: rgba(255,255,255,0.5); }
+
+    #hamburger {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 1.6rem;
+      cursor: pointer;
+      z-index: 1001;
+      line-height: 1;
+      padding: 4px 8px;
+    }
+    #mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0; right: 0;
+      background: #1a1a1a;
+      padding: 20px;
+      z-index: 999;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    #mobile-menu a {
+      display: block;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    #mobile-menu a:last-child { border-bottom: none; }
+    #mobile-menu a:hover { color: #aaaaaa; }
+
+    /* ─── PAGE CONTENT ────────────────────────────── */
+    .portfolio-page {
+      padding: 100px 20px 60px;
+      text-align: center;
+      background: #111111;
+      min-height: 100vh;
+    }
+
+    .section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #555555;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+
+    .gallery-grid-full {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin: 30px auto;
+      max-width: 800px;
+    }
+    .gallery-grid-full img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.1);
+      display: block;
+    }
+
+    .back-link-wrap { margin-top: 40px; }
+    .portfolio-link {
+      display: inline-block;
+      color: #ffffff;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.4);
+      padding-bottom: 3px;
+      transition: border-bottom-color .2s;
+    }
+    .portfolio-link:hover { border-bottom-color: #ffffff; }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer {
+      background: #0a0a0a;
+      color: #888888;
+      padding: 3.5rem 2rem 0;
+    }
+    .footer-top {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .ft-brand .ft-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.5rem;
+      color: #ffffff;
+      margin-bottom: .4rem;
+    }
+    .ft-brand .ft-logo span { color: #555555; }
+    .ft-brand p { color: #444444; font-size: .85rem; }
+    .ft-contact { text-align: right; }
+    .ft-phone {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: .75rem;
+    }
+    .ft-phone a { color: #ffffff; text-decoration: none; }
+    .ft-phone a:hover { color: #888888; }
+    .ft-insta a {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      color: #444444;
+      text-decoration: none;
+      font-size: .9rem;
+      padding: .5rem 1.1rem;
+      border: 1px solid #222222;
+      transition: all .3s;
+    }
+    .ft-insta a:hover { color: #ffffff; border-color: #ffffff; }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.4rem 0;
+      text-align: center;
+      font-size: .78rem;
+      color: rgba(245,240,232,.2);
+    }
+    .ph { font-variant-emoji: text; color: #ffffff; }
+
+    @media (max-width: 560px) {
+      .gallery-grid-full { grid-template-columns: 1fr; }
+      .ft-contact { text-align: left; }
+      .ft-phone { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <div class="nav-logo">naoking <span>tokyo</span></div>
+  <button id="hamburger" aria-label="メニューを開く">☰</button>
+  <div id="mobile-menu">
+    <a href="index.html#quote">無料見積もり</a>
+    <a href="index.html#services">サービス内容</a>
+    <a href="portfolio.html">施工事例</a>
+    <a href="index.html#quote">お問い合わせ</a>
+  </div>
+</nav>
+
+<!-- ══════════ PORTFOLIO PAGE ══════════ -->
+<main class="portfolio-page">
+  <p class="section-label">OUR WORK</p>
+  <h1 class="section-title">施工写真ギャラリー</h1>
+  <div class="gallery-grid-full">
+    <img src="images/House before.png" alt="施工写真">
+    <img src="images/House after.png" alt="施工写真">
+    <img src="images/Door before.jpg" alt="施工写真">
+    <img src="images/Door after.jpg" alt="施工写真">
+    <img src="images/Balcony roof before.jpg" alt="施工写真">
+    <img src="images/Balcony roof after1.jpg" alt="施工写真">
+    <img src="images/Balcony roof after2.jpg" alt="施工写真">
+    <img src="images/Staircase before.png" alt="施工写真">
+    <img src="images/Staircase after.png" alt="施工写真">
+    <img src="images/Car port before.jpg" alt="施工写真">
+    <img src="images/Car port after.jpg" alt="施工写真">
+    <img src="images/Carport after2.jpg" alt="施工写真">
+    <img src="images/Carport after3.jpg" alt="施工写真">
+    <img src="images/Ceiling electrical work1.jpg" alt="施工写真">
+    <img src="images/Ceiling electrical work2.jpg" alt="施工写真">
+    <img src="images/Toilet before.jpg" alt="施工写真">
+    <img src="images/Toilet after.jpg" alt="施工写真">
+  </div>
+  <div class="back-link-wrap">
+    <a href="index.html" class="portfolio-link">← トップページに戻る</a>
+  </div>
+</main>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-top">
+    <div class="ft-brand">
+      <div class="ft-logo">naoking <span>tokyo</span></div>
+      <p>町のリフォーム屋</p>
+      <p style="margin-top:.3rem">東京都のリフォーム専門店</p>
+    </div>
+    <div class="ft-contact">
+      <div class="ft-phone"><a href="tel:09022602222"><span class="ph">📞</span> 090-2260-2222</a></div>
+      <div class="ft-insta">
+        <a href="https://www.instagram.com/naokingtokyo" target="_blank" rel="noopener noreferrer">
+          📷 @naokingtokyo
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 naoking tokyo. All rights reserved.
+  </div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', function() {
+    mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => { mobileMenu.style.display = 'none'; })
+  );
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('nav')) mobileMenu.style.display = 'none';
+  });
+</script>
+</body>
+</html>

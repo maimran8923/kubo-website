@@ -1264,6 +1264,10 @@
     .photo-wrapper {
       position: relative;
       width: 100%;
+      background: transparent !important;
+      line-height: 0 !important;
+      font-size: 0 !important;
+      overflow: hidden !important;
     }
     .photo-tag {
       position: static;
@@ -1271,7 +1275,8 @@
       width: 100%;
       background: #1a1a1a;
       color: #ffffff;
-      font-size: 0.8rem;
+      font-size: 0.8rem !important;
+      line-height: 1.4 !important;
       letter-spacing: 0.15em;
       font-weight: 600;
       text-align: center;
@@ -1398,14 +1403,21 @@
     .portfolio-pair .photo-wrapper {
       width: 100% !important;
       position: relative !important;
+      background: transparent !important;
+      line-height: 0 !important;
+      font-size: 0 !important;
+      overflow: hidden !important;
     }
-    .portfolio-pair .photo-wrapper img {
+    .portfolio-pair .photo-wrapper img,
+    .photo-wrapper img {
       width: 100% !important;
       height: auto !important;
-      aspect-ratio: auto !important;
       object-fit: cover !important;
+      aspect-ratio: auto !important;
       background: transparent !important;
       display: block !important;
+      vertical-align: top !important;
+      margin: 0 !important;
     }
   </style>
 </head>

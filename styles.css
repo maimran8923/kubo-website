@@ -126,10 +126,10 @@ nav {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-template-columns: 1fr;
+  gap: 24px;
   margin: 30px auto;
-  max-width: 800px;
+  max-width: 700px;
   padding: 0 16px;
   box-sizing: border-box;
 }
@@ -145,7 +145,6 @@ nav {
 .photo-wrapper img {
   width: 100%;
   height: auto;
-  aspect-ratio: 4 / 3;
   object-fit: contain;
   background: #1a1a1a;
   display: block;

@@ -900,11 +900,17 @@
       margin: 2.5rem 0 1.8rem;
     }
     .area-card {
-      border: 3px solid #ffffff;
-      padding: 2rem 1.8rem;
+      padding: 2.2rem 1.8rem;
       text-align: center;
       position: relative;
-      box-shadow: 5px 5px 0px #ffffff;
+      background: radial-gradient(ellipse at center, #2a2a2a 0%, #0f0f0f 100%);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 0 60px rgba(255,255,255,0.02);
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .area-card:hover {
+      border-color: rgba(255,255,255,0.18);
     }
     .area-card-region {
       font-family: 'Noto Sans JP', sans-serif;
@@ -929,7 +935,7 @@
     }
     @media (max-width: 560px) {
       .area-cards { grid-template-columns: 1fr; gap: 1.2rem; }
-      .area-card { box-shadow: 4px 4px 0px #ffffff; }
+      .area-card { box-shadow: 0 6px 24px rgba(0,0,0,0.4), inset 0 0 40px rgba(255,255,255,0.02); }
     }
 
     /* ─── STRIP CTA ───────────────────────────────── */

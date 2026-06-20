@@ -485,83 +485,145 @@
     }
 
     /* ─── SERVICES ────────────────────────────────── */
-    #services {
-      background-color: #000000;
-      background-image: url('Background/Restaurant interior.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+    /* ─── SERVICES ──────────────────────────────── */
+    #services { background: #111111; }
+
+    .services {
+      padding: 4rem 1.5rem;
+      background: #111;
     }
-    #services::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.65) 100%);
-      z-index: 0;
-    }
-    #services .section-label { color: #ffffff; letter-spacing: 0.4em; font-size: 0.75rem; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
-    #services .section-title { color: #ffffff; font-weight: 700; }
-    #services .divider { background: #ffffff; width: 32px; height: 1px; }
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: #333;
+      border: 1px solid #333;
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
-    .svc-card {
-      border-radius: 0;
-      overflow: visible;
-      background: radial-gradient(ellipse at center, #2a2a2a 0%, #0f0f0f 100%);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 0 80px rgba(255,255,255,0.03);
+    .service-card {
+      background: #1a1a1a;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      overflow: hidden;
+    }
+
+    .service-card:hover { background: #222; }
+
+    .service-summary {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem 1.5rem;
+      text-align: center;
+      gap: 0.3rem;
       position: relative;
-      transition: opacity .3s;
-    }
-    .svc-card:hover { opacity: 0.85; }
-
-    .svc-head {
-      padding: 2.2rem 2rem 1.4rem;
-      background: transparent;
     }
 
-    .svc-numeral {
-      font-family: 'Helvetica Neue', sans-serif;
-      font-size: 4rem;
+    .service-num {
+      font-size: 2rem;
       font-weight: 100;
-      font-style: normal;
-      color: #ffffff;
-      opacity: 1;
-      letter-spacing: -0.02em;
-      line-height: 1;
-      margin-bottom: 1rem;
-    }
-    .svc-head h3 {
-      color: #ffffff;
-      font-size: 1.25rem;
-      font-weight: 600;
+      color: #fff;
       letter-spacing: 0.05em;
-      margin-bottom: .3rem;
-    }
-    .svc-head .en-tag {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 300;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #444444;
+      opacity: 0.5;
+      line-height: 1;
     }
 
-    .svc-body { padding: 1.4rem 2rem 2rem; background: transparent; border-top: 1px solid #2a2a2a; }
-    .svc-body p { color: #cccccc; line-height: 1.7; font-size: 0.95rem; font-weight: 400; margin-bottom: 1rem; }
-    .svc-body ul { list-style: none; }
-    .svc-body li {
-      padding: .28rem 0 .28rem 12px;
-      font-size: .87rem;
-      color: #cccccc;
-      border-left: 1px solid #ffffff;
-      margin-bottom: 6px;
-      line-height: 1.5;
+    .service-title-ja {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.05em;
+    }
+
+    .service-title-en {
+      font-size: 0.6rem;
+      font-weight: 400;
+      color: #888;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .service-arrow {
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+      color: #666;
+      transition: transform 0.3s ease, color 0.2s ease;
+      line-height: 1;
+    }
+
+    .service-card.open .service-arrow {
+      transform: rotate(45deg);
+      color: #fff;
+    }
+
+    .service-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+      padding: 0 1.2rem;
+      border-top: 0px solid #333;
+    }
+
+    .service-card.open .service-detail {
+      max-height: 400px;
+      padding: 1.2rem 1.2rem 1.8rem;
+      border-top: 1px solid #333;
+    }
+
+    .service-desc {
+      font-size: 0.78rem;
+      color: #aaa !important;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      text-shadow: none !important;
+    }
+
+    .service-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .service-list li {
+      font-size: 0.75rem;
+      color: #ccc !important;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid #2a2a2a;
+      padding-left: 0.8rem;
+      position: relative;
+      text-shadow: none !important;
+    }
+
+    .service-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: #555;
+      font-size: 0.6rem;
+      top: 0.5rem;
+    }
+
+    @media (max-width: 480px) {
+      .services-grid {
+        grid-template-columns: 1fr;
+        background: #1a1a1a;
+      }
+      .service-card { border-bottom: 1px solid #333; }
+      .service-summary {
+        flex-direction: row;
+        justify-content: flex-start;
+        gap: 1rem;
+        padding: 1.2rem 1.2rem;
+        text-align: left;
+      }
+      .service-num { font-size: 1.4rem; opacity: 0.4; min-width: 2rem; }
+      .service-title-ja { font-size: 1rem; flex: 1; }
+      .service-title-en { display: none; }
+      .service-arrow { margin-top: 0; }
     }
 
     /* ─── GALLERY / PORTFOLIO ────────────────────── */
@@ -769,7 +831,6 @@
     /* ─── BACKGROUND-IMAGE SECTION TEXT ──────────── */
     /* Applies to hero, services, gallery, about, quote — any section
        with a background photo. Ensures minimum legibility. */
-    #services h2, #services h3, #services .section-title,
     #gallery  h2, #gallery  .section-title,
     #about    h2, #about    .section-title,
     #quote    h2, #quote    .section-title,
@@ -779,7 +840,6 @@
       text-shadow: 0 1px 8px rgba(0,0,0,0.85);
     }
 
-    #services p, #services li,
     #gallery  p, #gallery  li,
     #about    p, #about    li,
     #quote    p, #quote    li,
@@ -790,7 +850,6 @@
     }
 
     /* Section labels (small uppercase tags above headings) */
-    #services .section-label,
     #gallery  .section-label,
     #about    .section-label,
     #quote    .section-label {
@@ -1518,70 +1577,69 @@
 </section>
 
 <!-- ══════════ SERVICES ══════════ -->
-<section id="services">
-  <div class="container">
-    <div class="section-header reveal">
-      <p class="section-label">Our Services</p>
-      <h2 class="section-title">サービス内容</h2>
-      <div class="divider"></div>
+<section class="services" id="services">
+  <div class="services-grid">
+
+    <!-- Card 01 -->
+    <div class="service-card" onclick="toggleService(this)">
+      <div class="service-summary">
+        <span class="service-num">01</span>
+        <span class="service-title-ja">内装</span>
+        <span class="service-title-en">INTERIOR</span>
+        <span class="service-arrow">＋</span>
+      </div>
+      <div class="service-detail">
+        <p class="service-desc">室内空間を美しく、快適に。お客様のご要望に合わせた最適なインテリアリフォームをご提案します。</p>
+        <ul class="service-list">
+          <li>壁紙・クロス張替え</li>
+          <li>フローリング・床工事</li>
+          <li>キッチン・浴室リフォーム</li>
+          <li>収納・押し入れ改造</li>
+          <li>照明・電気工事</li>
+        </ul>
+      </div>
     </div>
-    <div class="services-grid">
 
-      <div class="svc-card reveal">
-        <div class="svc-head">
-          <div class="svc-numeral">01</div>
-          <h3>内装リフォーム</h3>
-          <p class="en-tag">Interior Renovation</p>
-        </div>
-        <div class="svc-body">
-          <p>室内空間を美しく、快適に。お客様のご要望に合わせた最適なインテリアリフォームをご提案します。</p>
-          <ul>
-            <li>壁紙・クロス張替え</li>
-            <li>フローリング・床工事</li>
-            <li>キッチン・浴室リフォーム</li>
-            <li>収納・押し入れ改造</li>
-            <li>照明・電気工事</li>
-          </ul>
-        </div>
+    <!-- Card 02 -->
+    <div class="service-card" onclick="toggleService(this)">
+      <div class="service-summary">
+        <span class="service-num">02</span>
+        <span class="service-title-ja">外装</span>
+        <span class="service-title-en">EXTERIOR</span>
+        <span class="service-arrow">＋</span>
       </div>
-
-      <div class="svc-card reveal">
-        <div class="svc-head">
-          <div class="svc-numeral">02</div>
-          <h3>外装リフォーム</h3>
-          <p class="en-tag">Exterior Renovation</p>
-        </div>
-        <div class="svc-body">
-          <p>建物の外観を守り、美しく保ちます。耐久性と美観を両立した外装工事をご提供します。</p>
-          <ul>
-            <li>外壁塗装・補修</li>
-            <li>屋根工事・防水</li>
-            <li>サッシ・窓リフォーム</li>
-            <li>雨樋・軒天補修</li>
-            <li>玄関・アプローチ改修</li>
-          </ul>
-        </div>
+      <div class="service-detail">
+        <p class="service-desc">建物の外観を守り、美しく保ちます。耐久性と美観を両立した外装工事をご提供します。</p>
+        <ul class="service-list">
+          <li>外壁塗装・補修</li>
+          <li>屋根工事・防水</li>
+          <li>サッシ・窓リフォーム</li>
+          <li>雨樋・軒天補修</li>
+          <li>玄関・アプローチ改修</li>
+        </ul>
       </div>
-
-      <div class="svc-card reveal">
-        <div class="svc-head">
-          <div class="svc-numeral">03</div>
-          <h3>全面リフォーム</h3>
-          <p class="en-tag">Full Renovation</p>
-        </div>
-        <div class="svc-body">
-          <p>建物まるごとのリフォームも対応可能。トータルコーディネートで理想の住まいを実現します。</p>
-          <ul>
-            <li>間取り変更・スケルトン工事</li>
-            <li>断熱・耐震リフォーム</li>
-            <li>バリアフリー化</li>
-            <li>マンション全面改装</li>
-            <li>一戸建て丸ごとリフォーム</li>
-          </ul>
-        </div>
-      </div>
-
     </div>
+
+    <!-- Card 03 -->
+    <div class="service-card" onclick="toggleService(this)">
+      <div class="service-summary">
+        <span class="service-num">03</span>
+        <span class="service-title-ja">外構</span>
+        <span class="service-title-en">LANDSCAPING</span>
+        <span class="service-arrow">＋</span>
+      </div>
+      <div class="service-detail">
+        <p class="service-desc">建物まるごとのリフォームも対応可能。トータルコーディネートで理想の住まいを実現します。</p>
+        <ul class="service-list">
+          <li>間取り変更・スケルトン工事</li>
+          <li>断熱・耐震リフォーム</li>
+          <li>バリアフリー化</li>
+          <li>マンション全面改装</li>
+          <li>一戸建て丸ごとリフォーム</li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1859,6 +1917,12 @@
 
 <!-- ══════════ JS ══════════ -->
 <script>
+  function toggleService(card) {
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.service-card').forEach(c => c.classList.remove('open'));
+    if (!isOpen) { card.classList.add('open'); }
+  }
+
   /* Hamburger menu */
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');

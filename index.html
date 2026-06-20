@@ -52,7 +52,7 @@
     .nav-logo {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 10px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;
       font-size: 0.85rem;
@@ -372,7 +372,7 @@
       font-family: 'Noto Sans JP', sans-serif;
       font-size: 0.85rem;
       font-weight: 400;
-      color: rgba(255,255,255,0.65);
+      color: #e0e0e0;
       margin-top: 0.3rem;
       letter-spacing: 0.03em;
     }
@@ -1143,6 +1143,18 @@
     }
 
     /* ─── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 768px) {
+      .hero-logo-wrap {
+        width: 140px;
+        height: 140px;
+        min-width: 140px;
+        min-height: 140px;
+      }
+      .hero-tagline { font-size: 3rem; }
+      .hero { padding-bottom: 40px; }
+      .hero-cta .btn { margin-bottom: 20px; }
+    }
+
     @media (max-width: 800px) {
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
@@ -1209,7 +1221,7 @@
     <h1 class="hero-name">naoking <span class="hl">tokyo</span></h1>
     <p class="hero-sub">地域に根ざした、信頼のリフォーム工事</p>
     <div class="hero-free-badge">
-      <span class="badge-main">🆓 現地調査 無料</span>
+      <span class="badge-main">現地調査 無料</span>
       <span class="badge-sub">‼️ お気軽にご連絡ください</span>
     </div>
     <div class="hero-cta">

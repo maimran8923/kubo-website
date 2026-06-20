@@ -141,13 +141,15 @@ nav {
 .photo-wrapper {
   position: relative;
   width: 100%;
+  line-height: 0;
 }
 .photo-wrapper img {
   width: 100%;
   height: auto;
-  object-fit: contain;
-  background: #1a1a1a;
+  object-fit: cover;
+  background: transparent;
   display: block;
+  vertical-align: top;
   border: 1px solid rgba(255,255,255,0.1);
   opacity: 1 !important;
   filter: none !important;

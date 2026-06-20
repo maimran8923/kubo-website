@@ -682,34 +682,31 @@
     }
 
     .stats-grid {
-      display: grid !important;
-      grid-template-columns: repeat(2, 1fr) !important;
-      gap: 10px;
-      width: calc(100% - 32px) !important;
-      max-width: calc(100% - 32px) !important;
-      margin: 0 auto !important;
-      padding: 0 !important;
-      box-sizing: border-box !important;
-      overflow: hidden !important;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      padding: 16px;
+      box-sizing: border-box;
+      width: 100%;
     }
 
     .stat-card {
-      box-sizing: border-box !important;
-      min-width: 0 !important;
-      width: 100% !important;
-      overflow: hidden !important;
-      padding: 24px 12px;
+      padding: 16px 8px;
+      box-sizing: border-box;
+      width: 100%;
+      min-width: 0;
+      overflow: hidden;
       background: radial-gradient(ellipse at center, #2a2a2a 0%, #0f0f0f 100%);
       text-align: center;
     }
     .stat-num {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.9rem;
+      font-size: 1.8rem;
       font-weight: 900;
       color: var(--primary);
       line-height: 1;
     }
-    .stat-label { font-size: .72rem; color: var(--muted); margin-top: .3rem; }
+    .stat-label { font-size: 0.7rem; color: var(--muted); margin-top: .3rem; }
 
     .about-text h2 {
       font-size: 2rem;

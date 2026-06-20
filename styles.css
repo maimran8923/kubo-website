@@ -1,21 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Montserrat:wght@400;600;700;800;900&display=swap');
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; max-width: 100%; }
+* {
+  box-sizing: border-box !important;
+  margin: 0;
+  padding: 0;
+}
 
 html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  max-width: 100%;
-  width: 100%;
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+  width: 100% !important;
 }
 
 body {
   font-family: 'Noto Sans JP', sans-serif;
   background: #111111;
   color: #cccccc;
-  overflow-x: hidden;
-  max-width: 100%;
-  width: 100%;
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0;
+  padding: 0;
   word-break: keep-all;
   overflow-wrap: break-word;
 }
@@ -164,13 +169,15 @@ nav {
   display: inline-block;
   margin-top: 28px;
   color: #ffffff !important;
-  font-size: 1rem;
+  font-size: 1rem !important;
+  font-weight: 600 !important;
   letter-spacing: 0.12em;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(255,255,255,0.7);
+  text-decoration: none !important;
+  border-bottom: 2px solid #ffffff !important;
   padding-bottom: 4px;
+  opacity: 1 !important;
 }
-.portfolio-link:hover { border-bottom-color: #ffffff; }
+.portfolio-link:hover { border-bottom-color: rgba(255,255,255,0.6) !important; }
 
 /* ─── FOOTER ──────────────────────────────────── */
 footer {

@@ -1252,8 +1252,7 @@
       min-width: 0;
       max-width: 50%;
     }
-    .portfolio-item img,
-    .photo-wrapper img {
+    .portfolio-item img {
       width: 100%;
       max-width: 100%;
       height: 220px;
@@ -1267,15 +1266,26 @@
       width: 100%;
     }
     .photo-tag {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: rgba(0,0,0,0.65);
+      position: static;
+      display: block;
+      width: 100%;
+      background: #1a1a1a;
       color: #ffffff;
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      padding: 4px 10px;
-      font-weight: 500;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      font-weight: 600;
+      text-align: center;
+      padding: 8px 0;
+      box-sizing: border-box;
+      margin: 0;
+    }
+    .photo-wrapper img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: contain;
+      background: #1a1a1a;
+      display: block;
     }
     .photo-label {
       color: #aaaaaa;
@@ -1487,14 +1497,14 @@
   <div class="portfolio-pair">
     <div class="portfolio-item">
       <div class="photo-wrapper">
-        <img src="images/house-before.png" alt="施工前">
         <span class="photo-tag">施工前</span>
+        <img src="images/house-before.png" alt="施工前">
       </div>
     </div>
     <div class="portfolio-item">
       <div class="photo-wrapper">
-        <img src="images/house-after.png" alt="施工後">
         <span class="photo-tag">施工後</span>
+        <img src="images/house-after.png" alt="施工後">
       </div>
     </div>
   </div>

@@ -31,6 +31,8 @@
       color: var(--text);
       background: var(--cream);
       overflow-x: hidden;
+      word-break: keep-all;
+      overflow-wrap: break-word;
     }
 
     .ph { font-variant-emoji: text; color: #ffffff; }
@@ -438,6 +440,39 @@
       border: none;
     }
 
+    /* ─── SCROLL INDICATOR ────────────────────────── */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      z-index: 10;
+    }
+    .scroll-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      color: rgba(255,255,255,0.65);
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(255,255,255,0));
+      animation: scrollDrop 1.6s ease-in-out infinite;
+    }
+    @keyframes scrollDrop {
+      0%   { opacity: 0; transform: scaleY(0); transform-origin: top; }
+      40%  { opacity: 1; transform: scaleY(1); transform-origin: top; }
+      80%  { opacity: 0; transform: scaleY(1); transform-origin: bottom; }
+      100% { opacity: 0; transform: scaleY(0); transform-origin: bottom; }
+    }
+
     /* ─── SERVICES ────────────────────────────────── */
     #services {
       background-color: #000000;
@@ -618,7 +653,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at center, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.6) 100%);
+      background: rgba(0,0,0,0.82);
       z-index: 0;
     }
 
@@ -630,18 +665,6 @@
     }
 
     .about-img-wrap { position: relative; }
-
-    .about-placeholder {
-      width: 100%;
-      aspect-ratio: 4/3;
-      border-radius: 0;
-      background: #111111;
-      border: 1px solid #2a2a2a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 5rem;
-    }
 
     .stats-grid {
       display: grid;
@@ -1210,13 +1233,13 @@
     }
     .portfolio-link {
       display: inline-block;
-      margin-top: 20px;
+      margin-top: 24px;
       color: #ffffff;
-      font-size: 0.9rem;
-      letter-spacing: 0.1em;
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
       text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.4);
-      padding-bottom: 3px;
+      border-bottom: 1px solid rgba(255,255,255,0.6);
+      padding-bottom: 4px;
       transition: border-bottom-color .2s;
     }
     .portfolio-link:hover { border-bottom-color: #ffffff; }
@@ -1279,11 +1302,15 @@
     <p class="hero-tagline">町のリフォーム屋</p>
     <h1 class="hero-name">naoking <span class="hl">tokyo</span></h1>
     <p class="hero-sub">地域に根ざした、信頼のリフォーム工事</p>
-    <p class="hero-free-text">現地調査 無料 — お気軽にご連絡ください</p>
+    <p class="hero-free-text">現地調査 無料<br>お気軽にご連絡ください</p>
     <div class="hero-cta">
       <a href="#quote"    class="btn btn-fill">無料見積りを依頼する</a>
       <a href="#services" class="btn btn-ghost">サービスを見る</a>
     </div>
+  </div>
+  <div class="scroll-indicator">
+    <span class="scroll-text">SCROLL</span>
+    <div class="scroll-line"></div>
   </div>
 </section>
 
@@ -1361,11 +1388,11 @@
   <h2 class="section-title">施工事例</h2>
   <div class="portfolio-pair">
     <div class="portfolio-item">
-      <img src="images/House before.png" alt="施工前">
+      <img src="images/House before.png" alt="施工前" onerror="this.style.border='1px solid red'">
       <p class="photo-label">Before</p>
     </div>
     <div class="portfolio-item">
-      <img src="images/House after.png" alt="施工後">
+      <img src="images/House after.png" alt="施工後" onerror="this.style.border='1px solid red'">
       <p class="photo-label">After</p>
     </div>
   </div>
@@ -1378,7 +1405,6 @@
     <div class="about-grid">
 
       <div class="about-img-wrap reveal">
-        <div class="about-placeholder">🔨</div>
         <div class="stats-grid">
           <div class="stat-card">
             <div class="stat-num">15<small style="font-size:1rem">+</small></div>
@@ -1620,7 +1646,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    © 2025 naoking tokyo. All rights reserved.
+    © 2026 naoking tokyo. All rights reserved.
   </div>
 </footer>
 

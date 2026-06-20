@@ -58,15 +58,12 @@
       backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(255,255,255,.1);
       display: flex;
-      justify-content: center;
       align-items: center;
       min-height: 60px;
     }
 
     .nav-logo {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+      flex: 0;
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;
       font-size: 0.85rem;
@@ -78,10 +75,18 @@
     }
     .nav-logo span { color: rgba(255,255,255,0.5); }
 
+    .nav-phone {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+      opacity: 0.85;
+      white-space: nowrap;
+    }
+    .nav-phone:hover { opacity: 1; }
+
     #hamburger {
-      position: fixed;
-      right: 16px;
-      top: 16px;
       background: none;
       border: none;
       color: #ffffff;
@@ -793,7 +798,7 @@
     }
 
     /* ─── INSTAGRAM ──────────────────────────────── */
-    #instagram { background: #0a0a0a; }
+    #instagram { background: #0a0a0a; padding-bottom: 5rem; }
 
     .insta-inner {
       max-width: 600px;
@@ -835,10 +840,13 @@
     }
     .insta-note {
       margin-top: 1.4rem;
+      margin-bottom: 0;
+      padding-bottom: 2rem;
       font-size: 0.82rem;
       color: #555555;
       font-style: italic;
       letter-spacing: 0.03em;
+      opacity: 0.45;
     }
 
     /* ─── COMPANY PROFILE TABLE ──────────────────── */
@@ -941,26 +949,29 @@
     /* ─── STRIP CTA ───────────────────────────────── */
     .strip {
       background: #ffffff;
-      padding: 2.8rem 2rem;
+      border-top: 1px solid #e0e0e0;
+      padding: 4rem 2rem;
       text-align: center;
     }
     .strip p {
       color: #0a0a0a;
-      font-size: 1.3rem;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
       font-weight: 700;
-      margin-bottom: 1.2rem;
+      margin-bottom: 2rem;
       letter-spacing: 1px;
     }
     .strip a {
       background: #0a0a0a;
       color: #ffffff;
-      padding: .9rem 2.4rem;
+      padding: 1rem 2.5rem;
       border-radius: 0;
       font-weight: 700;
       text-decoration: none;
-      font-size: .95rem;
+      font-size: 1rem;
       transition: all .3s;
-      display: inline-block;
+      display: block;
+      margin: 0 auto;
+      width: fit-content;
       border: 1px solid #0a0a0a;
     }
     .strip a:hover {
@@ -1370,6 +1381,10 @@
     }
     .back-link-wrap { margin-top: 40px; }
 
+    @media (max-width: 768px) {
+      .nav-phone { display: none; }
+    }
+
     /* ═══ DEFINITIVE MOBILE STATS FIX ═══ */
     @media (max-width: 768px) {
       .container {
@@ -1456,8 +1471,12 @@
 
 <!-- ══════════ NAV ══════════ -->
 <nav>
+  <div style="flex:1"></div>
   <div class="nav-logo">naoking <span>tokyo</span></div>
-  <button id="hamburger" aria-label="メニューを開く">☰</button>
+  <div style="flex:1; display:flex; justify-content:flex-end; align-items:center; gap:1rem;">
+    <a href="tel:09022602222" class="nav-phone">090-2260-2222</a>
+    <button id="hamburger" aria-label="メニューを開く">☰</button>
+  </div>
   <div id="mobile-menu">
     <a href="#quote">無料見積もり</a>
     <a href="#services">サービス内容</a>

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; max-width: 100%; }
 
     :root {
       --primary:       #ffffff;
@@ -24,13 +24,20 @@
       --color-card:    #1a1a1a;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      max-width: 100%;
+      width: 100%;
+    }
 
     body {
       font-family: 'Noto Sans JP', sans-serif;
       color: var(--text);
       background: var(--cream);
       overflow-x: hidden;
+      max-width: 100%;
+      width: 100%;
       word-break: keep-all;
       overflow-wrap: break-word;
     }
@@ -72,16 +79,15 @@
     .nav-logo span { color: rgba(255,255,255,0.5); }
 
     #hamburger {
-      position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
+      position: fixed;
+      right: 16px;
+      top: 16px;
       background: none;
       border: none;
       color: #ffffff;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       cursor: pointer;
-      z-index: 1001;
+      z-index: 1100;
       line-height: 1;
       padding: 4px 8px;
     }
@@ -1388,11 +1394,11 @@
   <h2 class="section-title">施工事例</h2>
   <div class="portfolio-pair">
     <div class="portfolio-item">
-      <img src="images/House before.png" alt="施工前" onerror="this.style.border='1px solid red'">
+      <img src="images/house-before.png" alt="施工前" onerror="this.style.border='1px solid red'">
       <p class="photo-label">Before</p>
     </div>
     <div class="portfolio-item">
-      <img src="images/House after.png" alt="施工後" onerror="this.style.border='1px solid red'">
+      <img src="images/house-after.png" alt="施工後" onerror="this.style.border='1px solid red'">
       <p class="photo-label">After</p>
     </div>
   </div>

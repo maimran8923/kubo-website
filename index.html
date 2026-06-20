@@ -619,7 +619,6 @@
       aspect-ratio: 4 / 3;
       object-fit: cover;
       display: block;
-      filter: grayscale(15%);
     }
 
     .portfolio-singles {
@@ -634,7 +633,6 @@
       aspect-ratio: 4 / 3;
       object-fit: cover;
       display: block;
-      filter: grayscale(15%);
     }
 
     @media (max-width: 640px) {
@@ -670,13 +668,20 @@
       align-items: center;
     }
 
-    .about-img-wrap { position: relative; }
+    .about-img-wrap {
+      position: relative;
+      background: #0f0f0f !important;
+      padding: 20px 16px;
+      box-sizing: border-box;
+    }
 
     .stats-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: .75rem;
-      margin-top: 1.5rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      width: 100%;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     .stat-card {
@@ -1218,17 +1223,35 @@
       gap: 12px;
       justify-content: center;
       margin: 30px 0;
+      position: relative;
+      z-index: 2;
     }
     .portfolio-item {
       flex: 1;
       max-width: 48%;
     }
-    .portfolio-item img {
+    .photo-wrapper {
+      position: relative;
       width: 100%;
-      height: 200px;
+    }
+    .photo-wrapper img {
+      width: 100%;
+      height: 220px;
       object-fit: cover;
-      border: 1px solid rgba(255,255,255,0.1);
       display: block;
+      opacity: 1 !important;
+      filter: none !important;
+    }
+    .photo-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.65);
+      color: #ffffff;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      padding: 4px 10px;
+      font-weight: 500;
     }
     .photo-label {
       color: #aaaaaa;
@@ -1239,14 +1262,13 @@
     }
     .portfolio-link {
       display: inline-block;
-      margin-top: 24px;
-      color: #ffffff;
-      font-size: 0.95rem;
+      margin-top: 28px;
+      color: #ffffff !important;
+      font-size: 1rem;
       letter-spacing: 0.12em;
       text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.6);
+      border-bottom: 1px solid rgba(255,255,255,0.7);
       padding-bottom: 4px;
-      transition: border-bottom-color .2s;
     }
     .portfolio-link:hover { border-bottom-color: #ffffff; }
 
@@ -1394,12 +1416,16 @@
   <h2 class="section-title">施工事例</h2>
   <div class="portfolio-pair">
     <div class="portfolio-item">
-      <img src="images/house-before.png" alt="施工前" onerror="this.style.border='1px solid red'">
-      <p class="photo-label">Before</p>
+      <div class="photo-wrapper">
+        <img src="images/house-before.png" alt="施工前">
+        <span class="photo-tag">施工前</span>
+      </div>
     </div>
     <div class="portfolio-item">
-      <img src="images/house-after.png" alt="施工後" onerror="this.style.border='1px solid red'">
-      <p class="photo-label">After</p>
+      <div class="photo-wrapper">
+        <img src="images/house-after.png" alt="施工後">
+        <span class="photo-tag">施工後</span>
+      </div>
     </div>
   </div>
   <a href="portfolio.html" class="portfolio-link">すべての施工写真を見る →</a>

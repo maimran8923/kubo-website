@@ -166,6 +166,8 @@ nav {
 .back-link-wrap { margin-top: 40px; }
 
 .portfolio-link {
+  position: relative;
+  z-index: 10;
   display: inline-block;
   margin-top: 28px;
   color: #ffffff !important;
@@ -176,6 +178,8 @@ nav {
   border-bottom: 2px solid #ffffff !important;
   padding-bottom: 4px;
   opacity: 1 !important;
+  pointer-events: auto !important;
+  cursor: pointer;
 }
 .portfolio-link:hover { border-bottom-color: rgba(255,255,255,0.6) !important; }
 

@@ -38,32 +38,68 @@
     /* ─── NAV ─────────────────────────────────────── */
     nav {
       position: fixed;
-      inset: 0 0 auto;
-      z-index: 200;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
       padding: 0.9rem 2rem;
-      background: rgba(10,10,10,.97);
-      backdrop-filter: blur(12px);
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(8px);
       border-bottom: 1px solid rgba(255,255,255,.1);
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      gap: 1rem;
     }
 
     .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;
       font-size: 0.85rem;
-      color: rgba(255,255,255,0.6);
+      color: #ffffff;
       letter-spacing: 0.2em;
       text-transform: lowercase;
       white-space: nowrap;
       text-decoration: none;
     }
-    .nav-logo span { color: rgba(255,255,255,0.4); }
+    .nav-logo span { color: rgba(255,255,255,0.5); }
+
+    #hamburger {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px 8px;
+    }
+
+    #mobile-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #1a1a1a;
+      padding: 20px;
+      z-index: 999;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    #mobile-menu a {
+      display: block;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+    #mobile-menu a:last-child { border-bottom: none; }
+    #mobile-menu a:hover { color: #aaaaaa; }
 
     .nav-logo-img {
       display: block;
@@ -1160,20 +1196,14 @@
 
 <!-- ══════════ NAV ══════════ -->
 <nav>
-  <div class="nav-logo">
-    <img src="logo.jpg" alt="naoking tokyo ロゴ" class="nav-logo-img">
-    naoking <span>tokyo</span>
+  <div class="nav-logo">naoking <span>tokyo</span></div>
+  <button id="hamburger" aria-label="メニューを開く">☰</button>
+  <div id="mobile-menu">
+    <a href="#quote">無料見積もり</a>
+    <a href="#services">サービス内容</a>
+    <a href="#gallery">施工事例</a>
+    <a href="#quote">お問い合わせ</a>
   </div>
-  <ul class="nav-links">
-    <li><a href="#services">サービス</a></li>
-    <li><a href="#gallery">施工事例</a></li>
-    <li><a href="#about">会社概要</a></li>
-    <li><a href="#quote">お見積り</a></li>
-  </ul>
-  <a class="nav-cta" href="tel:09022602222"><span class="ph">📞</span> 090-2260-2222</a>
-  <button class="hamburger" id="burger" aria-label="メニューを開く">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
 <!-- ══════════ MOBILE MENU ══════════ -->
@@ -1664,16 +1694,18 @@
 
 <!-- ══════════ JS ══════════ -->
 <script>
-  /* Mobile menu */
-  const burger  = document.getElementById('burger');
-  const mobMenu = document.getElementById('mobMenu');
-  const mobClose = document.getElementById('mobClose');
-
-  burger.addEventListener('click',  () => mobMenu.classList.add('open'));
-  mobClose.addEventListener('click', () => mobMenu.classList.remove('open'));
-  mobMenu.querySelectorAll('a').forEach(a =>
-    a.addEventListener('click', () => mobMenu.classList.remove('open'))
+  /* Hamburger menu */
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', function() {
+    mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a =>
+    a.addEventListener('click', () => { mobileMenu.style.display = 'none'; })
   );
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('nav')) mobileMenu.style.display = 'none';
+  });
 
   /* Smooth scroll with nav offset */
   document.querySelectorAll('a[href^="#"]').forEach(a => {

@@ -667,17 +667,31 @@
         background: #1a1a1a;
       }
       .service-card { border-bottom: 1px solid #333; }
+      .service-num { font-size: 1.4rem; opacity: 0.4; min-width: 2rem; }
+      .service-title-ja { font-size: 1rem; }
+      .service-title-en { display: none; }
       .service-summary {
         flex-direction: row;
+        flex-wrap: wrap;
         justify-content: flex-start;
-        gap: 1rem;
+        align-items: center;
+        gap: 0.2rem;
         padding: 1.2rem 1.2rem;
         text-align: left;
       }
-      .service-num { font-size: 1.4rem; opacity: 0.4; min-width: 2rem; }
-      .service-title-ja { font-size: 1rem; flex: 1; }
-      .service-title-en { display: none; }
-      .service-arrow { margin-top: 0; }
+      .service-tags,
+      .service-subdesc {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.68rem;
+        margin: 0;
+      }
+      .service-arrow {
+        margin-left: auto;
+        align-self: center;
+      }
     }
 
     /* ─── GALLERY / PORTFOLIO ────────────────────── */

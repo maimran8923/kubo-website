@@ -241,7 +241,7 @@ footer {
   display: inline-flex;
   align-items: center;
   gap: .5rem;
-  color: #444444;
+  color: #cccccc !important;
   text-decoration: none;
   font-size: .9rem;
   padding: .5rem 1.1rem;
@@ -255,7 +255,7 @@ footer {
   padding: 1.4rem 0;
   text-align: center;
   font-size: .78rem;
-  color: rgba(245,240,232,.2);
+  color: #cccccc;
 }
 
 @media (max-width: 560px) {

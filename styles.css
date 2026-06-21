@@ -295,8 +295,8 @@ footer {
   left: 20px;
   z-index: 2000;
   background: rgba(26,26,26,0.95);
-  color: #ffffff;
-  text-decoration: none;
+  color: #ffffff !important;
+  text-decoration: none !important;
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -304,6 +304,9 @@ footer {
   border: 1px solid rgba(255,255,255,0.2);
   backdrop-filter: blur(8px);
   transition: border-color 0.2s;
+}
+.floating-back-btn:visited {
+  color: #ffffff !important;
 }
 .floating-back-btn:hover {
   border-color: rgba(255,255,255,0.7);

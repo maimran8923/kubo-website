@@ -173,8 +173,8 @@ nav {
   width: 100%;
   background: #1a1a1a;
   color: #ffffff;
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
   font-weight: 600;
   text-align: center;
   padding: 8px 0;
@@ -259,7 +259,7 @@ footer {
 }
 
 @media (max-width: 560px) {
-  .gallery-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr 1fr; }
   .footer-top {
     flex-direction: column;
     align-items: center;
@@ -275,7 +275,7 @@ footer {
   }
   .ft-phone {
     justify-content: center;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
   .ft-insta {
     display: flex;

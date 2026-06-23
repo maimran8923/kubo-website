@@ -311,3 +311,35 @@ footer {
 .floating-back-btn:hover {
   border-color: rgba(255,255,255,0.7);
 }
+
+/* ── Strengths section ── */
+.strength-card {
+  background: #111111;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 28px 24px;
+  transition: border-color 0.3s;
+}
+.strength-card:hover {
+  border-color: rgba(255,255,255,0.25);
+}
+.strength-icon {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+}
+.strength-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 10px;
+  letter-spacing: 0.05em;
+}
+.strength-desc {
+  font-size: 0.82rem;
+  color: #cccccc;
+  line-height: 1.8;
+}
+@media (max-width: 768px) {
+  #strengths > div > div[style*="grid"] {
+    grid-template-columns: 1fr !important;
+  }
+}

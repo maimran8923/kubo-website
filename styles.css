@@ -334,12 +334,3 @@ footer {
   color: #cccccc;
   line-height: 1.8;
 }
-@media (max-width: 768px) {
-  .strength-grid {
-    grid-template-columns: 1fr !important;
-    gap: 20px !important;
-  }
-  #strengths {
-    padding: 60px 16px !important;
-  }
-}

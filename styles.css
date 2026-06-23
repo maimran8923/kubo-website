@@ -322,10 +322,6 @@ footer {
 .strength-card:hover {
   border-color: rgba(255,255,255,0.25);
 }
-.strength-icon {
-  font-size: 1.8rem;
-  margin-bottom: 12px;
-}
 .strength-title {
   font-size: 0.95rem;
   font-weight: 700;
@@ -338,8 +334,8 @@ footer {
   color: #cccccc;
   line-height: 1.8;
 }
-@media (max-width: 768px) {
-  #strengths > div > div[style*="grid"] {
+@media (max-width: 600px) {
+  .strength-grid {
     grid-template-columns: 1fr !important;
   }
 }

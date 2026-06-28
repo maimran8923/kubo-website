@@ -180,10 +180,9 @@ nav {
 
 .gallery-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  margin: 30px auto;
-  max-width: 700px;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 16px 0;
   padding: 0 16px;
   box-sizing: border-box;
 }
@@ -303,7 +302,6 @@ footer {
 }
 
 @media (max-width: 560px) {
-  .gallery-grid { grid-template-columns: 1fr 1fr; }
   .footer-top {
     flex-direction: column;
     align-items: center;

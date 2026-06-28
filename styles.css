@@ -181,9 +181,9 @@ nav {
 .gallery-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
-  margin: 16px 0;
-  padding: 0 16px;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -195,7 +195,7 @@ nav {
   position: relative;
   width: 100%;
   line-height: 0;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
 }
 .photo-wrapper img {

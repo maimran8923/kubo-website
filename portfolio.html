@@ -289,7 +289,7 @@
 
   // Category expand / collapse
   document.querySelectorAll('.gallery-collapsible').forEach(function(grid) {
-    grid.style.maxHeight = grid.scrollHeight + 'px';
+    grid.style.maxHeight = 'none';
   });
   document.querySelectorAll('.category-toggle').forEach(function(btn) {
     btn.addEventListener('click', function() {
@@ -297,6 +297,7 @@
       const icon = this.querySelector('.toggle-icon');
       const expanded = this.getAttribute('aria-expanded') === 'true';
       if (expanded) {
+        // Pin current height first so the collapse animation has a start value
         grid.style.maxHeight = grid.scrollHeight + 'px';
         requestAnimationFrame(function() {
           grid.style.maxHeight = '0';
@@ -305,10 +306,15 @@
         btn.setAttribute('aria-expanded', 'false');
         icon.textContent = '▲';
       } else {
-        grid.style.maxHeight = grid.scrollHeight + 'px';
+        // Animate to a generous value, then remove the cap so late-loading images show fully
+        grid.style.maxHeight = '5000px';
         grid.style.opacity = '1';
         btn.setAttribute('aria-expanded', 'true');
         icon.textContent = '▼';
+        grid.addEventListener('transitionend', function handler() {
+          grid.style.maxHeight = 'none';
+          grid.removeEventListener('transitionend', handler);
+        });
       }
     });
   });

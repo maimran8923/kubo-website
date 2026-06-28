@@ -6,6 +6,46 @@
   <title>施工写真ギャラリー | naoking tokyo</title>
   <link rel="icon" href="logo.jpg" type="image/jpeg">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .category-toggle {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: none;
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding: 1.5rem 0 0.5rem;
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: #cccccc;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-align: left;
+    }
+    .category-toggle:hover { color: #ffffff; }
+    .toggle-icon {
+      font-size: 1.4rem;
+      font-weight: 300;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-left: 1rem;
+      transition: transform 0.3s ease;
+    }
+    .gallery-collapsible {
+      overflow: hidden;
+      transition: max-height 0.45s ease, opacity 0.35s ease;
+      opacity: 1;
+    }
+    .gallery-collapsible.collapsed {
+      max-height: 0 !important;
+      opacity: 0;
+    }
+  </style>
 </head>
 <body>
 
@@ -32,8 +72,8 @@
   <!-- ── 内装 ── -->
   <section class="portfolio-section" style="background-image: url('Background/内装.png'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
     <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.65);"></div>
-    <p style="position:relative; z-index:1; font-family:'Montserrat',sans-serif; font-size:0.7rem; letter-spacing:0.25em; color:#cccccc; text-transform:uppercase; padding: 1.5rem 0 0.5rem; border-top: 1px solid rgba(255,255,255,0.15); margin:0;">Interior · 内装</p>
-    <div class="gallery-grid" style="position: relative; z-index: 1;">
+    <button class="category-toggle" aria-expanded="true">Interior · 内装<span class="toggle-icon">−</span></button>
+    <div class="gallery-grid gallery-collapsible" style="position: relative; z-index: 1;">
       <div class="gallery-item">
         <div class="photo-wrapper">
           <span class="photo-tag">施工前</span>
@@ -136,8 +176,8 @@
   <!-- ── 外装 ── -->
   <section class="portfolio-section" style="background-image: url('Background/外装.png'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
     <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.65);"></div>
-    <p style="position:relative; z-index:1; font-family:'Montserrat',sans-serif; font-size:0.7rem; letter-spacing:0.25em; color:#cccccc; text-transform:uppercase; padding: 1.5rem 0 0.5rem; border-top: 1px solid rgba(255,255,255,0.15); margin:0;">Exterior · 外装</p>
-    <div class="gallery-grid" style="position: relative; z-index: 1;">
+    <button class="category-toggle" aria-expanded="true">Exterior · 外装<span class="toggle-icon">−</span></button>
+    <div class="gallery-grid gallery-collapsible" style="position: relative; z-index: 1;">
       <div class="gallery-item">
         <div class="photo-wrapper">
           <span class="photo-tag">施工前</span>
@@ -192,8 +232,8 @@
   <!-- ── 外構 ── -->
   <section class="portfolio-section" style="background-image: url('Background/外構.png'); background-size: cover; background-position: center; position: relative; overflow: hidden;">
     <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.65);"></div>
-    <p style="position:relative; z-index:1; font-family:'Montserrat',sans-serif; font-size:0.7rem; letter-spacing:0.25em; color:#cccccc; text-transform:uppercase; padding: 1.5rem 0 0.5rem; border-top: 1px solid rgba(255,255,255,0.15); margin:0;">Landscaping · 外構</p>
-    <div class="gallery-grid" style="position: relative; z-index: 1;">
+    <button class="category-toggle" aria-expanded="true">Landscaping · 外構<span class="toggle-icon">−</span></button>
+    <div class="gallery-grid gallery-collapsible" style="position: relative; z-index: 1;">
       <div class="gallery-item">
         <div class="photo-wrapper">
           <span class="photo-tag">施工前</span>
@@ -234,6 +274,7 @@
 </footer>
 
 <script>
+  // Hamburger menu
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
   hamburger.addEventListener('click', function() {
@@ -244,6 +285,32 @@
   );
   document.addEventListener('click', function(e) {
     if (!e.target.closest('nav')) mobileMenu.style.display = 'none';
+  });
+
+  // Category expand / collapse
+  document.querySelectorAll('.gallery-collapsible').forEach(function(grid) {
+    grid.style.maxHeight = grid.scrollHeight + 'px';
+  });
+  document.querySelectorAll('.category-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const grid = this.nextElementSibling;
+      const icon = this.querySelector('.toggle-icon');
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      if (expanded) {
+        grid.style.maxHeight = grid.scrollHeight + 'px';
+        requestAnimationFrame(function() {
+          grid.style.maxHeight = '0';
+          grid.style.opacity = '0';
+        });
+        btn.setAttribute('aria-expanded', 'false');
+        icon.textContent = '+';
+      } else {
+        grid.style.maxHeight = grid.scrollHeight + 'px';
+        grid.style.opacity = '1';
+        btn.setAttribute('aria-expanded', 'true');
+        icon.textContent = '−';
+      }
+    });
   });
 </script>
 <a href="index.html" class="floating-back-btn">← ホーム</a>

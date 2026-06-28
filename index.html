@@ -895,46 +895,55 @@
     /* ─── BACKGROUND-IMAGE SECTION TEXT ──────────── */
     /* Applies to hero, services, gallery, about, quote — any section
        with a background photo. Ensures minimum legibility. */
-    #gallery  h2, #gallery  .section-title,
-    #about    h2, #about    .section-title,
-    #quote    h2, #quote    .section-title,
-    #area     h2, #area     .section-title,
-    #instagram h2 {
+    #gallery   h2, #gallery   .section-title,
+    #about     h2, #about     .section-title,
+    #quote     h2, #quote     .section-title,
+    #area      h2, #area      .section-title,
+    #instagram h2, #instagram .section-title {
       color: #ffffff;
       text-shadow: 0 1px 8px rgba(0,0,0,0.85);
     }
 
-    #gallery  p, #gallery  li,
-    #about    p, #about    li,
-    #quote    p, #quote    li,
-    #area     p, #area     li {
+    #gallery   p, #gallery   li,
+    #about     p, #about     li,
+    #quote     p, #quote     li,
+    #area      p, #area      li,
+    #instagram p, #instagram li {
       color: #cccccc;
       text-shadow: 0 1px 4px rgba(0,0,0,0.9);
       line-height: 1.7;
     }
 
     /* Section labels (small uppercase tags above headings) */
-    #gallery  .section-label,
-    #about    .section-label,
-    #quote    .section-label {
+    #gallery   .section-label,
+    #about     .section-label,
+    #quote     .section-label,
+    #area      .section-label,
+    #instagram .section-label {
       text-shadow: 0 1px 4px rgba(0,0,0,0.85);
     }
 
     /* ─── INSTAGRAM ──────────────────────────────── */
-    #instagram { background: #0a0a0a; padding-bottom: 5rem; }
+    #instagram {
+      background-color: #0a0a0a;
+      background-image: url('Background/Cupboard setup.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding-bottom: 5rem;
+    }
+    #instagram::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      z-index: 0;
+    }
 
     .insta-inner {
       max-width: 600px;
       margin: 0 auto;
       text-align: center;
-    }
-    .insta-heading {
-      font-family: 'Noto Sans JP', sans-serif;
-      font-size: clamp(1.8rem, 5vw, 2.6rem);
-      font-weight: 900;
-      color: #ffffff;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.4rem;
     }
     .insta-sub {
       font-size: 1rem;
@@ -1015,7 +1024,20 @@
     }
 
     /* ─── SERVICE AREA ───────────────────────────── */
-    #area { background: #0d0d0d; }
+    #area {
+      background-color: #0a0a0a;
+      background-image: url('Background/Dining table.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    #area::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      z-index: 0;
+    }
 
     .area-cards {
       display: grid;
@@ -1934,7 +1956,11 @@
 <section id="instagram">
   <div class="container">
     <div class="insta-inner reveal">
-      <h2 class="insta-heading">🔰 社長日記</h2>
+      <div class="section-header">
+        <p class="section-label">Instagram</p>
+        <h2 class="section-title">🔰 社長日記</h2>
+        <div class="divider"></div>
+      </div>
       <p class="insta-sub">Instagramで毎日更新中！</p>
       <a href="https://www.instagram.com/naokingtokyo" target="_blank" rel="noopener" class="insta-btn">→ @naokingtokyo をフォローする</a>
       <p class="insta-note">施工事例・現場レポートをほぼ毎日投稿しています</p>

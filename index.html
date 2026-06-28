@@ -531,12 +531,25 @@
     }
 
     /* ─── SERVICES ────────────────────────────────── */
-    /* ─── SERVICES ──────────────────────────────── */
-    #services { background: #111111; }
+    #services {
+      background-image: url('Background/Outside the house.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+    #services::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.72);
+      z-index: 0;
+    }
 
     .services {
       padding: 4rem 1.5rem;
-      background: #111;
+      position: relative;
+      z-index: 1;
     }
 
     .services-grid {

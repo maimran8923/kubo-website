@@ -185,15 +185,29 @@ nav {
   .portfolio-page { padding-top: 80px; }
 }
 
+/* ─── PORTFOLIO PAGE ZONES ─────────────────── */
+.portfolio-zone {
+  margin: 0 -20px;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-color: #0a0a0a;
+}
+.portfolio-zone-1 {
+  margin-top: -100px;
+  background-image: url('Background/bg-corridor.png');
+}
+.portfolio-zone-2 {
+  background-image: url('Background/bg-dining.png');
+}
+@media (max-width: 800px) {
+  .portfolio-zone-1 { margin-top: -80px; }
+}
+
 /* ─── PORTFOLIO PAGE HERO HEADER ──────────── */
 .portfolio-hero-header {
   position: relative;
-  margin: -100px -20px 0;
   padding: 130px 20px 3rem;
-  background-image: url('Background/bg-corridor.png');
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
 }
 .portfolio-hero-header::before {
   content: '';
@@ -208,10 +222,7 @@ nav {
   z-index: 1;
 }
 @media (max-width: 800px) {
-  .portfolio-hero-header {
-    margin-top: -80px;
-    padding-top: 110px;
-  }
+  .portfolio-hero-header { padding-top: 110px; }
 }
 
 .gallery-grid {

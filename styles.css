@@ -213,7 +213,7 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.72);
+  background: rgba(0,0,0,0.55);
 }
 .portfolio-hero-header .section-eyebrow,
 .portfolio-hero-header .section-heading,
@@ -292,7 +292,7 @@ nav {
 
 /* ─── FOOTER ──────────────────────────────────── */
 footer {
-  background: rgba(0,0,0,0.85);
+  background: rgba(0,0,0,0.70);
   color: #cccccc;
   padding: 3.5rem 2rem 0;
 }

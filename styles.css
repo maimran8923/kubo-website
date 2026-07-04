@@ -196,10 +196,10 @@ nav {
 }
 .portfolio-zone-1 {
   margin-top: -100px;
-  background-image: url('Background/bg-garden-daytime.png');
+  background-image: url('Background/bg-exterior cropped.png');
 }
 .portfolio-zone-2 {
-  background-image: url('Background/bg-garden-daytime.png');
+  background-image: url('Background/bg-exterior cropped.png');
 }
 @media (max-width: 800px) {
   .portfolio-zone-1 { margin-top: -80px; }

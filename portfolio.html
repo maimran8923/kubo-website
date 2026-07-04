@@ -377,60 +377,89 @@
   const NAV_HEIGHT = 62;
   const categoryHeaders = [...document.querySelectorAll('.category-sticky-header')];
 
-  function stackHeader(header) {
+  // "Pinned" (position:fixed) is a purely positional concern, independent of
+  // whether the section's own content is collapsed. It has to be: .portfolio-
+  // section is position:relative (needed for its background overlay), which
+  // makes it the containing block for a plain position:sticky header. Once a
+  // header needs an offset greater than the default 62px (because something
+  // before it is stacked), native sticky can only hold that offset as long as
+  // there's room left in its OWN section's box -- as the section nears its
+  // own end, the browser has to cap/squeeze the sticky position to fit inside
+  // that shrinking box, which visibly misplaces the header. A pinned (fixed)
+  // header is positioned against the viewport instead, immune to that.
+  function pinHeader(header) {
     if (header.classList.contains('stacked')) return;
     const rect = header.getBoundingClientRect();
     header.style.width = rect.width + 'px';
     header.style.left = rect.left + 'px';
     header.classList.add('stacked');
-    restackFixedHeaders();
+    // Removing the header from normal flow closes the gap it used to
+    // reserve -- add it back as margin so the grid below doesn't ride up.
+    header.nextElementSibling.style.marginTop = rect.height + 'px';
   }
 
-  function unstackHeader(header) {
+  function unpinHeader(header) {
     if (!header.classList.contains('stacked')) return;
     header.classList.remove('stacked');
     header.style.top = '';
     header.style.left = '';
     header.style.width = '';
-    restackFixedHeaders();
+    header.nextElementSibling.style.marginTop = '';
   }
 
-  // Passed (stacked) headers pin one under another, in page order, below the
-  // nav. The still-sticky, currently-active header also needs its "top"
-  // pushed down by that same running total -- otherwise it sticks at the
-  // stylesheet's flat 62px and renders directly under/over the stacked ones.
-  function restackFixedHeaders() {
+  // Pinned (fully passed) headers stack one under another, in page order,
+  // below the nav; whichever section is currently active gets pinned right
+  // below that stack too, if the stack is non-empty. Sections further down
+  // that haven't been reached yet are left completely alone -- on a short
+  // page two categories can both be visible/expanded in the same viewport at
+  // once, and forcing the later one to the same fixed offset as the active
+  // one (before it's actually reached) would make it collide with it instead
+  // of appearing in its own natural place.
+  //
+  // While suppressObserver is true, this is skipped entirely -- otherwise
+  // the layout reflow from a jump's expand/collapse animations can
+  // transiently scroll other sections through the viewport and override the
+  // states jumpToCategory just set.
+  let suppressObserver = false;
+
+  function applyPinning(explicitStates) {
     let offset = NAV_HEIGHT;
-    categoryHeaders.forEach(function(header) {
-      header.style.top = offset + 'px';
-      if (header.classList.contains('stacked')) {
+    let foundActive = false;
+    categoryHeaders.forEach(function(header, i) {
+      if (foundActive) return;
+
+      const collapsed = explicitStates
+        ? explicitStates[i] === 'collapsed'
+        : header.querySelector('.category-toggle').getAttribute('aria-expanded') === 'false';
+
+      if (collapsed) {
+        pinHeader(header);
+        header.style.top = offset + 'px';
         offset += header.offsetHeight;
+      } else {
+        foundActive = true;
+        if (offset > NAV_HEIGHT) {
+          pinHeader(header);
+          header.style.top = offset + 'px';
+        } else {
+          unpinHeader(header);
+        }
       }
     });
   }
 
-  // While true, the scroll-triggered auto-fold observer ignores intersection
-  // changes -- otherwise the layout reflow from a jump's expand/collapse
-  // animations can transiently scroll other sections through the viewport
-  // and cause the observer to override the states jumpToCategory just set.
-  let suppressObserver = false;
-
   // Jump back to an earlier category: expand it and scroll to it, collapse
-  // (and stack) everything before it, collapse (and un-stack) everything after.
+  // everything before it, collapse everything after.
   function jumpToCategory(targetIndex) {
     suppressObserver = true;
     categoryHeaders.forEach(function(header, i) {
       if (i === targetIndex) {
-        unstackHeader(header);
         expandCategory(header);
-      } else if (i < targetIndex) {
-        collapseCategory(header);
-        stackHeader(header);
       } else {
         collapseCategory(header);
-        unstackHeader(header);
       }
     });
+    applyPinning(categoryHeaders.map((h, i) => i === targetIndex ? 'expanded' : 'collapsed'));
     categoryHeaders[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
     setTimeout(function() { suppressObserver = false; }, 900);
   }
@@ -439,12 +468,11 @@
     const btn = header.querySelector('.category-toggle');
 
     btn.addEventListener('click', function() {
-      if (header.classList.contains('stacked')) {
+      if (btn.getAttribute('aria-expanded') === 'false') {
         jumpToCategory(index);
         return;
       }
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      if (expanded) collapseCategory(header); else expandCategory(header);
+      collapseCategory(header);
     });
   });
 
@@ -462,12 +490,11 @@
       const rect = grid.getBoundingClientRect();
       if (rect.bottom < 0) {
         collapseCategory(header);
-        stackHeader(header);
       } else if (rect.top < window.innerHeight) {
         expandCategory(header);
-        unstackHeader(header);
       }
     });
+    applyPinning();
   }
 
   let scrollTicking = false;

@@ -144,7 +144,7 @@ nav {
 
 /* ─── PORTFOLIO PAGE ──────────────────────────── */
 .portfolio-page {
-  padding: 100px 20px 60px;
+  padding: 100px 20px 30px;
   text-align: center;
   background: #111111;
   min-height: 100vh;
@@ -152,7 +152,7 @@ nav {
 }
 
 .portfolio-section {
-  margin: 3rem -20px 0;
+  margin: 1.25rem -20px 0;
 }
 
 .section-eyebrow {
@@ -208,7 +208,7 @@ nav {
 /* ─── PORTFOLIO PAGE HERO HEADER ──────────── */
 .portfolio-hero-header {
   position: relative;
-  padding: 130px 20px 3rem;
+  padding: 130px 20px 1.25rem;
 }
 .portfolio-hero-header::before {
   content: '';
@@ -284,13 +284,11 @@ nav {
   font-weight: 600 !important;
   letter-spacing: 0.12em;
   text-decoration: none !important;
-  border-bottom: 2px solid #ffffff !important;
-  padding-bottom: 4px;
   opacity: 1 !important;
   pointer-events: auto !important;
   cursor: pointer;
 }
-.portfolio-link:hover { border-bottom-color: rgba(255,255,255,0.6) !important; }
+.portfolio-link:hover { color: rgba(255,255,255,0.75) !important; }
 
 /* ─── FOOTER ──────────────────────────────────── */
 footer {

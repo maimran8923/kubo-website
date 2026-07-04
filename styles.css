@@ -213,7 +213,7 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.55);
+  background: rgba(0,0,0,0.78);
 }
 .portfolio-hero-header .section-eyebrow,
 .portfolio-hero-header .section-heading,

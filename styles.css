@@ -213,13 +213,26 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.78);
+  background: rgba(0,0,0,0.55);
 }
 .portfolio-hero-header .section-eyebrow,
 .portfolio-hero-header .section-heading,
 .portfolio-hero-header .divider {
   position: relative;
   z-index: 1;
+}
+.portfolio-hero-header .divider::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 180px;
+  max-width: 90vw;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.65) 35%, transparent 72%);
+  z-index: -1;
+  pointer-events: none;
 }
 @media (max-width: 800px) {
   .portfolio-hero-header { padding-top: 110px; }

@@ -197,6 +197,7 @@ nav {
 .portfolio-zone-1 {
   margin-top: -100px;
   background-image: url('Background/bg-exterior cropped.png');
+  background-position: center 40%;
 }
 .portfolio-zone-2 {
   background-image: url('Background/bg-exterior cropped.png');
@@ -209,6 +210,10 @@ nav {
 .portfolio-hero-header {
   position: relative;
   padding: 130px 20px 1.25rem;
+  background-image: url('Background/bg-exterior cropped.png');
+  background-size: cover;
+  background-position: center 40%;
+  background-repeat: no-repeat;
 }
 .portfolio-hero-header::before {
   content: '';

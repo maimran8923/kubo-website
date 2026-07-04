@@ -371,33 +371,28 @@
   const NAV_HEIGHT = 62;
   const categoryHeaders = [...document.querySelectorAll('.category-sticky-header')];
 
-  // Headers are always position:fixed (see stylesheet) -- never native
-  // sticky. Sticky's containing block is its nearest block-level ancestor
-  // regardless of anyone's position value, so a header could only ever hold
-  // an offset as long as there was room left in its OWN (possibly short)
-  // section; as that section neared its own end, the browser would cap/
-  // squeeze the position to fit, visibly misplacing it. Fixed positioning
-  // is anchored to the viewport instead and has no such constraint.
-  //
-  // Only one category is ever "active" (expanded) at a time -- the first one
-  // whose own content hasn't been scrolled past. Everything before it is
-  // collapsed and shown as a small pinned bar; the active one is shown
-  // expanded at its own pinned slot; everything after it, and anything not
-  // yet scrolled into view at all, is hidden entirely (display:none) rather
-  // than left to its own natural position -- on a short page two categories'
-  // content can otherwise become simultaneously visible, and there's no
-  // single correct fixed offset both their headers could share without
-  // colliding.
-  function showHeader(header, offset) {
+  // Only ever one header is shown, always pinned at the same spot right
+  // below the nav -- whichever category is currently being viewed. As the
+  // user scrolls, it's simply swapped for the next/previous one rather than
+  // stacking up. This sidesteps the whole class of bugs from trying to keep
+  // multiple headers simultaneously positioned (position:fixed, since CSS
+  // sticky's containing block is always its own nearest block-level
+  // ancestor and can't hold an offset once that section runs low on room).
+  function showHeader(header) {
     header.style.display = 'block';
-    header.style.top = offset + 'px';
+    header.style.top = NAV_HEIGHT + 'px';
     header.nextElementSibling.style.marginTop = header.offsetHeight + 'px';
   }
 
   function hideHeader(header) {
     header.style.display = 'none';
-    header.style.top = '';
     header.nextElementSibling.style.marginTop = '';
+  }
+
+  function showOnly(activeHeader) {
+    categoryHeaders.forEach(function(header) {
+      if (header === activeHeader) showHeader(header); else hideHeader(header);
+    });
   }
 
   // While suppressObserver is true, auto-fold is skipped -- otherwise the
@@ -407,20 +402,13 @@
   let suppressObserver = false;
 
   // Jump back to an earlier category: expand it and scroll to it, collapse
-  // everything before it, hide everything after it (as if not yet reached).
+  // everything else.
   function jumpToCategory(targetIndex) {
     suppressObserver = true;
-    let offset = NAV_HEIGHT;
     categoryHeaders.forEach(function(header, i) {
-      if (i > targetIndex) {
-        collapseCategory(header);
-        hideHeader(header);
-        return;
-      }
       if (i === targetIndex) expandCategory(header); else collapseCategory(header);
-      showHeader(header, offset);
-      offset += header.offsetHeight;
     });
+    showOnly(categoryHeaders[targetIndex]);
     categoryHeaders[targetIndex].nextElementSibling.scrollIntoView({ behavior: 'smooth', block: 'start' });
     setTimeout(function() { suppressObserver = false; }, 900);
   }
@@ -446,34 +434,19 @@
   // meant its threshold never crossed and it silently never got collapsed.
   function updateCategoryPositions() {
     if (suppressObserver) return;
-    let offset = NAV_HEIGHT;
-    let foundActive = false;
+    let current = null;
     categoryHeaders.forEach(function(header) {
       const grid = header.nextElementSibling;
       const rect = grid.getBoundingClientRect();
-      const reached = rect.top < window.innerHeight;
-
-      if (!reached) {
-        hideHeader(header);
-        return;
-      }
-
-      if (foundActive || rect.bottom < 0) {
+      if (rect.bottom < 0) {
         collapseCategory(header);
-      } else {
+      } else if (rect.top < window.innerHeight) {
         expandCategory(header);
       }
-
       const collapsed = header.querySelector('.category-toggle').getAttribute('aria-expanded') === 'false';
-      if (!collapsed) foundActive = true;
-
-      // Every shown header (whether collapsed or the one active one) reserves
-      // its own band -- anything shown after it, even a later category that's
-      // been force-collapsed because it's not the active one, must start
-      // below that band, not share it.
-      showHeader(header, offset);
-      offset += header.offsetHeight;
+      if (!collapsed && !current) current = header;
     });
+    if (current) showOnly(current); else categoryHeaders.forEach(hideHeader);
   }
 
   let scrollTicking = false;

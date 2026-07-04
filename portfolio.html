@@ -437,7 +437,6 @@
 
   categoryHeaders.forEach(function(header, index) {
     const btn = header.querySelector('.category-toggle');
-    const grid = header.nextElementSibling;
 
     btn.addEventListener('click', function() {
       if (header.classList.contains('stacked')) {
@@ -447,23 +446,41 @@
       const expanded = btn.getAttribute('aria-expanded') === 'true';
       if (expanded) collapseCategory(header); else expandCategory(header);
     });
-
-    // Auto-fold a category once its photos have been scrolled past (pinning
-    // its header in the stack), and re-open it if scrolled back up into it.
-    const scrollObserver = new IntersectionObserver(function(entries) {
-      if (suppressObserver) return;
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          expandCategory(header);
-          unstackHeader(header);
-        } else if (entry.boundingClientRect.bottom < 0) {
-          collapseCategory(header);
-          stackHeader(header);
-        }
-      });
-    }, { threshold: 0 });
-    scrollObserver.observe(grid);
   });
+
+  // Auto-fold a category once its photos have been scrolled past (pinning its
+  // header in the stack), and re-open it if scrolled back up into it. This
+  // checks each grid's actual position directly on every scroll, rather than
+  // relying on IntersectionObserver's 0%/>0% threshold crossing -- a fast or
+  // instant scroll can jump a whole section from "not yet reached" straight
+  // to "already passed" without ever sampling it as partially visible, which
+  // meant its threshold never crossed and it silently never got collapsed.
+  function updateCategoryPositions() {
+    if (suppressObserver) return;
+    categoryHeaders.forEach(function(header) {
+      const grid = header.nextElementSibling;
+      const rect = grid.getBoundingClientRect();
+      if (rect.bottom < 0) {
+        collapseCategory(header);
+        stackHeader(header);
+      } else if (rect.top < window.innerHeight) {
+        expandCategory(header);
+        unstackHeader(header);
+      }
+    });
+  }
+
+  let scrollTicking = false;
+  window.addEventListener('scroll', function() {
+    if (scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(function() {
+      updateCategoryPositions();
+      scrollTicking = false;
+    });
+  }, { passive: true });
+
+  updateCategoryPositions();
 </script>
 <a href="index.html" class="floating-back-btn">← ホーム</a>
 </body>

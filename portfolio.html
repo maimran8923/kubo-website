@@ -25,6 +25,14 @@
       background: rgba(10,10,10,0.92);
       backdrop-filter: blur(6px);
       border-top: 1px solid rgba(255,255,255,0.15);
+      scroll-margin-top: 62px;
+    }
+    .category-sticky-header.stacked {
+      position: fixed;
+      z-index: 6;
+    }
+    .category-sticky-header.stacked .category-toggle {
+      cursor: pointer;
     }
     .category-toggle {
       position: relative;
@@ -366,23 +374,88 @@
     });
   }
 
-  document.querySelectorAll('.category-sticky-header').forEach(function(header) {
+  const NAV_HEIGHT = 62;
+  const categoryHeaders = [...document.querySelectorAll('.category-sticky-header')];
+
+  function stackHeader(header) {
+    if (header.classList.contains('stacked')) return;
+    const rect = header.getBoundingClientRect();
+    header.style.width = rect.width + 'px';
+    header.style.left = rect.left + 'px';
+    header.classList.add('stacked');
+    restackFixedHeaders();
+  }
+
+  function unstackHeader(header) {
+    if (!header.classList.contains('stacked')) return;
+    header.classList.remove('stacked');
+    header.style.top = '';
+    header.style.left = '';
+    header.style.width = '';
+    restackFixedHeaders();
+  }
+
+  // Passed (stacked) headers pin one under another, in page order, below the nav.
+  function restackFixedHeaders() {
+    let offset = NAV_HEIGHT;
+    categoryHeaders.forEach(function(header) {
+      if (header.classList.contains('stacked')) {
+        header.style.top = offset + 'px';
+        offset += header.offsetHeight;
+      }
+    });
+  }
+
+  // While true, the scroll-triggered auto-fold observer ignores intersection
+  // changes -- otherwise the layout reflow from a jump's expand/collapse
+  // animations can transiently scroll other sections through the viewport
+  // and cause the observer to override the states jumpToCategory just set.
+  let suppressObserver = false;
+
+  // Jump back to an earlier category: expand it and scroll to it, collapse
+  // (and stack) everything before it, collapse (and un-stack) everything after.
+  function jumpToCategory(targetIndex) {
+    suppressObserver = true;
+    categoryHeaders.forEach(function(header, i) {
+      if (i === targetIndex) {
+        unstackHeader(header);
+        expandCategory(header);
+      } else if (i < targetIndex) {
+        collapseCategory(header);
+        stackHeader(header);
+      } else {
+        collapseCategory(header);
+        unstackHeader(header);
+      }
+    });
+    categoryHeaders[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function() { suppressObserver = false; }, 900);
+  }
+
+  categoryHeaders.forEach(function(header, index) {
     const btn = header.querySelector('.category-toggle');
     const grid = header.nextElementSibling;
 
     btn.addEventListener('click', function() {
+      if (header.classList.contains('stacked')) {
+        jumpToCategory(index);
+        return;
+      }
       const expanded = btn.getAttribute('aria-expanded') === 'true';
       if (expanded) collapseCategory(header); else expandCategory(header);
     });
 
-    // Auto-fold a category once its photos have been scrolled past, and
-    // re-open it automatically if the user scrolls back up into it.
+    // Auto-fold a category once its photos have been scrolled past (pinning
+    // its header in the stack), and re-open it if scrolled back up into it.
     const scrollObserver = new IntersectionObserver(function(entries) {
+      if (suppressObserver) return;
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           expandCategory(header);
+          unstackHeader(header);
         } else if (entry.boundingClientRect.bottom < 0) {
           collapseCategory(header);
+          stackHeader(header);
         }
       });
     }, { threshold: 0 });

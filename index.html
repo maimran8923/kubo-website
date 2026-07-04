@@ -464,14 +464,17 @@
       color: #ffffff;
       font-weight: 700;
       font-size: 1rem;
-      text-decoration: none;
-      transition: color .2s;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-color: rgba(255,255,255,0.35);
+      transition: color .2s, text-decoration-color .2s;
     }
     .hero-cta .btn:hover {
       background: none;
       transform: none;
       box-shadow: none;
       color: rgba(255,255,255,0.75);
+      text-decoration-color: rgba(255,255,255,0.75);
     }
 
     .hero-free-text {
@@ -1011,9 +1014,12 @@
     }
     .cp-table td a {
       color: #cccccc;
-      text-decoration: none;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(255,255,255,0.3);
+      transition: color .2s, text-decoration-color .2s;
     }
-    .cp-table td a:hover { color: #ffffff; }
+    .cp-table td a:hover { color: #ffffff; text-decoration-color: rgba(255,255,255,0.6); }
     @media (max-width: 560px) {
       .cp-table th { width: 38%; padding: 0.75rem 0.8rem; font-size: 0.82rem; }
       .cp-table td { padding: 0.75rem 0.8rem; font-size: 0.85rem; }
@@ -1140,22 +1146,26 @@
       font-size: 2rem;
       font-weight: 900;
       color: #ffffff;
-      text-decoration: none;
+      text-decoration: underline;
+      text-underline-offset: 5px;
+      text-decoration-color: rgba(255,255,255,0.3);
       letter-spacing: 0.04em;
       line-height: 1.2;
-      transition: color .2s;
+      transition: color .2s, text-decoration-color .2s;
     }
-    .contact-phone:hover { color: #cccccc; }
+    .contact-phone:hover { color: #cccccc; text-decoration-color: rgba(255,255,255,0.6); }
     .contact-email {
       display: block;
       margin-top: 0.75rem;
       font-size: 0.88rem;
       color: #888888;
-      text-decoration: none;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: rgba(255,255,255,0.25);
       letter-spacing: 0.03em;
-      transition: color .2s;
+      transition: color .2s, text-decoration-color .2s;
     }
-    .contact-email:hover { color: #ffffff; }
+    .contact-email:hover { color: #ffffff; text-decoration-color: rgba(255,255,255,0.6); }
 
     .form-card {
       background: var(--color-card);
@@ -1474,12 +1484,15 @@
       font-size: 1rem !important;
       font-weight: 600 !important;
       letter-spacing: 0.12em;
-      text-decoration: none !important;
+      text-decoration: underline !important;
+      text-underline-offset: 4px;
+      text-decoration-color: rgba(255,255,255,0.35) !important;
       opacity: 1 !important;
       pointer-events: auto !important;
       cursor: pointer;
+      transition: color .2s, text-decoration-color .2s;
     }
-    .portfolio-link:hover { color: rgba(255,255,255,0.75) !important; }
+    .portfolio-link:hover { color: rgba(255,255,255,0.75) !important; text-decoration-color: rgba(255,255,255,0.7) !important; }
 
     /* ─── PORTFOLIO PAGE ──────────────────────────── */
     .portfolio-page {

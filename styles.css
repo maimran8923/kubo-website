@@ -283,12 +283,15 @@ nav {
   font-size: 1rem !important;
   font-weight: 600 !important;
   letter-spacing: 0.12em;
-  text-decoration: none !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(255,255,255,0.35) !important;
   opacity: 1 !important;
   pointer-events: auto !important;
   cursor: pointer;
+  transition: color .2s, text-decoration-color .2s;
 }
-.portfolio-link:hover { color: rgba(255,255,255,0.75) !important; }
+.portfolio-link:hover { color: rgba(255,255,255,0.75) !important; text-decoration-color: rgba(255,255,255,0.7) !important; }
 
 /* ─── FOOTER ──────────────────────────────────── */
 footer {

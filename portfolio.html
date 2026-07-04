@@ -19,14 +19,13 @@
   <link rel="stylesheet" href="styles.css">
   <style>
     .category-sticky-header {
-      position: fixed;
-      left: 0;
-      right: 0;
-      z-index: 6;
+      position: sticky;
+      top: 62px;
+      z-index: 5;
       background: rgba(10,10,10,0.92);
       backdrop-filter: blur(6px);
       border-top: 1px solid rgba(255,255,255,0.15);
-      display: none;
+      scroll-margin-top: 62px;
     }
     .category-toggle {
       position: relative;
@@ -368,105 +367,28 @@
     });
   }
 
-  // Instant (non-animated) variants for the scroll-driven auto-advance
-  // logic below. Reading getBoundingClientRect() right after starting a CSS
-  // transition still reflects the pre-transition size -- the animation
-  // hasn't progressed yet -- so a section that was JUST re-expanded still
-  // geometrically "looks" collapsed for up to .45s afterward. Since scroll
-  // events fire far more often than that, the geometry check would
-  // immediately see the stale (still-collapsed-looking) size and reverse the
-  // very transition it just made, bouncing back and forth. Snapping
-  // instantly keeps geometry always in sync with the JS state that drove it.
-  function collapseInstant(header) {
-    const btn = header.querySelector('.category-toggle');
-    const grid = header.nextElementSibling;
-    if (btn.getAttribute('aria-expanded') === 'false') return;
-    const prevTransition = grid.style.transition;
-    grid.style.transition = 'none';
-    grid.style.maxHeight = '0';
-    grid.style.opacity = '0';
-    grid.offsetHeight; // force layout to apply immediately, skipping the transition
-    grid.style.transition = prevTransition;
-    btn.setAttribute('aria-expanded', 'false');
-    btn.querySelector('.toggle-icon').textContent = '▲';
-  }
-
-  function expandInstant(header) {
-    const btn = header.querySelector('.category-toggle');
-    const grid = header.nextElementSibling;
-    if (btn.getAttribute('aria-expanded') === 'true') return;
-    const prevTransition = grid.style.transition;
-    grid.style.transition = 'none';
-    grid.style.maxHeight = 'none';
-    grid.style.opacity = '1';
-    grid.offsetHeight;
-    grid.style.transition = prevTransition;
-    btn.setAttribute('aria-expanded', 'true');
-    btn.querySelector('.toggle-icon').textContent = '▼';
-  }
-
-  const NAV_HEIGHT = 62;
   const categoryHeaders = [...document.querySelectorAll('.category-sticky-header')];
 
-  // Only ever one header is shown, always pinned at the same spot right
-  // below the nav -- whichever category is currently being viewed. As the
-  // user scrolls, it's simply swapped for the next/previous one rather than
-  // stacking up. This sidesteps the whole class of bugs from trying to keep
-  // multiple headers simultaneously positioned (position:fixed, since CSS
-  // sticky's containing block is always its own nearest block-level
-  // ancestor and can't hold an offset once that section runs low on room).
-  function showHeader(header) {
-    header.style.display = 'block';
-    header.style.top = NAV_HEIGHT + 'px';
-    header.nextElementSibling.style.marginTop = header.offsetHeight + 'px';
-  }
-
-  function hideHeader(header) {
-    header.style.display = 'none';
-    header.nextElementSibling.style.marginTop = '';
-  }
-
-  function showOnly(activeHeader) {
-    categoryHeaders.forEach(function(header) {
-      if (header === activeHeader) showHeader(header); else hideHeader(header);
-    });
-  }
-
-  // While suppressObserver is true, auto-fold is skipped -- otherwise the
-  // layout reflow from a jump's expand/collapse animations can transiently
-  // scroll other sections through the viewport and override the states
-  // jumpToCategory just set.
-  let suppressObserver = false;
-
-  // "Current" is tracked as a single persistent index rather than re-derived
-  // from scratch on every scroll tick. Re-deriving it by scanning each
-  // header's own geometry independently doesn't work: once a section is
-  // collapsed its marker has ~0 height, and two adjacent collapsed markers
-  // can easily land within the same viewport-sized band of each other in the
-  // shortened document -- both would then look like valid "current"
-  // candidates, and picking "the first match" meant an earlier section could
-  // keep winning over the one actually on screen, in both scroll directions.
-  let currentIndex = 0;
-
-  function goToIndex(newIndex) {
-    if (newIndex === currentIndex) return;
-    collapseInstant(categoryHeaders[currentIndex]);
-    currentIndex = newIndex;
-    expandInstant(categoryHeaders[currentIndex]);
-    showOnly(categoryHeaders[currentIndex]);
-  }
+  // Headers are plain position:sticky, all at the same top:62px -- there's
+  // no stacking, so no header ever needs an offset bigger than that. This
+  // lets the browser handle "only the currently-relevant one visible" for
+  // free: a header only starts sticking once its own section scrolls up to
+  // that point, and releases once its own section has scrolled fully past
+  // (at which point the next section's header picks up the same way) --
+  // exactly "swap to whichever category is current" with no JS bookkeeping
+  // needed. An earlier position:fixed-based version showed the first
+  // category's header immediately at page load, before the page had even
+  // been scrolled past the hero title above it, overlapping the title.
+  // Native sticky doesn't have that problem since it only engages once
+  // actually scrolled to.
 
   // Jump back to an earlier category: expand it and scroll to it, collapse
   // everything else.
   function jumpToCategory(targetIndex) {
-    suppressObserver = true;
     categoryHeaders.forEach(function(header, i) {
       if (i === targetIndex) expandCategory(header); else collapseCategory(header);
     });
-    currentIndex = targetIndex;
-    showOnly(categoryHeaders[targetIndex]);
-    categoryHeaders[targetIndex].nextElementSibling.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    setTimeout(function() { suppressObserver = false; }, 900);
+    categoryHeaders[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   categoryHeaders.forEach(function(header, index) {
@@ -481,72 +403,23 @@
     });
   });
 
-  // Auto-fold the current category once its photos have been scrolled past
-  // (advancing to the next one), and step back to the previous one if
-  // scrolled back up above its own start. Checks the CURRENT section's
-  // actual position directly on every scroll, rather than relying on
+  // Auto-fold a category once its photos have been scrolled past, and
+  // re-open it if scrolled back up into it. This checks each grid's actual
+  // position directly on every scroll, rather than relying on
   // IntersectionObserver's 0%/>0% threshold crossing -- a fast or instant
   // scroll can jump a whole section from "not yet reached" straight to
   // "already passed" without ever sampling it as partially visible, which
   // meant its threshold never crossed and it silently never got collapsed.
   function updateCategoryPositions() {
-    if (suppressObserver) return;
-
-    // If the page has been scrolled all the way to its end, there's nowhere
-    // left to scroll for a not-yet-fully-passed section's bottom to ever
-    // cross 0 -- on a short last category this can leave the current index
-    // stuck one step behind forever. Once at the very bottom, just show the
-    // last category regardless.
-    const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
-    if (atBottom) {
-      goToIndex(categoryHeaders.length - 1);
-      showOnly(categoryHeaders[currentIndex]);
-      return;
-    }
-
-    // Symmetric case: an instant jump straight to the top only fires one
-    // scroll event, but retreating is deliberately single-step per call (see
-    // below) -- from deep in the page that would only retreat one step and
-    // then have no further scroll event left to finish catching up. At the
-    // very top, always show the first category.
-    if (window.scrollY <= 0) {
-      goToIndex(0);
-      showOnly(categoryHeaders[currentIndex]);
-      return;
-    }
-
-    // Advancing can safely cascade through multiple steps in one pass: a
-    // not-yet-visited section is already at its natural default-expanded
-    // state, so collapsing the one being left behind is the only height
-    // change happening at each step, and it only ever shrinks things.
-    while (currentIndex < categoryHeaders.length - 1) {
-      const rect = categoryHeaders[currentIndex].nextElementSibling.getBoundingClientRect();
-      if (rect.bottom < 0) goToIndex(currentIndex + 1); else break;
-    }
-
-    // Retreating is different: it RESTORES a previously-collapsed section's
-    // full height (thousands of pixels for a real category), which shifts
-    // the "reference frame" every subsequent check in the same pass would be
-    // measured against. Cascading here could restore several sections in one
-    // go and land all the way back at the first one from a small scroll-up,
-    // instead of stopping at the adjacent section the user actually scrolled
-    // into. Only ever take one retreat step per call; further steps (if
-    // still warranted) get picked up on the next scroll tick.
-    //
-    // The current section's own grid also carries a marginTop reserving
-    // space for its fixed header (see showHeader), so its rect.top is always
-    // offset by roughly that header's own height even right at the moment it
-    // becomes current -- comparing that against the bare NAV_HEIGHT would
-    // treat the reserved space itself as "scrolled back above the start" and
-    // retreat immediately, undoing every advance the instant it happened.
-    if (currentIndex > 0) {
-      const header = categoryHeaders[currentIndex];
-      const rect = header.nextElementSibling.getBoundingClientRect();
-      const threshold = NAV_HEIGHT + header.offsetHeight;
-      if (rect.top > threshold) goToIndex(currentIndex - 1);
-    }
-
-    showOnly(categoryHeaders[currentIndex]);
+    categoryHeaders.forEach(function(header) {
+      const grid = header.nextElementSibling;
+      const rect = grid.getBoundingClientRect();
+      if (rect.bottom < 0) {
+        collapseCategory(header);
+      } else if (rect.top < window.innerHeight) {
+        expandCategory(header);
+      }
+    });
   }
 
   let scrollTicking = false;

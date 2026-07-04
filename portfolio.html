@@ -395,12 +395,15 @@
     restackFixedHeaders();
   }
 
-  // Passed (stacked) headers pin one under another, in page order, below the nav.
+  // Passed (stacked) headers pin one under another, in page order, below the
+  // nav. The still-sticky, currently-active header also needs its "top"
+  // pushed down by that same running total -- otherwise it sticks at the
+  // stylesheet's flat 62px and renders directly under/over the stacked ones.
   function restackFixedHeaders() {
     let offset = NAV_HEIGHT;
     categoryHeaders.forEach(function(header) {
+      header.style.top = offset + 'px';
       if (header.classList.contains('stacked')) {
-        header.style.top = offset + 'px';
         offset += header.offsetHeight;
       }
     });

@@ -19,20 +19,14 @@
   <link rel="stylesheet" href="styles.css">
   <style>
     .category-sticky-header {
-      position: sticky;
-      top: 62px;
-      z-index: 5;
+      position: fixed;
+      left: 0;
+      right: 0;
+      z-index: 6;
       background: rgba(10,10,10,0.92);
       backdrop-filter: blur(6px);
       border-top: 1px solid rgba(255,255,255,0.15);
-      scroll-margin-top: 62px;
-    }
-    .category-sticky-header.stacked {
-      position: fixed;
-      z-index: 6;
-    }
-    .category-sticky-header.stacked .category-toggle {
-      cursor: pointer;
+      display: none;
     }
     .category-toggle {
       position: relative;
@@ -112,13 +106,13 @@
   </div>
 
   <!-- ── 内装 ── -->
-  <section class="portfolio-section" style="position: relative;">
-    <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.2);"></div>
+  <section class="portfolio-section">
     <div class="category-sticky-header">
       <button class="category-toggle" aria-expanded="true">Interior · 内装<span class="toggle-icon">▼</span></button>
       <div class="category-labels"><span>施工前</span><span>施工後</span></div>
     </div>
     <div class="gallery-grid gallery-collapsible" style="position: relative; z-index: 1;">
+      <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.2); pointer-events: none;"></div>
       <div class="gallery-item">
         <div class="photo-wrapper">
           <img src="images/お風呂-ビフォー.jpg" alt="お風呂 施工前">
@@ -226,13 +220,13 @@
 
   <div class="portfolio-zone portfolio-zone-2">
   <!-- ── 外装 ── -->
-  <section class="portfolio-section" style="position: relative;">
-    <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.2);"></div>
+  <section class="portfolio-section">
     <div class="category-sticky-header">
       <button class="category-toggle" aria-expanded="true">Exterior · 外装<span class="toggle-icon">▼</span></button>
       <div class="category-labels"><span>施工前</span><span>施工後</span></div>
     </div>
     <div class="gallery-grid gallery-collapsible" style="position: relative; z-index: 1;">
+      <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.2); pointer-events: none;"></div>
       <div class="gallery-item">
         <div class="photo-wrapper">
           <img src="images/house-before.png" alt="外観 施工前">
@@ -277,13 +271,13 @@
   </section>
 
   <!-- ── 外構 ── -->
-  <section class="portfolio-section" style="position: relative;">
-    <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.2);"></div>
+  <section class="portfolio-section">
     <div class="category-sticky-header">
       <button class="category-toggle" aria-expanded="true">Landscaping · 外構<span class="toggle-icon">▼</span></button>
       <div class="category-labels"><span>施工前</span><span>施工後</span></div>
     </div>
     <div class="gallery-grid gallery-collapsible" style="position: relative; z-index: 1;">
+      <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.2); pointer-events: none;"></div>
       <div class="gallery-item">
         <div class="photo-wrapper">
           <img src="images/Car port before.jpg" alt="カーポート 施工前">
@@ -377,90 +371,57 @@
   const NAV_HEIGHT = 62;
   const categoryHeaders = [...document.querySelectorAll('.category-sticky-header')];
 
-  // "Pinned" (position:fixed) is a purely positional concern, independent of
-  // whether the section's own content is collapsed. It has to be: .portfolio-
-  // section is position:relative (needed for its background overlay), which
-  // makes it the containing block for a plain position:sticky header. Once a
-  // header needs an offset greater than the default 62px (because something
-  // before it is stacked), native sticky can only hold that offset as long as
-  // there's room left in its OWN section's box -- as the section nears its
-  // own end, the browser has to cap/squeeze the sticky position to fit inside
-  // that shrinking box, which visibly misplaces the header. A pinned (fixed)
-  // header is positioned against the viewport instead, immune to that.
-  function pinHeader(header) {
-    if (header.classList.contains('stacked')) return;
-    const rect = header.getBoundingClientRect();
-    header.style.width = rect.width + 'px';
-    header.style.left = rect.left + 'px';
-    header.classList.add('stacked');
-    // Removing the header from normal flow closes the gap it used to
-    // reserve -- add it back as margin so the grid below doesn't ride up.
-    header.nextElementSibling.style.marginTop = rect.height + 'px';
+  // Headers are always position:fixed (see stylesheet) -- never native
+  // sticky. Sticky's containing block is its nearest block-level ancestor
+  // regardless of anyone's position value, so a header could only ever hold
+  // an offset as long as there was room left in its OWN (possibly short)
+  // section; as that section neared its own end, the browser would cap/
+  // squeeze the position to fit, visibly misplacing it. Fixed positioning
+  // is anchored to the viewport instead and has no such constraint.
+  //
+  // Only one category is ever "active" (expanded) at a time -- the first one
+  // whose own content hasn't been scrolled past. Everything before it is
+  // collapsed and shown as a small pinned bar; the active one is shown
+  // expanded at its own pinned slot; everything after it, and anything not
+  // yet scrolled into view at all, is hidden entirely (display:none) rather
+  // than left to its own natural position -- on a short page two categories'
+  // content can otherwise become simultaneously visible, and there's no
+  // single correct fixed offset both their headers could share without
+  // colliding.
+  function showHeader(header, offset) {
+    header.style.display = 'block';
+    header.style.top = offset + 'px';
+    header.nextElementSibling.style.marginTop = header.offsetHeight + 'px';
   }
 
-  function unpinHeader(header) {
-    if (!header.classList.contains('stacked')) return;
-    header.classList.remove('stacked');
+  function hideHeader(header) {
+    header.style.display = 'none';
     header.style.top = '';
-    header.style.left = '';
-    header.style.width = '';
     header.nextElementSibling.style.marginTop = '';
   }
 
-  // Pinned (fully passed) headers stack one under another, in page order,
-  // below the nav; whichever section is currently active gets pinned right
-  // below that stack too, if the stack is non-empty. Sections further down
-  // that haven't been reached yet are left completely alone -- on a short
-  // page two categories can both be visible/expanded in the same viewport at
-  // once, and forcing the later one to the same fixed offset as the active
-  // one (before it's actually reached) would make it collide with it instead
-  // of appearing in its own natural place.
-  //
-  // While suppressObserver is true, this is skipped entirely -- otherwise
-  // the layout reflow from a jump's expand/collapse animations can
-  // transiently scroll other sections through the viewport and override the
-  // states jumpToCategory just set.
+  // While suppressObserver is true, auto-fold is skipped -- otherwise the
+  // layout reflow from a jump's expand/collapse animations can transiently
+  // scroll other sections through the viewport and override the states
+  // jumpToCategory just set.
   let suppressObserver = false;
 
-  function applyPinning(explicitStates) {
-    let offset = NAV_HEIGHT;
-    let foundActive = false;
-    categoryHeaders.forEach(function(header, i) {
-      if (foundActive) return;
-
-      const collapsed = explicitStates
-        ? explicitStates[i] === 'collapsed'
-        : header.querySelector('.category-toggle').getAttribute('aria-expanded') === 'false';
-
-      if (collapsed) {
-        pinHeader(header);
-        header.style.top = offset + 'px';
-        offset += header.offsetHeight;
-      } else {
-        foundActive = true;
-        if (offset > NAV_HEIGHT) {
-          pinHeader(header);
-          header.style.top = offset + 'px';
-        } else {
-          unpinHeader(header);
-        }
-      }
-    });
-  }
-
   // Jump back to an earlier category: expand it and scroll to it, collapse
-  // everything before it, collapse everything after.
+  // everything before it, hide everything after it (as if not yet reached).
   function jumpToCategory(targetIndex) {
     suppressObserver = true;
+    let offset = NAV_HEIGHT;
     categoryHeaders.forEach(function(header, i) {
-      if (i === targetIndex) {
-        expandCategory(header);
-      } else {
+      if (i > targetIndex) {
         collapseCategory(header);
+        hideHeader(header);
+        return;
       }
+      if (i === targetIndex) expandCategory(header); else collapseCategory(header);
+      showHeader(header, offset);
+      offset += header.offsetHeight;
     });
-    applyPinning(categoryHeaders.map((h, i) => i === targetIndex ? 'expanded' : 'collapsed'));
-    categoryHeaders[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    categoryHeaders[targetIndex].nextElementSibling.scrollIntoView({ behavior: 'smooth', block: 'start' });
     setTimeout(function() { suppressObserver = false; }, 900);
   }
 
@@ -476,25 +437,43 @@
     });
   });
 
-  // Auto-fold a category once its photos have been scrolled past (pinning its
-  // header in the stack), and re-open it if scrolled back up into it. This
-  // checks each grid's actual position directly on every scroll, rather than
-  // relying on IntersectionObserver's 0%/>0% threshold crossing -- a fast or
-  // instant scroll can jump a whole section from "not yet reached" straight
-  // to "already passed" without ever sampling it as partially visible, which
+  // Auto-fold a category once its photos have been scrolled past, and
+  // re-open it if scrolled back up into it. This checks each grid's actual
+  // position directly on every scroll, rather than relying on
+  // IntersectionObserver's 0%/>0% threshold crossing -- a fast or instant
+  // scroll can jump a whole section from "not yet reached" straight to
+  // "already passed" without ever sampling it as partially visible, which
   // meant its threshold never crossed and it silently never got collapsed.
   function updateCategoryPositions() {
     if (suppressObserver) return;
+    let offset = NAV_HEIGHT;
+    let foundActive = false;
     categoryHeaders.forEach(function(header) {
       const grid = header.nextElementSibling;
       const rect = grid.getBoundingClientRect();
-      if (rect.bottom < 0) {
+      const reached = rect.top < window.innerHeight;
+
+      if (!reached) {
+        hideHeader(header);
+        return;
+      }
+
+      if (foundActive || rect.bottom < 0) {
         collapseCategory(header);
-      } else if (rect.top < window.innerHeight) {
+      } else {
         expandCategory(header);
       }
+
+      const collapsed = header.querySelector('.category-toggle').getAttribute('aria-expanded') === 'false';
+      if (!collapsed) foundActive = true;
+
+      // Every shown header (whether collapsed or the one active one) reserves
+      // its own band -- anything shown after it, even a later category that's
+      // been force-collapsed because it's not the active one, must start
+      // below that band, not share it.
+      showHeader(header, offset);
+      offset += header.offsetHeight;
     });
-    applyPinning();
   }
 
   let scrollTicking = false;

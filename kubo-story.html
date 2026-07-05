@@ -48,8 +48,8 @@
     .draft-banner strong { color: #ffdca6; }
 
     .story-hero { text-align: center; margin-bottom: 3rem; }
-    .story-hero-inner { display: flex; flex-direction: column; }
     .story-photo {
+      position: relative;
       width: 100vw;
       aspect-ratio: 1 / 1;
       margin: 0 0 0.6rem;
@@ -58,11 +58,39 @@
       background: rgba(255,255,255,0.04);
       overflow: hidden;
     }
+    @media (min-width: 801px) {
+      .story-photo {
+        width: 100%;
+        max-width: 640px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
     .story-photo img {
       width: 100%; height: 100%;
       object-fit: cover;
       object-position: center 25%;
       display: block;
+    }
+    .story-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, transparent 45%, rgba(0,0,0,0.6) 100%);
+    }
+    .story-slogan {
+      position: absolute;
+      z-index: 1;
+      right: 6%;
+      top: 50%;
+      transform: translateY(-50%);
+      max-width: 55%;
+      text-align: right;
+      color: #ffffff;
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.9;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
     }
     .story-photo-caption {
       font-size: 0.68rem;
@@ -73,24 +101,6 @@
     }
     .story-name { font-size: 1.7rem; font-weight: 700; color: #ffffff; margin-bottom: 0.4rem; }
     .story-role { font-size: 0.85rem; color: #999999; letter-spacing: 0.1em; }
-
-    @media (min-width: 801px) {
-      .story-hero-inner {
-        flex-direction: row;
-        align-items: center;
-        gap: 2.5rem;
-        text-align: left;
-      }
-      .story-photo-wrap { flex: 0 0 380px; }
-      .story-photo {
-        width: 100%;
-        aspect-ratio: 1 / 1;
-        margin-left: 0;
-        margin-right: 0;
-      }
-      .story-photo-caption { text-align: left; margin: 0; }
-      .story-hero-text { flex: 1; text-align: left; }
-    }
 
     .story-block { text-align: left; margin-bottom: 3rem; }
     .story-block .section-eyebrow { text-align: left; }
@@ -154,16 +164,13 @@
   <div class="story-container">
 
     <div class="story-hero">
-      <div class="story-hero-inner">
-        <div class="story-photo-wrap">
-          <div class="story-photo"><img src="images/kubo-placeholder.jpg" width="800" height="533" alt="プロフィール写真（仮）"></div>
-          <p class="story-photo-caption">※ 仮の写真です。久保代表のお写真に差し替え予定</p>
-        </div>
-        <div class="story-hero-text">
-          <div class="story-name">久保代表 <span class="story-gap" style="font-size:1rem;">（お名前の読み方・表記を確認中）</span></div>
-          <p class="story-role">株式会社久保工務店 代表</p>
-        </div>
+      <div class="story-photo">
+        <img src="images/kubo-placeholder.jpg" width="800" height="533" alt="プロフィール写真（仮）">
+        <p class="story-slogan">誠実に、丁寧に、<br>責任を持って。</p>
       </div>
+      <p class="story-photo-caption">※ 仮の写真です。久保代表のお写真に差し替え予定</p>
+      <div class="story-name">久保代表 <span class="story-gap" style="font-size:1rem;">（お名前の読み方・表記を確認中）</span></div>
+      <p class="story-role">株式会社久保工務店 代表</p>
     </div>
 
     <div class="story-block">

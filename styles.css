@@ -185,6 +185,14 @@ nav {
   .portfolio-page { padding-top: 80px; }
 }
 
+@media (min-width: 801px) {
+  /* The 30px bottom padding left a visible flat-color strip between the
+     last gallery photo and the footer on desktop, since photos here
+     don't reach the very edge of .portfolio-page the way they do on
+     narrower/taller mobile layouts. */
+  .portfolio-page { padding-bottom: 0; }
+}
+
 /* ─── PORTFOLIO PAGE ZONES ─────────────────── */
 .portfolio-zone {
   margin: 0 -20px;

@@ -11,8 +11,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .story-page { padding: 100px 20px 40px; background: #111111; min-height: 100vh; }
+    .story-page {
+      position: relative;
+      padding: 100px 20px 40px;
+      background-image: url('Background/bg-exterior cropped.png');
+      background-size: cover;
+      background-position: center 30%;
+      background-repeat: no-repeat;
+      background-color: #0a0a0a;
+      min-height: 100vh;
+    }
+    .story-page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 0;
+    }
     @media (max-width: 800px) { .story-page { padding-top: 80px; } }
+
+    .draft-banner, .story-container { position: relative; z-index: 1; }
 
     .story-container { max-width: 780px; margin: 0 auto; }
 

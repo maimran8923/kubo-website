@@ -341,11 +341,30 @@
     grid.style.maxHeight = 'none';
   });
 
+  // If a collapse/expand gets interrupted partway by another call (e.g. a
+  // fast scroll re-triggers the auto check before the previous animation
+  // finished), the transitionend listener from the interrupted call was
+  // never removed and would fire later -- against whichever transition
+  // happened to finish next (including the unrelated opacity transition,
+  // since no propertyName filter was applied) -- forcibly snapping
+  // max-height back to 'none' (full height) in the middle of what should
+  // have been a collapse. That's what caused a manual collapse click to
+  // "flash and revert", and caused sudden full-height pop-ins during fast
+  // scrolling. Always clearing any pending handler before starting a new
+  // transition, and filtering to the max-height property only, prevents it.
+  function clearPendingMaxHeightHandler(grid) {
+    if (grid._maxHeightHandler) {
+      grid.removeEventListener('transitionend', grid._maxHeightHandler);
+      grid._maxHeightHandler = null;
+    }
+  }
+
   function collapseCategory(header) {
     const btn = header.querySelector('.category-toggle');
     const icon = btn.querySelector('.toggle-icon');
     const grid = header.nextElementSibling;
     if (btn.getAttribute('aria-expanded') === 'false') return;
+    clearPendingMaxHeightHandler(grid);
     // Pin current height first so the collapse animation has a start value
     grid.style.maxHeight = grid.scrollHeight + 'px';
     requestAnimationFrame(function() {
@@ -361,15 +380,20 @@
     const icon = btn.querySelector('.toggle-icon');
     const grid = header.nextElementSibling;
     if (btn.getAttribute('aria-expanded') === 'true') return;
+    clearPendingMaxHeightHandler(grid);
     // Animate to a generous value, then remove the cap so late-loading images show fully
     grid.style.maxHeight = '5000px';
     grid.style.opacity = '1';
     btn.setAttribute('aria-expanded', 'true');
     icon.textContent = '▼';
-    grid.addEventListener('transitionend', function handler() {
+    const handler = function(e) {
+      if (e.propertyName !== 'max-height') return;
       grid.style.maxHeight = 'none';
       grid.removeEventListener('transitionend', handler);
-    });
+      grid._maxHeightHandler = null;
+    };
+    grid._maxHeightHandler = handler;
+    grid.addEventListener('transitionend', handler);
   }
 
   const categoryHeaders = [...document.querySelectorAll('.category-sticky-header')];
@@ -401,9 +425,15 @@
 
     btn.addEventListener('click', function() {
       if (btn.getAttribute('aria-expanded') === 'false') {
+        delete header.dataset.manualCollapse;
         jumpToCategory(index);
         return;
       }
+      // Mark this as a deliberate user action so the auto scroll-check
+      // below doesn't immediately re-expand it just because it's still
+      // in view -- otherwise clicking to fold a section you're currently
+      // looking at got undone by the very next scroll tick.
+      header.dataset.manualCollapse = 'true';
       collapseCategory(header);
     });
   });
@@ -419,9 +449,14 @@
     categoryHeaders.forEach(function(header) {
       const grid = header.nextElementSibling;
       const rect = grid.getBoundingClientRect();
+      const outOfView = rect.bottom < 0 || rect.top > window.innerHeight;
+      // Once the section has fully left view in either direction, clear the
+      // manual-collapse flag so a later approach auto-expands normally again.
+      if (outOfView) delete header.dataset.manualCollapse;
       if (rect.bottom < 0) {
         collapseCategory(header);
       } else if (rect.top < window.innerHeight) {
+        if (header.dataset.manualCollapse === 'true') return;
         expandCategory(header);
       }
     });

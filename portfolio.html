@@ -359,33 +359,61 @@
     }
   }
 
-  function collapseCategory(header) {
+  // Auto (scroll-driven) calls pass instant=true: a fast scroll gesture can
+  // cover the same document distance faster than the 0.45s grow animation
+  // can keep up with, so the section is measurably shorter than its real
+  // height for a moment -- which lets the same scroll gesture "outrun" it
+  // and blow straight past into whatever's above/below, feeling like a
+  // jump straight to another section. Applying the change instantly for
+  // auto-triggered calls means the document is always its true full size
+  // by the very next frame, no matter how fast the user scrolls. Manual
+  // clicks keep the smooth animation since that's a deliberate, isolated
+  // interaction, not fighting against continuous scroll input.
+  function collapseCategory(header, instant) {
     const btn = header.querySelector('.category-toggle');
     const icon = btn.querySelector('.toggle-icon');
     const grid = header.nextElementSibling;
     if (btn.getAttribute('aria-expanded') === 'false') return;
     clearPendingMaxHeightHandler(grid);
-    // Pin current height first so the collapse animation has a start value
-    grid.style.maxHeight = grid.scrollHeight + 'px';
-    requestAnimationFrame(function() {
+    if (instant) {
+      grid.style.transition = 'none';
       grid.style.maxHeight = '0';
       grid.style.opacity = '0';
-    });
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() { grid.style.transition = ''; });
+      });
+    } else {
+      // Pin current height first so the collapse animation has a start value
+      grid.style.maxHeight = grid.scrollHeight + 'px';
+      requestAnimationFrame(function() {
+        grid.style.maxHeight = '0';
+        grid.style.opacity = '0';
+      });
+    }
     btn.setAttribute('aria-expanded', 'false');
     icon.textContent = '▲';
   }
 
-  function expandCategory(header) {
+  function expandCategory(header, instant) {
     const btn = header.querySelector('.category-toggle');
     const icon = btn.querySelector('.toggle-icon');
     const grid = header.nextElementSibling;
     if (btn.getAttribute('aria-expanded') === 'true') return;
     clearPendingMaxHeightHandler(grid);
+    btn.setAttribute('aria-expanded', 'true');
+    icon.textContent = '▼';
+    if (instant) {
+      grid.style.transition = 'none';
+      grid.style.maxHeight = 'none';
+      grid.style.opacity = '1';
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() { grid.style.transition = ''; });
+      });
+      return;
+    }
     // Animate to a generous value, then remove the cap so late-loading images show fully
     grid.style.maxHeight = '5000px';
     grid.style.opacity = '1';
-    btn.setAttribute('aria-expanded', 'true');
-    icon.textContent = '▼';
     const handler = function(e) {
       if (e.propertyName !== 'max-height') return;
       grid.style.maxHeight = 'none';
@@ -454,10 +482,10 @@
       // manual-collapse flag so a later approach auto-expands normally again.
       if (outOfView) delete header.dataset.manualCollapse;
       if (rect.bottom < 0) {
-        collapseCategory(header);
+        collapseCategory(header, true);
       } else if (rect.top < window.innerHeight) {
         if (header.dataset.manualCollapse === 'true') return;
-        expandCategory(header);
+        expandCategory(header, true);
       }
     });
   }

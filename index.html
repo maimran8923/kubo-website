@@ -10,6 +10,76 @@
   <meta property="og:title" content="株式会社久保工務店 | 町のリフォーム屋">
   <meta property="og:description" content="地域に根ざした、信頼のリフォーム工事。現地調査無料。関東・関西・北九州対応。24時間365日対応。">
   <meta property="og:type" content="website">
+  <!-- Structured data: no street address is published anywhere on this
+       site (only "東京支社 / 大阪支社" branch names) -- this models the
+       business as a service-area contractor via areaServed rather than
+       inventing an address, matching how Google expects businesses that
+       travel to customers rather than operate a storefront. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "GeneralContractor",
+    "@id": "https://kubokoumutenn.com/#business",
+    "name": "株式会社久保工務店",
+    "alternateName": "naoking tokyo",
+    "url": "https://kubokoumutenn.com",
+    "logo": "https://kubokoumutenn.com/logo.jpg",
+    "image": "https://kubokoumutenn.com/logo.jpg",
+    "description": "地域に根ざした、信頼のリフォーム工事。現地調査無料。関東・関西全域対応。24時間365日対応。",
+    "telephone": "+81-90-2260-2222",
+    "email": "kubokoumutenn@yahoo.co.jp",
+    "sameAs": [
+      "https://www.instagram.com/naokingtokyo"
+    ],
+    "areaServed": [
+      { "@type": "AdministrativeArea", "name": "東京都" },
+      { "@type": "AdministrativeArea", "name": "神奈川県" },
+      { "@type": "AdministrativeArea", "name": "埼玉県" },
+      { "@type": "AdministrativeArea", "name": "千葉県" },
+      { "@type": "AdministrativeArea", "name": "大阪府" },
+      { "@type": "AdministrativeArea", "name": "京都府" },
+      { "@type": "AdministrativeArea", "name": "兵庫県" }
+    ],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+      ],
+      "opens": "00:00",
+      "closes": "23:59"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "施工サービス",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "内装リフォーム",
+            "description": "壁紙・クロス張替え、フローリング・床工事、キッチン・浴室リフォーム、収納・押し入れ改造、照明・電気工事"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "外装リフォーム",
+            "description": "外壁塗装・補修、屋根工事・防水、サッシ・窓リフォーム、雨樋・軒天補修、玄関・アプローチ改修"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "外構・全面リフォーム工事",
+            "description": "間取り変更・スケルトン工事、断熱・耐震リフォーム、バリアフリー化、マンション全面改装、一戸建て丸ごとリフォーム"
+          }
+        }
+      ]
+    }
+  }
+  </script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-VWRMP00PLB"></script>
   <script>

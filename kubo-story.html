@@ -14,9 +14,9 @@
     .story-page {
       position: relative;
       padding: 100px 20px 40px;
-      background-image: url('Background/bg-exterior cropped.png');
+      background-image: url('Background/bg-corridor-cropped.png');
       background-size: cover;
-      background-position: center 30%;
+      background-position: center 20%;
       background-repeat: no-repeat;
       background-color: #0a0a0a;
       min-height: 100vh;
@@ -48,6 +48,7 @@
     .draft-banner strong { color: #ffdca6; }
 
     .story-hero { text-align: center; margin-bottom: 3rem; }
+    .story-hero-inner { display: flex; flex-direction: column; }
     .story-photo {
       width: 100vw;
       aspect-ratio: 1 / 1;
@@ -63,14 +64,6 @@
       object-position: center 25%;
       display: block;
     }
-    @media (min-width: 801px) {
-      .story-photo {
-        width: 100%;
-        max-width: 640px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-    }
     .story-photo-caption {
       font-size: 0.68rem;
       color: #888888;
@@ -81,6 +74,26 @@
     .story-name { font-size: 1.7rem; font-weight: 700; color: #ffffff; margin-bottom: 0.4rem; }
     .story-role { font-size: 0.85rem; color: #999999; letter-spacing: 0.1em; }
     .story-tagline { margin-top: 1rem; font-size: 1rem; color: #cccccc; line-height: 1.9; }
+
+    @media (min-width: 801px) {
+      .story-hero-inner {
+        flex-direction: row;
+        align-items: center;
+        gap: 2.5rem;
+        text-align: left;
+      }
+      .story-photo-wrap { flex: 0 0 380px; }
+      .story-photo {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      .story-photo-caption { text-align: left; margin: 0; }
+      .story-hero-text { flex: 1; text-align: left; }
+      .story-hero-text .section-eyebrow { text-align: left; }
+      .story-tagline br { display: none; }
+    }
 
     .story-block { text-align: left; margin-bottom: 3rem; }
     .story-block .section-eyebrow { text-align: left; }
@@ -144,12 +157,18 @@
   <div class="story-container">
 
     <div class="story-hero">
-      <div class="story-photo"><img src="images/kubo-placeholder.jpg" width="800" height="533" alt="プロフィール写真（仮）"></div>
-      <p class="story-photo-caption">※ 仮の写真です。久保代表のお写真に差し替え予定</p>
-      <p class="section-eyebrow" style="text-align:center;">OUR STORY</p>
-      <div class="story-name">久保代表 <span class="story-gap" style="font-size:1rem;">（お名前の読み方・表記を確認中）</span></div>
-      <p class="story-role">株式会社久保工務店 代表</p>
-      <p class="story-tagline">大阪生まれ、東京在住。電気工事士としてこの世界に入り、<br class="story-gap-br">今では会社全体を率いる代表として、日々現場とお客様に向き合っている。</p>
+      <div class="story-hero-inner">
+        <div class="story-photo-wrap">
+          <div class="story-photo"><img src="images/kubo-placeholder.jpg" width="800" height="533" alt="プロフィール写真（仮）"></div>
+          <p class="story-photo-caption">※ 仮の写真です。久保代表のお写真に差し替え予定</p>
+        </div>
+        <div class="story-hero-text">
+          <p class="section-eyebrow">OUR STORY</p>
+          <div class="story-name">久保代表 <span class="story-gap" style="font-size:1rem;">（お名前の読み方・表記を確認中）</span></div>
+          <p class="story-role">株式会社久保工務店 代表</p>
+          <p class="story-tagline">大阪生まれ、東京在住。電気工事士としてこの世界に入り、<br class="story-gap-br">今では会社全体を率いる代表として、日々現場とお客様に向き合っている。</p>
+        </div>
+      </div>
     </div>
 
     <div class="story-block">

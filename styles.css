@@ -277,6 +277,34 @@ nav {
   filter: brightness(1.16) saturate(1.18) contrast(1.04) !important;
 }
 
+/* "Before" photos get a slight mute (a touch darker, a touch flatter)
+   so the after-glow reads as a deliberate transformation, not just one
+   photo being randomly brighter than the other. */
+.gallery-item:nth-child(even) .photo-wrapper img {
+  filter: saturate(0.85) brightness(0.93) !important;
+}
+
+/* Gentle hover/tap zoom + shadow lift on both photos -- a small,
+   professional "premium gallery" touch rather than the photos just
+   sitting static. Hover-only, so it's a no-op on touch devices with no
+   real hover state (expected -- the static before/after treatment
+   above is already the primary visual on mobile). */
+.gallery-item .photo-wrapper {
+  transition: box-shadow 0.35s ease;
+}
+.gallery-item .photo-wrapper img {
+  transition: transform 0.45s ease, filter 0.35s ease;
+}
+.gallery-item:hover .photo-wrapper img {
+  transform: scale(1.045);
+}
+.gallery-item:nth-child(even):hover .photo-wrapper {
+  box-shadow: 0 14px 32px rgba(0,0,0,0.5);
+}
+.gallery-item:nth-child(odd):hover .photo-wrapper {
+  box-shadow: 0 0 34px 8px rgba(255, 214, 120, 0.65), 0 14px 32px rgba(0,0,0,0.5);
+}
+
 .photo-wrapper {
   position: relative;
   width: 100%;

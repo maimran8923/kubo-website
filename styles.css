@@ -269,8 +269,9 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(115deg, transparent 35%, rgba(255,255,255,0.55) 50%, transparent 65%);
-  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='0'%3E%3Cstop offset='0' stop-color='white' stop-opacity='0'/%3E%3Cstop offset='0.5' stop-color='white' stop-opacity='0.65'/%3E%3Cstop offset='1' stop-color='white' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M-60,180 C20,120 60,220 140,190 C220,160 260,240 340,200 C380,180 400,190 460,160 L460,230 C400,260 380,250 340,270 C260,310 220,230 140,260 C60,290 20,190 -60,250 Z' fill='url(%23g)'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   pointer-events: none;
 }
 .gallery-item:nth-child(odd) .photo-wrapper img {
@@ -308,6 +309,7 @@ nav {
 .photo-wrapper {
   position: relative;
   width: 100%;
+  aspect-ratio: 3 / 4;
   line-height: 0;
   overflow: hidden;
 }

@@ -250,6 +250,20 @@ nav {
 .gallery-item {
   position: relative;
 }
+/* "After" photos are always the second (right-hand) item in each
+   before/after pair -- give them a soft backlit glow plus a slight
+   brightness lift so the finished result visually "shines" next to
+   the flat, unlit "before" shot beside it. Odd, not even: the dark
+   overlay div at the top of .gallery-grid is itself an unclassed
+   first child, which shifts every .gallery-item's nth-child count
+   by one relative to its position within the before/after pair. */
+.gallery-item:nth-child(odd) {
+  z-index: 1;
+  box-shadow: 0 0 22px 2px rgba(255, 246, 214, 0.4);
+}
+.gallery-item:nth-child(odd) .photo-wrapper img {
+  filter: brightness(1.08) saturate(1.08) !important;
+}
 
 .photo-wrapper {
   position: relative;

@@ -378,6 +378,22 @@
   // by the very next frame, no matter how fast the user scrolls. Manual
   // clicks keep the smooth animation since that's a deliberate, isolated
   // interaction, not fighting against continuous scroll input.
+  // Instantly resizing a grid that sits above the current scroll position
+  // (collapsing it to 0, or snapping it back open) changes the document's
+  // layout above the viewport without the browser adjusting scrollY to
+  // compensate -- so the same pixel scrollY suddenly corresponds to
+  // different content, which reads as the page "jumping". Measuring the
+  // height before/after the instant resize and shifting scrollY by the
+  // exact delta in the same synchronous pass keeps whatever the user is
+  // looking at visually anchored in place.
+  function resizeInstantly(grid, apply) {
+    const before = grid.getBoundingClientRect().height;
+    apply();
+    const after = grid.getBoundingClientRect().height;
+    const delta = after - before;
+    if (delta !== 0) window.scrollBy(0, delta);
+  }
+
   function collapseCategory(header, instant) {
     const btn = header.querySelector('.category-toggle');
     const icon = btn.querySelector('.toggle-icon');
@@ -385,9 +401,11 @@
     if (btn.getAttribute('aria-expanded') === 'false') return;
     clearPendingMaxHeightHandler(grid);
     if (instant) {
-      grid.style.transition = 'none';
-      grid.style.maxHeight = '0';
-      grid.style.opacity = '0';
+      resizeInstantly(grid, function() {
+        grid.style.transition = 'none';
+        grid.style.maxHeight = '0';
+        grid.style.opacity = '0';
+      });
       requestAnimationFrame(function() {
         requestAnimationFrame(function() { grid.style.transition = ''; });
       });
@@ -412,9 +430,11 @@
     btn.setAttribute('aria-expanded', 'true');
     icon.textContent = '▼';
     if (instant) {
-      grid.style.transition = 'none';
-      grid.style.maxHeight = 'none';
-      grid.style.opacity = '1';
+      resizeInstantly(grid, function() {
+        grid.style.transition = 'none';
+        grid.style.maxHeight = 'none';
+        grid.style.opacity = '1';
+      });
       requestAnimationFrame(function() {
         requestAnimationFrame(function() { grid.style.transition = ''; });
       });

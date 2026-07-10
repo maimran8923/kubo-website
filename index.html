@@ -362,6 +362,11 @@
       line-height: 1.25;
     }
 
+    /* The ㍿ ligature renders as a tall stacked 株式/会社 glyph, which eats
+       into the label-to-title gap above it and makes the spacing look
+       tighter than other section headers. Extra margin compensates. */
+    #strengths .section-label { margin-bottom: 1.1rem; }
+
     .divider {
       width: 56px;
       height: 2px;
@@ -498,7 +503,7 @@
 
     .hero-name {
       font-family: 'Noto Sans JP', sans-serif;
-      font-size: 1.3rem;
+      font-size: 2rem;
       font-weight: 700;
       color: #ffffff;
       letter-spacing: 0.05em;
@@ -551,7 +556,7 @@
       font-family: 'Noto Sans JP', sans-serif;
       font-size: 1.1rem;
       font-weight: 700;
-      color: #cccccc;
+      color: #ffffff;
       letter-spacing: 0.04em;
       margin-bottom: 2rem;
       text-shadow: 0 1px 6px rgba(0,0,0,0.8);
@@ -1416,14 +1421,19 @@
 
     /* ─── RESPONSIVE ──────────────────────────────── */
     @media (max-width: 768px) {
+      .hero {
+        padding-top: 5.5rem;
+        padding-bottom: 40px;
+      }
       .hero-logo-wrap {
         width: 140px;
         height: 140px;
         min-width: 140px;
         min-height: 140px;
+        margin-bottom: 1.25rem;
       }
+      .hero-name { font-size: 1.75rem; }
       .hero-tagline { font-size: 2.4rem; }
-      .hero { padding-bottom: 40px; }
       .hero-cta .btn { margin-bottom: 20px; }
       .section-title { font-size: 1.75rem; }
       #quote .section-title { font-size: 1.625rem; }
@@ -1838,10 +1848,10 @@
         <p style="font-size:0.92rem; color:#cccccc; line-height:1.8;">許認可取得済、工事損害保険加入済。法的にも万が一の時も安心です。</p>
         <p style="font-size:0.92rem; color:#ffffff; font-weight:700; line-height:1.8; margin-top:0.6rem;">建設業免許取得済み</p>
         <ul style="list-style:none; margin:0; padding:0; font-size:0.92rem; color:#cccccc; line-height:1.8;">
-          <li style="display:flex; align-items:center; gap:0.5em;"><span style="display:inline-block; width:0.85em; height:0.85em; border:1.5px solid #cccccc; flex-shrink:0;"></span>建築工事業</li>
-          <li style="display:flex; align-items:center; gap:0.5em;"><span style="display:inline-block; width:0.85em; height:0.85em; border:1.5px solid #cccccc; flex-shrink:0;"></span>大工工事業</li>
-          <li style="display:flex; align-items:center; gap:0.5em;"><span style="display:inline-block; width:0.85em; height:0.85em; border:1.5px solid #cccccc; flex-shrink:0;"></span>屋根工事業</li>
-          <li style="display:flex; align-items:center; gap:0.5em;"><span style="display:inline-block; width:0.85em; height:0.85em; border:1.5px solid #cccccc; flex-shrink:0;"></span>内装仕上工事業</li>
+          <li>・建築工事業</li>
+          <li>・大工工事業</li>
+          <li>・屋根工事業</li>
+          <li>・内装仕上工事業</li>
         </ul>
       </div>
 
@@ -2008,7 +2018,6 @@
     <div class="section-header reveal">
       <p class="section-label">Service Area</p>
       <h2 class="section-title">対応エリア</h2>
-      <div class="divider"></div>
     </div>
     <div class="area-cards">
       <div class="area-card reveal">
@@ -2029,7 +2038,6 @@
       <div class="section-header">
         <p class="section-label">Instagram</p>
         <h2 class="section-title">🔰 社長日記</h2>
-        <div class="divider"></div>
       </div>
       <p class="insta-sub">Instagramで毎日更新中！</p>
       <a href="https://www.instagram.com/naokingtokyo" target="_blank" rel="noopener" class="insta-btn">→ @naokingtokyo をフォローする</a>
@@ -2045,7 +2053,6 @@
     <div class="section-header reveal">
       <p class="section-label">Free Estimate</p>
       <h2 class="section-title">お気軽にご相談ください<br>無料でお見積りいたします</h2>
-      <div class="divider"></div>
     </div>
     <div class="contact-info reveal">
       <p class="contact-info-label">24時間 ⏰ いつでもご連絡ください</p>

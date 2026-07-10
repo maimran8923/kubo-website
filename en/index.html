@@ -502,7 +502,7 @@
 
     .hero-name {
       font-family: 'Noto Sans JP', sans-serif;
-      font-size: 1.3rem;
+      font-size: 2rem;
       font-weight: 700;
       color: #ffffff;
       letter-spacing: 0.05em;
@@ -555,7 +555,7 @@
       font-family: 'Noto Sans JP', sans-serif;
       font-size: 1.1rem;
       font-weight: 700;
-      color: #cccccc;
+      color: #ffffff;
       letter-spacing: 0.04em;
       margin-bottom: 2rem;
       text-shadow: 0 1px 6px rgba(0,0,0,0.8);
@@ -1420,14 +1420,19 @@
 
     /* ─── RESPONSIVE ──────────────────────────────── */
     @media (max-width: 768px) {
+      .hero {
+        padding-top: 5.5rem;
+        padding-bottom: 40px;
+      }
       .hero-logo-wrap {
         width: 140px;
         height: 140px;
         min-width: 140px;
         min-height: 140px;
+        margin-bottom: 1.25rem;
       }
+      .hero-name { font-size: 1.75rem; }
       .hero-tagline { font-size: 2.4rem; }
-      .hero { padding-bottom: 40px; }
       .hero-cta .btn { margin-bottom: 20px; }
       .section-title { font-size: 1.75rem; }
       #quote .section-title { font-size: 1.625rem; }
@@ -2007,7 +2012,6 @@
     <div class="section-header reveal">
       <p class="section-label">Service Area</p>
       <h2 class="section-title">Service Area</h2>
-      <div class="divider"></div>
     </div>
     <div class="area-cards">
       <div class="area-card reveal">
@@ -2028,7 +2032,6 @@
       <div class="section-header">
         <p class="section-label">Instagram</p>
         <h2 class="section-title">🔰 Owner's Diary</h2>
-        <div class="divider"></div>
       </div>
       <p class="insta-sub">Updated almost daily on Instagram!</p>
       <a href="https://www.instagram.com/naokingtokyo" target="_blank" rel="noopener" class="insta-btn">→ Follow @naokingtokyo</a>
@@ -2044,7 +2047,6 @@
     <div class="section-header reveal">
       <p class="section-label">Free Estimate</p>
       <h2 class="section-title">Contact Us Anytime<br>Free Estimate — English OK</h2>
-      <div class="divider"></div>
     </div>
     <div class="contact-info reveal">
       <p class="contact-info-label">24 Hours ⏰ Contact Us Anytime</p>

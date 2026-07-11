@@ -522,6 +522,24 @@
   }, { passive: true });
 
   updateCategoryPositions();
+
+  // One-time "shine sweep" animation on each after-photo as it scrolls
+  // into view (see .shine-play in styles.css). Unobserve immediately so
+  // it only ever plays once per photo, not every time it re-enters view.
+  const shineTargets = document.querySelectorAll('.gallery-item:nth-child(odd) .photo-wrapper');
+  if ('IntersectionObserver' in window) {
+    const shineObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('shine-play');
+          shineObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+    shineTargets.forEach(function(el) { shineObserver.observe(el); });
+  } else {
+    shineTargets.forEach(function(el) { el.classList.add('shine-play'); });
+  }
 </script>
 <a href="index.html" class="floating-back-btn">← ホーム</a>
 </body>

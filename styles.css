@@ -271,9 +271,53 @@ nav {
   inset: 0;
   background: radial-gradient(ellipse 90% 65% at 50% -5%, rgba(255,255,255,0.85), rgba(255,255,255,0.3) 45%, transparent 75%);
   pointer-events: none;
+  z-index: 2;
 }
 .gallery-item:nth-child(odd) .photo-wrapper img {
   filter: brightness(1.16) saturate(1.18) contrast(1.04) !important;
+}
+
+/* One-time animated "shine sweep" -- a diagonal light beam that crosses
+   the after-photo once as it scrolls into view, then settles back into
+   the static glow above. .photo-wrapper's own overflow:hidden clips the
+   beam to the photo bounds. Triggered by adding .shine-play via JS
+   (IntersectionObserver). The <img>'s filter property gives it its own
+   stacking context at implicit stack level 0, so a position:absolute
+   pseudo-element with no z-index (also stack level 0) falls back to DOM
+   order against it -- ::after (generated after the img) already painted
+   on top for free, but ::before (generated before the img) was painting
+   underneath it and was invisible. Explicit z-index forces both above it.
+   The gradient pairs a bright core with a faint dark band on each side
+   (like a real glass/chrome reflection) rather than pure white-on-
+   transparent -- a plain white highlight is invisible against the many
+   near-white bathroom/kitchen photos in this gallery, since there's no
+   brightness difference left to show; the dark bands give it contrast
+   against light AND dark backdrops alike. */
+.gallery-item:nth-child(odd) .photo-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 48%;
+  height: 220%;
+  background: linear-gradient(75deg,
+    transparent 0%,
+    rgba(0,0,0,0.3) 34%,
+    rgba(255,255,255,1) 50%,
+    rgba(0,0,0,0.3) 66%,
+    transparent 100%);
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+}
+.gallery-item:nth-child(odd) .photo-wrapper.shine-play::before {
+  animation: photoShineSweep 1.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+@keyframes photoShineSweep {
+  0%   { left: -60%; opacity: 0; }
+  12%  { opacity: 1; }
+  55%  { opacity: 1; }
+  100% { left: 130%; opacity: 0; }
 }
 
 /* "Before" photos get a slight mute (a touch darker, a touch flatter)

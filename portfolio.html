@@ -475,36 +475,48 @@
     });
   });
 
-  // Auto-fold a category once its photos have been scrolled past, and
-  // re-open it if scrolled back up into it. This checks each grid's actual
-  // position directly on every scroll, rather than relying on
+  // Auto-open a category once it's scrolled into view. This checks each
+  // grid's actual position directly on every scroll, rather than relying on
   // IntersectionObserver's 0%/>0% threshold crossing -- a fast or instant
   // scroll can jump a whole section from "not yet reached" straight to
   // "already passed" without ever sampling it as partially visible, which
-  // meant its threshold never crossed and it silently never got collapsed.
+  // meant its threshold never crossed and it silently never got expanded.
+  //
+  // Categories are never auto-collapsed. Auto-collapsing a category above
+  // the current scroll position shrinks the document above the viewport,
+  // which can leave it shorter than the current scroll position -- the
+  // browser then clamps scrollY to fit, which reads as the page suddenly
+  // jumping backward. Manual collapse (clicking a category header) still
+  // works; it just isn't undone or triggered automatically by scrolling.
   function updateCategoryPositions() {
     categoryHeaders.forEach(function(header) {
       const grid = header.nextElementSibling;
       const rect = grid.getBoundingClientRect();
       const outOfView = rect.bottom < 0 || rect.top > window.innerHeight;
-      // Once the section has fully left view in either direction, clear the
-      // manual-collapse flag so a later approach auto-expands normally again.
       if (outOfView) delete header.dataset.manualCollapse;
-      if (rect.bottom < 0) {
-        collapseCategory(header, true);
-      } else if (rect.top < window.innerHeight) {
+      if (rect.top < window.innerHeight && rect.bottom >= 0) {
         if (header.dataset.manualCollapse === 'true') return;
         expandCategory(header, true);
       }
     });
   }
 
+  // Only auto-collapse/expand while scrolling DOWN. Reversing direction
+  // leaves every category exactly as it is -- nothing resizes, so nothing
+  // above the viewport can suddenly grow and shove the page down (which is
+  // what caused the "jump to Interior" bug on the way back up). Scrolling
+  // down again immediately self-corrects any state via the checks below.
   let scrollTicking = false;
+  let lastScrollY = window.scrollY;
   window.addEventListener('scroll', function() {
     if (scrollTicking) return;
     scrollTicking = true;
     requestAnimationFrame(function() {
-      updateCategoryPositions();
+      const currentY = window.scrollY;
+      if (currentY > lastScrollY) {
+        updateCategoryPositions();
+      }
+      lastScrollY = currentY;
       scrollTicking = false;
     });
   }, { passive: true });

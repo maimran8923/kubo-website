@@ -1706,6 +1706,67 @@
       vertical-align: top !important;
       margin: 0 !important;
     }
+
+    /* ═══ AFTER-PHOTO GLOW + SHINE SWEEP (matches portfolio.html) ═══
+       The 2nd .portfolio-item is always the "after" photo in this
+       preview pair. Same outline/glow/studio-light/shine-sweep treatment
+       as the gallery page's after-photos -- see styles.css for the full
+       rationale on the two rendering gotchas (stacking context from the
+       img's filter property, and the bright-core/dark-edge gradient
+       needed so the beam still reads against near-white photos). */
+    .portfolio-item:nth-child(2) {
+      z-index: 2;
+    }
+    .portfolio-item:nth-child(2) .photo-wrapper {
+      outline: 3px solid rgba(255, 255, 255, 0.95);
+      outline-offset: -1px;
+      box-shadow: 0 0 34px 8px rgba(255, 255, 255, 0.55);
+      transition: box-shadow 0.35s ease;
+    }
+    .portfolio-item:nth-child(2) .photo-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 90% 65% at 50% -5%, rgba(255,255,255,0.85), rgba(255,255,255,0.3) 45%, transparent 75%);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .portfolio-item:nth-child(2) .photo-wrapper::before {
+      content: '';
+      position: absolute;
+      top: -60%;
+      left: -60%;
+      width: 48%;
+      height: 220%;
+      background: linear-gradient(75deg,
+        transparent 0%,
+        rgba(0,0,0,0.3) 34%,
+        rgba(255,255,255,1) 50%,
+        rgba(0,0,0,0.3) 66%,
+        transparent 100%);
+      pointer-events: none;
+      opacity: 0;
+      z-index: 1;
+    }
+    .portfolio-item:nth-child(2) .photo-wrapper.shine-play::before {
+      animation: photoShineSweep 1.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    @keyframes photoShineSweep {
+      0%   { left: -60%; opacity: 0; }
+      12%  { opacity: 1; }
+      55%  { opacity: 1; }
+      100% { left: 130%; opacity: 0; }
+    }
+    .portfolio-item:nth-child(2) .photo-wrapper img {
+      filter: brightness(1.16) saturate(1.18) contrast(1.04) !important;
+      transition: transform 0.45s ease, filter 0.35s ease !important;
+    }
+    .portfolio-item:nth-child(2) .photo-wrapper:hover img {
+      transform: scale(1.045);
+    }
+    .portfolio-item:nth-child(2) .photo-wrapper:hover {
+      box-shadow: 0 0 34px 8px rgba(255, 255, 255, 0.55), 0 14px 32px rgba(0,0,0,0.5);
+    }
   </style>
 </head>
 <body>
@@ -2205,6 +2266,23 @@
     el.style.transitionDelay = (i % 4) * 0.1 + 's';
     observer.observe(el);
   });
+
+  /* One-time "shine sweep" on the homepage's after-photo preview, once
+     it's fully in view (matches the portfolio page's after-photo effect). */
+  const shineTargets = document.querySelectorAll('.portfolio-item:nth-child(2) .photo-wrapper');
+  if ('IntersectionObserver' in window) {
+    const shineObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('shine-play');
+          shineObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.85 });
+    shineTargets.forEach(function(el) { shineObserver.observe(el); });
+  } else {
+    shineTargets.forEach(function(el) { el.classList.add('shine-play'); });
+  }
 
   /* Form submission — sends to Formspree via fetch (no page reload) */
   document.getElementById('quoteForm').addEventListener('submit', async function(e) {

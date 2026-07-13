@@ -348,26 +348,6 @@ nav {
   box-shadow: 0 0 34px 8px rgba(255, 255, 255, 0.55), 0 14px 32px rgba(0,0,0,0.5);
 }
 
-/* This particular "after" photo (ceiling electrical work) has a real
-   overhead light fixture right where the glow gradient sits, making the
-   effect look like a blown-out extension of that light rather than a
-   frame highlight. It's also not a true before/after pair (both shots
-   are mid-installation), so opt it out of the after-glow treatment. */
-.gallery-item:nth-child(odd) .photo-wrapper.no-afterglow {
-  outline: none;
-  box-shadow: none;
-}
-.gallery-item:nth-child(odd) .photo-wrapper.no-afterglow::after,
-.gallery-item:nth-child(odd) .photo-wrapper.no-afterglow::before {
-  content: none;
-}
-.gallery-item:nth-child(odd) .photo-wrapper.no-afterglow img {
-  filter: none !important;
-}
-.gallery-item:nth-child(odd):hover .photo-wrapper.no-afterglow {
-  box-shadow: 0 14px 32px rgba(0,0,0,0.5);
-}
-
 .photo-wrapper {
   position: relative;
   width: 100%;

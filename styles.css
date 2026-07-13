@@ -46,7 +46,7 @@ nav {
   flex: 0;
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   color: #ffffff;
   letter-spacing: 0.15em;
   text-transform: lowercase;
@@ -58,7 +58,7 @@ nav {
 .nav-phone {
   color: #ffffff;
   text-decoration: none;
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   letter-spacing: 0.05em;
   font-weight: 500;
   opacity: 0.85;
@@ -134,7 +134,7 @@ nav {
   text-decoration: none;
   padding: 12px 0;
   border-bottom: 1px solid rgba(255,255,255,0.1);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   letter-spacing: 0.1em;
   font-family: 'Noto Sans JP', sans-serif;
 }

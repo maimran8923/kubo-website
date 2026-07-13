@@ -24,7 +24,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
   <style>
     .category-sticky-header {
@@ -84,6 +84,17 @@
     .gallery-collapsible.collapsed {
       max-height: 0 !important;
       opacity: 0;
+    }
+
+    /* Override styles.css's body font: 'Noto Sans JP' is tuned for
+       Japanese and only carries a bundled fallback Latin subset, not a
+       proper English-optimized design. 'Noto Sans' is the same
+       superfamily's dedicated Latin sibling -- same metrics/weights, so
+       nothing else on the page needs re-tuning, but with correct English
+       letterforms. Scoped to this page only; the Japanese portfolio page
+       keeps 'Noto Sans JP' via the shared stylesheet. */
+    body {
+      font-family: 'Noto Sans', sans-serif;
     }
   </style>
 </head>

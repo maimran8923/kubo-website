@@ -286,22 +286,22 @@
           <img width="1100" height="1466" loading="lazy" src="../images/マンションお風呂-施工後.jpg" alt="Apartment bathroom after renovation">
         </div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item after-only">
         <div class="photo-wrapper">
-          <img width="1100" height="1466" loading="lazy" src="../images/美容室-施工後.jpg" alt="Beauty salon before renovation">
+          <img width="1100" height="1466" loading="lazy" src="../images/美容室-施工後.jpg" alt="Beauty salon after renovation">
         </div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item after-only">
         <div class="photo-wrapper">
           <img width="1100" height="1466" loading="lazy" src="../images/美容室②-施工後.jpg" alt="Beauty salon after renovation">
         </div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item after-only">
         <div class="photo-wrapper">
           <img width="1100" height="1466" loading="lazy" src="../images/マンション廊下-施工後.jpg" alt="Apartment hallway after renovation">
         </div>
       </div>
-      <div class="gallery-item">
+      <div class="gallery-item after-only">
         <div class="photo-wrapper">
           <img width="1100" height="1466" loading="lazy" src="../images/マンションリビング-施工後.jpg" alt="Apartment living room after renovation">
         </div>
@@ -596,7 +596,7 @@
   // scrolled into view (see .shine-play in styles.css). Unobserve
   // immediately so it only ever plays once per photo, not every time it
   // re-enters view.
-  const shineTargets = document.querySelectorAll('.gallery-item:nth-child(odd) .photo-wrapper, .masonry-item');
+  const shineTargets = document.querySelectorAll('.gallery-item:nth-child(odd) .photo-wrapper, .gallery-item.after-only .photo-wrapper, .masonry-item');
   if ('IntersectionObserver' in window) {
     const shineObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {

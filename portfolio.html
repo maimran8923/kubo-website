@@ -574,10 +574,16 @@
 
   updateCategoryPositions();
 
-  // One-time "shine sweep" animation on each after-photo once it's fully
+  // One-time "shine sweep" animation on each after-photo once it's mostly
   // scrolled into view (see .shine-play in styles.css). Unobserve
   // immediately so it only ever plays once per photo, not every time it
-  // re-enters view.
+  // re-enters view. Threshold 0.85 (85% of the photo visible at once)
+  // seemed reasonable on a laptop screen, but on a wide desktop window the
+  // gallery has no max-width, so each photo grows to nearly half the
+  // browser width -- past a certain window width the resulting photo is
+  // literally taller than the viewport, making 85% simultaneous visibility
+  // physically impossible and the sweep silently never fires. 0.5 stays
+  // reachable even when a photo is up to 2x the viewport height.
   const shineTargets = document.querySelectorAll('.gallery-item:nth-child(odd) .photo-wrapper, .gallery-item.after-only .photo-wrapper, .masonry-item');
   if ('IntersectionObserver' in window) {
     const shineObserver = new IntersectionObserver(function(entries) {
@@ -587,7 +593,7 @@
           shineObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.85 });
+    }, { threshold: 0.5 });
     shineTargets.forEach(function(el) { shineObserver.observe(el); });
   } else {
     shineTargets.forEach(function(el) { el.classList.add('shine-play'); });

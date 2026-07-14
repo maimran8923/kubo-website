@@ -2271,7 +2271,11 @@
   });
 
   /* One-time "shine sweep" on the homepage's after-photo preview, once
-     it's fully in view (matches the portfolio page's after-photo effect). */
+     it's mostly in view (matches the portfolio page's after-photo effect).
+     0.5 rather than 0.85 -- see portfolio.html's shine-sweep comment: an
+     85%-of-target threshold can never fire once the photo is taller than
+     the viewport, which happens on wide desktop windows since neither
+     .portfolio-item nor its ancestors cap the photo's width. */
   const shineTargets = document.querySelectorAll('.portfolio-item:nth-child(2) .photo-wrapper');
   if ('IntersectionObserver' in window) {
     const shineObserver = new IntersectionObserver(function(entries) {
@@ -2281,7 +2285,7 @@
           shineObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.85 });
+    }, { threshold: 0.5 });
     shineTargets.forEach(function(el) { shineObserver.observe(el); });
   } else {
     shineTargets.forEach(function(el) { el.classList.add('shine-play'); });

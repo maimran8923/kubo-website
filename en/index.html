@@ -176,6 +176,32 @@
     }
     .nav-phone:hover { opacity: 1; }
 
+    /* Language toggle -- a small pill badge rather than plain text like
+       the phone number, so it reads as a switch/control instead of
+       blending into the rest of the nav. Kept compact so it doesn't push
+       the phone number or hamburger into wrapping on narrow screens. */
+    .nav-lang {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.2rem 0.6rem;
+      border: 1px solid rgba(255,255,255,0.5);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: #ffffff;
+      text-decoration: none;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .nav-lang:hover {
+      background: rgba(255,255,255,0.18);
+      border-color: rgba(255,255,255,0.85);
+    }
+
     #hamburger {
       background: none;
       border: none;
@@ -293,6 +319,10 @@
         font-size: 0.68rem;
         letter-spacing: 0.03em;
       }
+      .nav-lang {
+        font-size: 0.64rem;
+        padding: 0.15rem 0.5rem;
+      }
       #hamburger {
         font-size: 1.3rem;
         padding: 2px 4px;
@@ -306,6 +336,10 @@
       }
       .nav-phone {
         font-size: 0.62rem;
+      }
+      .nav-lang {
+        font-size: 0.58rem;
+        padding: 0.12rem 0.42rem;
       }
     }
 
@@ -1778,7 +1812,7 @@
   <div class="nav-logo"><a href="https://www.instagram.com/naokingtokyo" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">📷 naoking <span>tokyo</span></a></div>
   <div style="flex:1; display:flex; justify-content:flex-end; align-items:center; gap:1rem;">
     <a href="tel:08095720846" class="nav-phone">080-9572-0846</a>
-    <a href="../index.html" class="nav-phone" style="opacity:1;">JP</a>
+    <a href="../index.html" class="nav-lang">JP</a>
     <button id="hamburger" aria-label="Open menu">☰</button>
   </div>
   <div id="mobile-menu">

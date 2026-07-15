@@ -316,7 +316,7 @@ nav {
 }
 .gallery-item:nth-child(odd) .photo-wrapper.shine-play::before,
 .masonry-item.shine-play::before {
-  animation: photoShineSweep 1.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: photoShineSweep 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 @keyframes photoShineSweep {
   0%   { left: -60%; opacity: 0; }
@@ -376,7 +376,7 @@ nav {
   z-index: 1;
 }
 .gallery-item.after-only .photo-wrapper.shine-play::before {
-  animation: photoShineSweep 1.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: photoShineSweep 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* Gentle hover/tap zoom + shadow lift on both photos -- a small,

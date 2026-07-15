@@ -352,6 +352,26 @@
           <img width="1100" height="1466" loading="lazy" src="images/Carport after2.jpg" alt="カーポート 施工後">
         </div>
       </div>
+      <div class="gallery-item">
+        <div class="photo-wrapper">
+          <img width="1100" height="1466" loading="lazy" src="images/Aircon A before.jpg" alt="エアコン設置 施工中">
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="photo-wrapper">
+          <img width="1100" height="1466" loading="lazy" src="images/Aircon A after.jpg" alt="エアコン設置 施工後">
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="photo-wrapper">
+          <img width="1100" height="1466" loading="lazy" src="images/Aircon B before.jpg" alt="エアコン設置 施工中">
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="photo-wrapper">
+          <img width="1100" height="1466" loading="lazy" src="images/Aircon B after.jpg" alt="エアコン設置 施工後">
+        </div>
+      </div>
     </div>
   </section>
   </div>
@@ -577,13 +597,11 @@
   // One-time "shine sweep" animation on each after-photo once it's mostly
   // scrolled into view (see .shine-play in styles.css). Unobserve
   // immediately so it only ever plays once per photo, not every time it
-  // re-enters view. Threshold 0.85 (85% of the photo visible at once)
-  // seemed reasonable on a laptop screen, but on a wide desktop window the
-  // gallery has no max-width, so each photo grows to nearly half the
-  // browser width -- past a certain window width the resulting photo is
-  // literally taller than the viewport, making 85% simultaneous visibility
-  // physically impossible and the sweep silently never fires. 0.5 stays
-  // reachable even when a photo is up to 2x the viewport height.
+  // re-enters view. Threshold 0.8 (80% of the photo visible at once) --
+  // note a wide desktop window has no gallery max-width, so a tall photo
+  // can grow past the viewport height and never reach 80% simultaneous
+  // visibility, silently skipping the sweep (this is why the threshold
+  // was previously lowered from 0.85 to 0.5; raised back up on request).
   const shineTargets = document.querySelectorAll('.gallery-item:nth-child(odd) .photo-wrapper, .gallery-item.after-only .photo-wrapper, .masonry-item');
   if ('IntersectionObserver' in window) {
     const shineObserver = new IntersectionObserver(function(entries) {
@@ -593,7 +611,7 @@
           shineObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.8 });
     shineTargets.forEach(function(el) { shineObserver.observe(el); });
   } else {
     shineTargets.forEach(function(el) { el.classList.add('shine-play'); });

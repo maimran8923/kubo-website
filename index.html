@@ -1749,7 +1749,7 @@
       z-index: 1;
     }
     .portfolio-item:nth-child(2) .photo-wrapper.shine-play::before {
-      animation: photoShineSweep 1.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      animation: photoShineSweep 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
     @keyframes photoShineSweep {
       0%   { left: -60%; opacity: 0; }
@@ -2271,10 +2271,11 @@
 
   /* One-time "shine sweep" on the homepage's after-photo preview, once
      it's mostly in view (matches the portfolio page's after-photo effect).
-     0.5 rather than 0.85 -- see portfolio.html's shine-sweep comment: an
-     85%-of-target threshold can never fire once the photo is taller than
-     the viewport, which happens on wide desktop windows since neither
-     .portfolio-item nor its ancestors cap the photo's width. */
+     0.8 -- note a taller-than-viewport photo (possible on wide desktop
+     windows, since neither .portfolio-item nor its ancestors cap the
+     photo's width) can never reach 80% simultaneous visibility, silently
+     skipping the sweep; this is why the threshold was previously lowered
+     to 0.5, raised back up on request. */
   const shineTargets = document.querySelectorAll('.portfolio-item:nth-child(2) .photo-wrapper');
   if ('IntersectionObserver' in window) {
     const shineObserver = new IntersectionObserver(function(entries) {
@@ -2284,7 +2285,7 @@
           shineObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.8 });
     shineTargets.forEach(function(el) { shineObserver.observe(el); });
   } else {
     shineTargets.forEach(function(el) { el.classList.add('shine-play'); });

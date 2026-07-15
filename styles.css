@@ -278,51 +278,26 @@ nav {
 .gallery-item:nth-child(odd) .photo-wrapper img,
 .masonry-item img {
   filter: brightness(1.16) saturate(1.18) contrast(1.04) !important;
+  clip-path: polygon(0% 0%, -11% 0%, -29% 100%, 0% 100%);
 }
 
-/* One-time animated "shine sweep" -- a diagonal light beam that crosses
-   the after-photo once as it scrolls into view, then settles back into
-   the static glow above. .photo-wrapper's own overflow:hidden clips the
-   beam to the photo bounds. Triggered by adding .shine-play via JS
-   (IntersectionObserver). The <img>'s filter property gives it its own
-   stacking context at implicit stack level 0, so a position:absolute
-   pseudo-element with no z-index (also stack level 0) falls back to DOM
-   order against it -- ::after (generated after the img) already painted
-   on top for free, but ::before (generated before the img) was painting
-   underneath it and was invisible. Explicit z-index forces both above it.
-   The gradient pairs a bright core with a faint dark band on each side
-   (like a real glass/chrome reflection) rather than pure white-on-
-   transparent -- a plain white highlight is invisible against the many
-   near-white bathroom/kitchen photos in this gallery, since there's no
-   brightness difference left to show; the dark bands give it contrast
-   against light AND dark backdrops alike. */
-.gallery-item:nth-child(odd) .photo-wrapper::before,
-.masonry-item::before {
-  content: '';
-  position: absolute;
-  top: -60%;
-  left: -60%;
-  width: 48%;
-  height: 220%;
-  background: linear-gradient(75deg,
-    transparent 0%,
-    rgba(0,0,0,0.3) 34%,
-    rgba(255,255,255,1) 50%,
-    rgba(0,0,0,0.3) 66%,
-    transparent 100%);
-  pointer-events: none;
-  opacity: 0;
-  z-index: 1;
+/* One-time "unfurl" reveal -- rather than a light effect layered on top
+   of an already-visible photo, the after-photo itself uncurls into view
+   diagonally once it scrolls into view. clip-path animates on the <img>
+   directly (not a pseudo-element overlay), so the photo's own edge is
+   the reveal edge -- it reads as the picture unrolling open, not a
+   highlight passing over a static image. Triggered by adding .shine-play
+   via JS (IntersectionObserver); forwards fill mode holds the final,
+   fully-open state. The two clip-path x-offsets (top vs. bottom edge)
+   differ by a fixed 18-point skew, which is what gives the reveal edge
+   its diagonal slant instead of a flat vertical wipe. */
+.gallery-item:nth-child(odd) .photo-wrapper.shine-play img,
+.masonry-item.shine-play img {
+  animation: photoUnfurl 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
-.gallery-item:nth-child(odd) .photo-wrapper.shine-play::before,
-.masonry-item.shine-play::before {
-  animation: photoShineSweep 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-@keyframes photoShineSweep {
-  0%   { left: -60%; opacity: 0; }
-  12%  { opacity: 1; }
-  55%  { opacity: 1; }
-  100% { left: 130%; opacity: 0; }
+@keyframes photoUnfurl {
+  0%   { clip-path: polygon(0% 0%, -11% 0%, -29% 100%, 0% 100%); }
+  100% { clip-path: polygon(0% 0%, 129% 0%, 111% 100%, 0% 100%); }
 }
 
 /* "Before" photos get a slight mute (a touch darker, a touch flatter)
@@ -357,26 +332,10 @@ nav {
 }
 .gallery-item.after-only .photo-wrapper img {
   filter: brightness(1.16) saturate(1.18) contrast(1.04) !important;
+  clip-path: polygon(0% 0%, -11% 0%, -29% 100%, 0% 100%);
 }
-.gallery-item.after-only .photo-wrapper::before {
-  content: '';
-  position: absolute;
-  top: -60%;
-  left: -60%;
-  width: 48%;
-  height: 220%;
-  background: linear-gradient(75deg,
-    transparent 0%,
-    rgba(0,0,0,0.3) 34%,
-    rgba(255,255,255,1) 50%,
-    rgba(0,0,0,0.3) 66%,
-    transparent 100%);
-  pointer-events: none;
-  opacity: 0;
-  z-index: 1;
-}
-.gallery-item.after-only .photo-wrapper.shine-play::before {
-  animation: photoShineSweep 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+.gallery-item.after-only .photo-wrapper.shine-play img {
+  animation: photoUnfurl 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 /* Gentle hover/tap zoom + shadow lift on both photos -- a small,

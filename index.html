@@ -1707,13 +1707,13 @@
       margin: 0 !important;
     }
 
-    /* ═══ AFTER-PHOTO GLOW + SHINE SWEEP (matches portfolio.html) ═══
+    /* ═══ AFTER-PHOTO GLOW + UNFURL REVEAL (matches portfolio.html) ═══
        The 2nd .portfolio-item is always the "after" photo in this
-       preview pair. Same outline/glow/studio-light/shine-sweep treatment
-       as the gallery page's after-photos -- see styles.css for the full
-       rationale on the two rendering gotchas (stacking context from the
-       img's filter property, and the bright-core/dark-edge gradient
-       needed so the beam still reads against near-white photos). */
+       preview pair. Same outline/glow/studio-light treatment as the
+       gallery page's after-photos, plus a one-time "unfurl" reveal --
+       the photo itself uncurls open diagonally via an animated
+       clip-path on the <img>, rather than a highlight sweeping over an
+       already-visible image -- see styles.css for the full rationale. */
     .portfolio-item:nth-child(2) {
       z-index: 2;
     }
@@ -1731,31 +1731,15 @@
       pointer-events: none;
       z-index: 2;
     }
-    .portfolio-item:nth-child(2) .photo-wrapper::before {
-      content: '';
-      position: absolute;
-      top: -60%;
-      left: -60%;
-      width: 48%;
-      height: 220%;
-      background: linear-gradient(75deg,
-        transparent 0%,
-        rgba(0,0,0,0.3) 34%,
-        rgba(255,255,255,1) 50%,
-        rgba(0,0,0,0.3) 66%,
-        transparent 100%);
-      pointer-events: none;
-      opacity: 0;
-      z-index: 1;
+    .portfolio-item:nth-child(2) .photo-wrapper img {
+      clip-path: polygon(0% 0%, -11% 0%, -29% 100%, 0% 100%);
     }
-    .portfolio-item:nth-child(2) .photo-wrapper.shine-play::before {
-      animation: photoShineSweep 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    .portfolio-item:nth-child(2) .photo-wrapper.shine-play img {
+      animation: photoUnfurl 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
-    @keyframes photoShineSweep {
-      0%   { left: -60%; opacity: 0; }
-      12%  { opacity: 1; }
-      55%  { opacity: 1; }
-      100% { left: 130%; opacity: 0; }
+    @keyframes photoUnfurl {
+      0%   { clip-path: polygon(0% 0%, -11% 0%, -29% 100%, 0% 100%); }
+      100% { clip-path: polygon(0% 0%, 129% 0%, 111% 100%, 0% 100%); }
     }
     .portfolio-item:nth-child(2) .photo-wrapper img {
       filter: brightness(1.16) saturate(1.18) contrast(1.04) !important;
@@ -2269,13 +2253,15 @@
     observer.observe(el);
   });
 
-  /* One-time "shine sweep" on the homepage's after-photo preview, once
-     it's mostly in view (matches the portfolio page's after-photo effect).
-     0.8 -- note a taller-than-viewport photo (possible on wide desktop
-     windows, since neither .portfolio-item nor its ancestors cap the
-     photo's width) can never reach 80% simultaneous visibility, silently
-     skipping the sweep; this is why the threshold was previously lowered
-     to 0.5, raised back up on request. */
+  /* One-time "unfurl" reveal on the homepage's after-photo preview, once
+     it's mostly in view (matches the portfolio page's after-photo effect
+     -- the photo is clipped shut by default and only .shine-play's
+     animation opens it). 0.8 -- note a taller-than-viewport photo
+     (possible on wide desktop windows, since neither .portfolio-item nor
+     its ancestors cap the photo's width) can never reach 80% simultaneous
+     visibility. Unlike the old shine-sweep (a missed trigger just meant a
+     skipped highlight), the photo itself now stays clipped shut if this
+     never fires, so a fallback is important here. */
   const shineTargets = document.querySelectorAll('.portfolio-item:nth-child(2) .photo-wrapper');
   if ('IntersectionObserver' in window) {
     const shineObserver = new IntersectionObserver(function(entries) {
@@ -2287,6 +2273,20 @@
       });
     }, { threshold: 0.8 });
     shineTargets.forEach(function(el) { shineObserver.observe(el); });
+
+    // Safety net: a taller-than-viewport photo can never satisfy the 0.8
+    // threshold above and would stay clipped shut forever. Once any
+    // sliver of it is visible at all, give the 0.8 threshold a couple
+    // seconds to fire on its own, then force the reveal regardless.
+    const fallbackObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          fallbackObserver.unobserve(entry.target);
+          setTimeout(function() { entry.target.classList.add('shine-play'); }, 2500);
+        }
+      });
+    }, { threshold: 0 });
+    shineTargets.forEach(function(el) { fallbackObserver.observe(el); });
   } else {
     shineTargets.forEach(function(el) { el.classList.add('shine-play'); });
   }

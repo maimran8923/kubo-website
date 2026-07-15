@@ -594,14 +594,16 @@
 
   updateCategoryPositions();
 
-  // One-time "shine sweep" animation on each after-photo once it's mostly
-  // scrolled into view (see .shine-play in styles.css). Unobserve
-  // immediately so it only ever plays once per photo, not every time it
-  // re-enters view. Threshold 0.8 (80% of the photo visible at once) --
-  // note a wide desktop window has no gallery max-width, so a tall photo
-  // can grow past the viewport height and never reach 80% simultaneous
-  // visibility, silently skipping the sweep (this is why the threshold
-  // was previously lowered from 0.85 to 0.5; raised back up on request).
+  // One-time "unfurl" reveal on each after-photo once it's mostly
+  // scrolled into view (see .shine-play in styles.css -- the photo is
+  // clipped shut by default and only .shine-play's animation opens it).
+  // Unobserve immediately so it only ever plays once per photo, not every
+  // time it re-enters view. Threshold 0.8 (80% of the photo visible at
+  // once) -- note a wide desktop window has no gallery max-width, so a
+  // tall photo can grow past the viewport height and never reach 80%
+  // simultaneous visibility. Unlike the old shine-sweep (a missed
+  // trigger just meant a skipped highlight), the photo itself now stays
+  // clipped shut if this never fires, so a fallback is important here.
   const shineTargets = document.querySelectorAll('.gallery-item:nth-child(odd) .photo-wrapper, .gallery-item.after-only .photo-wrapper, .masonry-item');
   if ('IntersectionObserver' in window) {
     const shineObserver = new IntersectionObserver(function(entries) {
@@ -613,6 +615,22 @@
       });
     }, { threshold: 0.8 });
     shineTargets.forEach(function(el) { shineObserver.observe(el); });
+
+    // Safety net: a photo taller than the viewport (possible on a wide
+    // desktop window, since the gallery has no max-width) can never
+    // satisfy the 0.8 threshold above and would stay clipped shut
+    // forever. Once any sliver of it is visible at all, give the 0.8
+    // threshold a couple seconds to fire on its own, then force the
+    // reveal regardless.
+    const fallbackObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          fallbackObserver.unobserve(entry.target);
+          setTimeout(function() { entry.target.classList.add('shine-play'); }, 2500);
+        }
+      });
+    }, { threshold: 0 });
+    shineTargets.forEach(function(el) { fallbackObserver.observe(el); });
   } else {
     shineTargets.forEach(function(el) { el.classList.add('shine-play'); });
   }

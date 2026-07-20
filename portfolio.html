@@ -106,11 +106,8 @@
 <main class="portfolio-page">
   <div class="portfolio-zone portfolio-zone-1">
   <div class="portfolio-hero-header">
-    <div class="trace-frame bold">
-      <p class="section-eyebrow">OUR WORK</p>
-      <h1 class="section-heading">施工写真ギャラリー</h1>
-      <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /><path class="trace-path trace-path-b" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
-    </div>
+    <p class="section-eyebrow">OUR WORK</p>
+    <h1 class="section-heading">施工写真ギャラリー</h1>
   </div>
 
   <!-- ── 住宅内 ── -->
@@ -619,24 +616,6 @@
   } else {
     shineTargets.forEach(function(el) { el.classList.add('shine-play'); });
   }
-
-  /* Border-trace flash on the page header only — this page doesn't use
-     the scroll-snap section layout index.html does, so there's no
-     "section settles at top" moment to hook; just fire once shortly
-     after load, matching how index.html's hero also flashes on arrival. */
-  (function() {
-    const frame = document.querySelector('.portfolio-hero-header .trace-frame');
-    if (!frame) return;
-    setTimeout(function() {
-      frame.querySelectorAll('.trace-path, .trace-path-b').forEach(function(path) {
-        path.classList.add('play');
-        path.addEventListener('animationend', function onDone() {
-          path.classList.remove('play');
-          path.removeEventListener('animationend', onDone);
-        });
-      });
-    }, 400);
-  })();
 </script>
 <a href="index.html" class="floating-back-btn">← ホーム</a>
 </body>

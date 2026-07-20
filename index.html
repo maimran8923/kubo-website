@@ -475,15 +475,24 @@
       transform: none;
     }
 
-    /* Border-trace flash: thin line runs once around a compact "header"
-       block (label + title) inside each major section, starting and ending
-       at the top-right corner, replayed each time that section scrolls
-       into view. Traces a small header rather than the whole section so
-       the full loop is always visible even on sections taller than the
-       viewport. display:inline-block makes the frame hug its text content
-       instead of stretching full-width; non-scaling-stroke keeps the line
-       an even thickness despite preserveAspectRatio="none" stretching the
-       path unevenly. */
+    /* Border-trace flash: two short lines run once around a compact
+       "header" block (label + title) inside each major section, replayed
+       each time that section scrolls into view. Runner A starts at the
+       top-right corner and stops at the diagonally opposite corner
+       (bottom-left); runner B starts at bottom-left and stops at
+       top-right — together they cover the full perimeter (each edge lit
+       exactly once) while each individual runner only ever travels half
+       the loop and always ends at the corner opposite its own start.
+       Traces a small header rather than the whole section so the full
+       loop is always visible even on sections taller than the viewport.
+       display:inline-block makes the frame hug its text content instead
+       of stretching full-width; non-scaling-stroke keeps the line an
+       even thickness despite preserveAspectRatio="none" stretching the
+       path unevenly. opacity:0 at rest is required because the dash (6)
+       and gap (94) sum to exactly the pathLength (100), so some part of
+       the dash is ALWAYS positioned somewhere on the path — without
+       this, a static sliver stays visible at the idle dashoffset even
+       when not "playing". */
     .trace-frame {
       position: relative;
       display: inline-block;
@@ -497,32 +506,44 @@
       pointer-events: none;
       z-index: 2;
     }
-    .trace-frame .trace-path {
+    .trace-frame .trace-path,
+    .trace-frame .trace-path-b {
       fill: none;
       stroke: #ffffff;
       stroke-width: 2;
       stroke-linecap: round;
       filter: drop-shadow(0 0 3px rgba(255,255,255,.85)) drop-shadow(0 0 8px rgba(255,255,255,.35));
       stroke-dasharray: 6 94;
-      stroke-dashoffset: 100;
+      opacity: 0;
     }
     .trace-frame .trace-path.play {
-      animation: sectionTrace .55s cubic-bezier(.3,.75,.35,1) 1;
+      opacity: 1;
+      animation: sectionTraceA .55s cubic-bezier(.3,.75,.35,1) 1;
     }
-    .trace-frame.bold .trace-path {
+    .trace-frame .trace-path-b.play {
+      opacity: 1;
+      animation: sectionTraceB .55s cubic-bezier(.3,.75,.35,1) 1;
+    }
+    .trace-frame.bold .trace-path,
+    .trace-frame.bold .trace-path-b {
       stroke-width: 3;
       filter: drop-shadow(0 0 4px rgba(255,255,255,.95)) drop-shadow(0 0 14px rgba(255,255,255,.6)) drop-shadow(0 0 22px rgba(255,255,255,.3));
     }
-    /* Runs from the top-right corner to the diagonally opposite corner
-       (bottom-left) and stops there, rather than completing the full
-       loop back to the start — dashoffset 100 -> 50 is exactly half of
-       the pathLength="100" perimeter. */
-    @keyframes sectionTrace {
+    /* pathLength="100": corner positions are top-right=0, bottom-right=25,
+       bottom-left=50, top-left=75 (dashoffset maps to path position as
+       (100 - offset) mod 100). Runner A: 100->50 = top-right to
+       bottom-left. Runner B: 50->0 = bottom-left to top-right. */
+    @keyframes sectionTraceA {
       from { stroke-dashoffset: 100; }
       to   { stroke-dashoffset: 50; }
     }
+    @keyframes sectionTraceB {
+      from { stroke-dashoffset: 50; }
+      to   { stroke-dashoffset: 0; }
+    }
     @media (prefers-reduced-motion: reduce) {
-      .trace-frame .trace-path.play { animation-duration: .01s; }
+      .trace-frame .trace-path.play,
+      .trace-frame .trace-path-b.play { animation-duration: .01s; }
     }
 
     /* ─── HERO ────────────────────────────────────── */
@@ -1943,7 +1964,7 @@
     <div class="trace-frame bold">
       <p class="hero-tagline">建物に価値を与える</p>
       <h1 class="hero-name">㍿ 久保工務店</h1>
-      <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /><path class="trace-path trace-path-b" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
     </div>
     <p class="hero-sub">地域に根ざした、信頼のリフォーム工事</p>
     <p class="hero-free-text">現地調査 無料<br>お気軽にご連絡ください</p>
@@ -2050,7 +2071,7 @@
     <div class="trace-frame bold">
       <p class="section-label">TWO APPROACHES</p>
       <p class="two-track-heading">二つの工事アプローチ</p>
-      <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /><path class="trace-path trace-path-b" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
     </div>
   </div>
   <div class="two-track">
@@ -2079,7 +2100,7 @@
       <div class="trace-frame bold">
         <p class="section-label">WHY CHOOSE US</p>
         <h2 class="section-title">㍿ 久保工務店の強み</h2>
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /><path class="trace-path trace-path-b" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
       </div>
     </div>
 
@@ -2136,7 +2157,7 @@
       <div class="trace-frame bold">
         <p class="section-label">OUR WORK</p>
         <h2 class="section-title">施工事例</h2>
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /><path class="trace-path trace-path-b" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
       </div>
     </div>
   <div class="portfolio-pair">
@@ -2188,7 +2209,7 @@
           <div class="trace-frame bold">
             <p class="section-label">About Us</p>
             <h2 class="section-title">地域に根ざした<br>信頼のリフォーム</h2>
-            <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /><path class="trace-path trace-path-b" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
           </div>
         </div>
         <p>株式会社久保工務店は、東京を拠点に地域のお客様に密着したリフォームサービスを提供しています。「建物に価値を与える」を掲げ、戸建・マンションはもちろん、店舗・ビルの改修まで、誠実・丁寧に対応いたします。</p>
@@ -2232,7 +2253,7 @@
         <div class="trace-frame bold">
           <p class="section-label">Company Profile</p>
           <h2 class="section-title">会社概要</h2>
-          <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /><path class="trace-path trace-path-b" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
         </div>
       </div>
       <table class="cp-table">
@@ -2275,7 +2296,7 @@
       <div class="trace-frame bold">
         <p class="section-label">Service Area</p>
         <h2 class="section-title">対応エリア</h2>
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /><path class="trace-path trace-path-b" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
       </div>
     </div>
     <div class="area-cards">
@@ -2298,7 +2319,7 @@
         <div class="trace-frame bold">
           <p class="section-label">Instagram</p>
           <h2 class="section-title">🔰 社長日記</h2>
-          <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /><path class="trace-path trace-path-b" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
         </div>
       </div>
       <p class="insta-sub">Instagramで毎日更新中！</p>
@@ -2316,7 +2337,7 @@
       <div class="trace-frame bold">
         <p class="section-label">Free Estimate</p>
         <h2 class="section-title">お気軽にご相談ください<br>無料でお見積りいたします</h2>
-        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /><path class="trace-path trace-path-b" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
       </div>
     </div>
     <div class="contact-info reveal">
@@ -2503,19 +2524,26 @@
      at opacity:0 made it invisible. The traceQueued guard stops a second
      intersection event (e.g. from a sibling .reveal fade nudging layout
      right as this element crosses the threshold) from restarting the
-     animation mid-flight before it reaches its stop position. */
+     animation mid-flight before it reaches its stop position. The
+     animationend listener removes .play once the sweep finishes — .play
+     carries its own "opacity:1" declaration, so without this the element
+     would stay permanently visible (stuck at its final dashoffset) after
+     the very first flash instead of returning to the hidden idle state. */
   if ('IntersectionObserver' in window) {
     const traceObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting && !entry.target.dataset.traceQueued) {
           entry.target.dataset.traceQueued = '1';
           setTimeout(function() {
-            const path = entry.target.querySelector('.trace-path');
-            if (path) {
+            entry.target.querySelectorAll('.trace-path, .trace-path-b').forEach(function(path) {
               path.classList.remove('play');
               void path.getBoundingClientRect();
               path.classList.add('play');
-            }
+              path.addEventListener('animationend', function onDone() {
+                path.classList.remove('play');
+                path.removeEventListener('animationend', onDone);
+              });
+            });
           }, 700);
           setTimeout(function() {
             delete entry.target.dataset.traceQueued;

@@ -475,6 +475,52 @@
       transform: none;
     }
 
+    /* Border-trace flash: thin line runs once around a compact "header"
+       block (label + title) inside each major section, starting and ending
+       at the top-right corner, replayed each time that section scrolls
+       into view. Traces a small header rather than the whole section so
+       the full loop is always visible even on sections taller than the
+       viewport. display:inline-block makes the frame hug its text content
+       instead of stretching full-width; non-scaling-stroke keeps the line
+       an even thickness despite preserveAspectRatio="none" stretching the
+       path unevenly. */
+    .trace-frame {
+      position: relative;
+      display: inline-block;
+    }
+    .trace-frame svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .trace-frame .trace-path {
+      fill: none;
+      stroke: #ffffff;
+      stroke-width: 2;
+      stroke-linecap: round;
+      filter: drop-shadow(0 0 3px rgba(255,255,255,.85)) drop-shadow(0 0 8px rgba(255,255,255,.35));
+      stroke-dasharray: 6 94;
+      stroke-dashoffset: 100;
+    }
+    .trace-frame .trace-path.play {
+      animation: sectionTrace 1.05s cubic-bezier(.3,.75,.35,1) 1;
+    }
+    .trace-frame.bold .trace-path {
+      stroke-width: 3;
+      filter: drop-shadow(0 0 4px rgba(255,255,255,.95)) drop-shadow(0 0 14px rgba(255,255,255,.6)) drop-shadow(0 0 22px rgba(255,255,255,.3));
+    }
+    @keyframes sectionTrace {
+      from { stroke-dashoffset: 100; }
+      to   { stroke-dashoffset: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .trace-frame .trace-path.play { animation-duration: .01s; }
+    }
+
     /* ─── HERO ────────────────────────────────────── */
     .hero {
       min-height: 100vh;
@@ -1890,8 +1936,11 @@
       <img width="400" height="393" src="logo.jpg" alt="naoking tokyo ロゴ" class="hero-logo-img">
     </div>
     <div class="hero-badge">関東・関西・北九州のリフォーム専門店</div>
-    <p class="hero-tagline">建物に価値を与える</p>
-    <h1 class="hero-name">㍿ 久保工務店</h1>
+    <div class="trace-frame bold">
+      <p class="hero-tagline">建物に価値を与える</p>
+      <h1 class="hero-name">㍿ 久保工務店</h1>
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+    </div>
     <p class="hero-sub">地域に根ざした、信頼のリフォーム工事</p>
     <p class="hero-free-text">現地調査 無料<br>お気軽にご連絡ください</p>
     <div class="hero-cta">
@@ -1994,8 +2043,11 @@
   </div>
 
   <div class="two-track-label">
-    <p class="section-label">TWO APPROACHES</p>
-    <p class="two-track-heading">二つの工事アプローチ</p>
+    <div class="trace-frame bold">
+      <p class="section-label">TWO APPROACHES</p>
+      <p class="two-track-heading">二つの工事アプローチ</p>
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+    </div>
   </div>
   <div class="two-track">
     <div class="two-track-item">
@@ -2020,8 +2072,11 @@
   <div style="position:absolute;inset:0;background:rgba(0,0,0,0.40);z-index:0;"></div>
   <div style="position:relative; z-index:1; max-width:1100px; margin:0 auto;">
     <div class="section-header">
-      <p class="section-label">WHY CHOOSE US</p>
-      <h2 class="section-title">㍿ 久保工務店の強み</h2>
+      <div class="trace-frame bold">
+        <p class="section-label">WHY CHOOSE US</p>
+        <h2 class="section-title">㍿ 久保工務店の強み</h2>
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+      </div>
     </div>
 
     <div style="display:flex; flex-direction:column; gap:0;">
@@ -2074,8 +2129,11 @@
 <section id="gallery" class="portfolio-section">
   <div style="position: relative; z-index: 1;">
     <div class="section-header">
-      <p class="section-label">OUR WORK</p>
-      <h2 class="section-title">施工事例</h2>
+      <div class="trace-frame bold">
+        <p class="section-label">OUR WORK</p>
+        <h2 class="section-title">施工事例</h2>
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+      </div>
     </div>
   <div class="portfolio-pair">
     <div class="portfolio-item">
@@ -2123,8 +2181,11 @@
 
       <div class="about-text reveal">
         <div class="section-header">
-          <p class="section-label">About Us</p>
-          <h2 class="section-title">地域に根ざした<br>信頼のリフォーム</h2>
+          <div class="trace-frame bold">
+            <p class="section-label">About Us</p>
+            <h2 class="section-title">地域に根ざした<br>信頼のリフォーム</h2>
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+          </div>
         </div>
         <p>株式会社久保工務店は、東京を拠点に地域のお客様に密着したリフォームサービスを提供しています。「建物に価値を与える」を掲げ、戸建・マンションはもちろん、店舗・ビルの改修まで、誠実・丁寧に対応いたします。</p>
         <p>熟練の職人がお客様の大切な住まいを、より良い空間へと生まれ変わらせます。透明な価格設定と確かな技術で、安心してお任せください。</p>
@@ -2204,8 +2265,11 @@
 <section id="area">
   <div class="container">
     <div class="section-header reveal">
-      <p class="section-label">Service Area</p>
-      <h2 class="section-title">対応エリア</h2>
+      <div class="trace-frame bold">
+        <p class="section-label">Service Area</p>
+        <h2 class="section-title">対応エリア</h2>
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+      </div>
     </div>
     <div class="area-cards">
       <div class="area-card reveal">
@@ -2224,8 +2288,11 @@
   <div class="container">
     <div class="insta-inner reveal">
       <div class="section-header">
-        <p class="section-label">Instagram</p>
-        <h2 class="section-title">🔰 社長日記</h2>
+        <div class="trace-frame bold">
+          <p class="section-label">Instagram</p>
+          <h2 class="section-title">🔰 社長日記</h2>
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+        </div>
       </div>
       <p class="insta-sub">Instagramで毎日更新中！</p>
       <a href="https://www.instagram.com/naokingtokyo" target="_blank" rel="noopener" class="insta-btn">→ @naokingtokyo をフォローする</a>
@@ -2239,8 +2306,11 @@
 <section id="quote">
   <div class="container">
     <div class="section-header reveal">
-      <p class="section-label">Free Estimate</p>
-      <h2 class="section-title">お気軽にご相談ください<br>無料でお見積りいたします</h2>
+      <div class="trace-frame bold">
+        <p class="section-label">Free Estimate</p>
+        <h2 class="section-title">お気軽にご相談ください<br>無料でお見積りいたします</h2>
+        <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+      </div>
     </div>
     <div class="contact-info reveal">
       <p class="contact-info-label">24時間 ⏰ いつでもご連絡ください</p>
@@ -2413,6 +2483,28 @@
     shineTargets.forEach(function(el) { shineObserver.observe(el); });
   } else {
     shineTargets.forEach(function(el) { el.classList.add('shine-play'); });
+  }
+
+  /* Border-trace flash: replays every time a major section (re)enters
+     view, unlike the one-shot .reveal/shine-sweep effects above. Delayed
+     700ms so it always fires after the .reveal fade-in (650ms) finishes —
+     several header blocks (about/area/quote) sit inside a .reveal
+     ancestor, and playing the flash at opacity:0 made it invisible. */
+  if ('IntersectionObserver' in window) {
+    const traceObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          const path = entry.target.querySelector('.trace-path');
+          if (!path) return;
+          setTimeout(function() {
+            path.classList.remove('play');
+            void path.getBoundingClientRect();
+            path.classList.add('play');
+          }, 700);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('section').forEach(function(el) { traceObserver.observe(el); });
   }
 
   /* Form submission — sends to Formspree via fetch (no page reload) */

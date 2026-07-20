@@ -8,7 +8,7 @@
   <link rel="canonical" href="https://kubokoumutenn.com">
   <meta property="og:url" content="https://kubokoumutenn.com">
   <meta property="og:title" content="㍿ 久保工務店 | 建物に価値を与える">
-  <meta property="og:description" content="地域に根ざした、信頼のリフォーム工事。現地調査無料。関東・関西・北九州。24時間365日対応。">
+  <meta property="og:description" content="地域に根ざした、信頼のリフォーム工事。戸建・マンションから店舗・ビルまで対応。現地調査無料。関東・関西・北九州。24時間365日対応。">
   <meta property="og:type" content="website">
   <!-- Structured data: no street address is published anywhere on this
        site (only "東京支社 / 大阪支社" branch names) -- this models the
@@ -75,6 +75,14 @@
             "@type": "Service",
             "name": "外構・全面リフォーム工事",
             "description": "間取り変更・スケルトン工事、断熱・耐震リフォーム、バリアフリー化、マンション全面改装、一戸建て丸ごとリフォーム"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "店舗・ビル改修",
+            "description": "テナント内装・店舗改修、オフィス改修、ビル外装・共用部リノベーション、収益物件のコンバージョン（用途変更）、資産価値・利回り向上プラン"
           }
         }
       ]
@@ -677,12 +685,41 @@
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1px;
       background: rgba(51,51,51,0.85);
       border: 1px solid #333;
       max-width: 1100px;
       margin: 0 auto;
+    }
+
+    .two-track {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(51,51,51,0.85);
+      border: 1px solid #333;
+      border-top: none;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .two-track-item {
+      background: radial-gradient(ellipse at center, rgba(42,42,42,0.85) 0%, rgba(15,15,15,0.85) 100%);
+      padding: 1.5rem 1.2rem;
+      display: flex;
+      gap: .75rem;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .two-track-icon { font-size: 1.6rem; flex-shrink: 0; line-height: 1; }
+    .two-track-text { min-width: 0; }
+    .two-track-text h4 { font-size: .95rem; font-weight: 700; color: #ffffff; margin-bottom: .3rem; }
+    .two-track-text p { font-size: .78rem; color: #cccccc; line-height: 1.6; margin: 0; }
+
+    @media (max-width: 480px) {
+      .two-track { grid-template-columns: 1fr; }
     }
 
     .service-card {
@@ -1922,6 +1959,43 @@
       </div>
     </div>
 
+    <!-- Card 04 -->
+    <div class="service-card" onclick="toggleService(this)">
+      <div class="service-summary">
+        <span class="service-num">04</span>
+        <span class="service-title-ja">店舗・ビル</span>
+        <span class="service-title-en">COMMERCIAL</span>
+        <span class="service-arrow">▼</span>
+      </div>
+      <div class="service-detail">
+        <p class="service-desc">店舗・オフィス・収益ビルの改修に対応。リフォームはもちろん、リノベーション・コンバージョン（用途変更）まで幅広くご提案します。</p>
+        <ul class="service-list">
+          <li>テナント内装・店舗改修</li>
+          <li>オフィス改修</li>
+          <li>ビル外装・共用部リノベーション</li>
+          <li>収益物件のコンバージョン（用途変更）</li>
+          <li>資産価値・利回り向上プラン</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="two-track">
+    <div class="two-track-item">
+      <div class="two-track-icon">👷</div>
+      <div class="two-track-text">
+        <h4>コストを抑えて、綺麗に</h4>
+        <p>ご予算内で見た目と使い勝手を最大限に高める工事です。</p>
+      </div>
+    </div>
+    <div class="two-track-item">
+      <div class="two-track-icon">📈</div>
+      <div class="two-track-text">
+        <h4>投資として、価値を上げる</h4>
+        <p>資産価値・利回りアップを見据えた本格改修です。</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -2036,7 +2110,7 @@
           <p class="section-label">About Us</p>
           <h2 class="section-title">地域に根ざした<br>信頼のリフォーム</h2>
         </div>
-        <p>株式会社久保工務店は、東京を拠点に地域のお客様に密着したリフォームサービスを提供しています。「建物に価値を与える」を掲げ、小さな修繕から大規模改修まで、誠実・丁寧に対応いたします。</p>
+        <p>株式会社久保工務店は、東京を拠点に地域のお客様に密着したリフォームサービスを提供しています。「建物に価値を与える」を掲げ、戸建・マンションはもちろん、店舗・ビルの改修まで、誠実・丁寧に対応いたします。</p>
         <p>熟練の職人がお客様の大切な住まいを、より良い空間へと生まれ変わらせます。透明な価格設定と確かな技術で、安心してお任せください。</p>
         <div class="features">
           <div class="feat">

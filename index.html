@@ -2524,16 +2524,27 @@
      two nearby headers (e.g. #about's "About Us" and "Company Profile")
      both be >40% visible at once and flash together. Observes each
      .trace-frame individually so sections with more than one header each
-     flash independently when THEY cross the middle. Delayed 700ms so it
-     always fires after the .reveal fade-in (650ms) finishes — several
-     header blocks sit inside a .reveal ancestor, and playing the flash
-     at opacity:0 made it invisible. The traceQueued guard stops a second
-     intersection event from restarting the animation mid-flight before
-     it reaches its stop position. The animationend listener removes
-     .play once the sweep finishes — .play carries its own "opacity:1"
-     declaration, so without this the element would stay permanently
-     visible (stuck at its final dashoffset) after the very first flash
-     instead of returning to the hidden idle state. */
+     flash independently when THEY cross the middle.
+
+     Only an 80ms delay now (was 700ms) — confirmed via a real screen
+     recording that the old 700ms delay was long enough for continuous
+     scrolling to carry the header well past the middle before the flash
+     even started, so it fired late and out of sync with scroll position,
+     and on a fast scroll the delayed flash could land around the same
+     moment as the NEXT header's own (also-delayed) flash, reading as
+     multiple runners at once. 80ms is just enough to dodge layout jitter
+     right at the threshold crossing. The .reveal fade-in (650ms) that the
+     700ms value was originally sized for isn't a concern here: reaching
+     the viewport's vertical middle requires scrolling roughly half a
+     screen further than the .reveal trigger point (12% visible from the
+     bottom), which in practice takes longer than the fade-in anyway.
+     The traceQueued guard stops a second intersection event from
+     restarting the animation mid-flight before it reaches its stop
+     position. The animationend listener removes .play once the sweep
+     finishes — .play carries its own "opacity:1" declaration, so without
+     this the element would stay permanently visible (stuck at its final
+     dashoffset) after the very first flash instead of returning to the
+     hidden idle state. */
   if ('IntersectionObserver' in window) {
     const traceObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
@@ -2549,10 +2560,10 @@
                 path.removeEventListener('animationend', onDone);
               });
             });
-          }, 700);
+          }, 80);
           setTimeout(function() {
             delete entry.target.dataset.traceQueued;
-          }, 1300); // 700ms delay + .55s animation + a small buffer
+          }, 680); // 80ms delay + .55s animation + a small buffer
         }
       });
     }, { threshold: 0, rootMargin: '-50% 0px -50% 0px' });

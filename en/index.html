@@ -126,6 +126,22 @@
       overflow-x: hidden;
       max-width: 100%;
       width: 100%;
+      scroll-snap-type: y mandatory;
+    }
+
+    /* One scroll gesture advances one section. scroll-margin-top offsets
+       the snap point by the fixed nav's height (matches the -72 already
+       used for the nav's smooth-scroll anchor links below) so a section
+       settles just under the nav rather than partly hidden behind it.
+       Sections taller than one viewport (About, Gallery, Strengths) still
+       need a couple of scrolls to get through their own content before
+       advancing — nothing is clipped or forced into a fixed height to
+       avoid that, so the "one scroll" guarantee is closest to exact on
+       shorter sections and approximate on long ones. */
+    #home, #services, #strengths, #gallery, #about, #area, #instagram,
+    #quote, footer {
+      scroll-snap-align: start;
+      scroll-margin-top: 72px;
     }
 
     body {
@@ -418,19 +434,32 @@
     }
 
     /* ─── BACKGROUND ZONES ──────────────────────── */
-    .bg-zone {
+    /* Each section carries its own background directly (previously these
+       three images were shared across sibling sections via a wrapping
+       .bg-zone div — removed so every <section> is a self-contained,
+       independent unit rather than several sections nested inside one
+       shared-background parent). */
+    #home, #services, #strengths {
+      background-image: url('../Background/bg-exterior.png');
+      background-size: 2500px auto;
+      background-position: right 75%;
+      background-repeat: no-repeat;
+      background-color: #0a0a0a;
+    }
+    #gallery, #about, #area {
+      background-image: url('../Background/bg-garden-cropped.png');
       background-size: cover;
       background-position: center top;
       background-repeat: no-repeat;
       background-color: #0a0a0a;
     }
-    .zone-1 {
-      background-image: url('../Background/bg-exterior.png');
-      background-size: 2500px auto !important;
-      background-position: right 75% !important;
+    #instagram, #quote {
+      background-image: url('../Background/bg-exterior cropped.png');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-color: #0a0a0a;
     }
-    .zone-2 { background-image: url('../Background/bg-garden-cropped.png'); }
-    .zone-3 { background-image: url('../Background/bg-exterior cropped.png'); }
 
     /* buttons */
     .btn {
@@ -1498,9 +1527,25 @@
 
     /* ─── FOOTER ──────────────────────────────────── */
     footer {
-      background: rgba(0,0,0,0.70);
+      background-image: url('../Background/bg-exterior cropped.png');
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+      background-color: #0a0a0a;
       color: var(--text);
       padding: 3.5rem 2rem 0;
+      position: relative;
+    }
+    /* footer previously inherited its photo backdrop from the shared
+       .bg-zone.zone-3 wrapper it sat inside; now that it's an independent
+       section it carries the image itself, with this dark tint layered
+       the same way #quote/#instagram/#area do. */
+    footer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.70);
+      z-index: 0;
     }
 
     .footer-top {
@@ -1512,6 +1557,8 @@
       gap: 2rem;
       flex-wrap: wrap;
       padding-bottom: 2.5rem;
+      position: relative;
+      z-index: 1;
       border-bottom: 1px solid rgba(255,255,255,.1);
     }
 
@@ -1558,6 +1605,8 @@
       margin: 0 auto;
       padding: 1.4rem 0;
       text-align: center;
+      position: relative;
+      z-index: 1;
       font-size: .78rem;
       color: #cccccc !important;
     }
@@ -1942,7 +1991,6 @@
   <a href="mailto:maimran8923@gmail.com" style="color:#ffffff;font-weight:700;font-family:'Montserrat',sans-serif;"><span class="ph">✉️</span> E-mail</a>
 </div>
 
-<div class="bg-zone zone-1">
 <!-- ══════════ HERO ══════════ -->
 <section class="hero" id="home">
   <div class="hero-content">
@@ -2136,9 +2184,6 @@
   </div>
 </section>
 
-</div>
-
-<div class="bg-zone zone-2">
 <!-- ══════════ PORTFOLIO PREVIEW ══════════ -->
 <section id="gallery" class="portfolio-section">
   <div style="position: relative; z-index: 1;">
@@ -2293,9 +2338,6 @@
   </div>
 </section>
 
-</div>
-
-<div class="bg-zone zone-3">
 <!-- ══════════ INSTAGRAM ══════════ -->
 <section id="instagram">
   <div class="container">
@@ -2425,7 +2467,6 @@
     © 2026 Kubo Koumuten Co., Ltd. All rights reserved.
   </div>
 </footer>
-</div>
 
 <!-- ══════════ JS ══════════ -->
 <script>
@@ -2497,62 +2538,77 @@
     shineTargets.forEach(function(el) { el.classList.add('shine-play'); });
   }
 
-  /* Border-trace flash: replays every time a header block crosses the
-     vertical middle of the viewport, unlike the one-shot .reveal/
-     shine-sweep effects above. rootMargin "-50% 0px -50% 0px" shrinks the
-     observer's effective viewport to a zero-height line at screen center,
-     so isIntersecting only flips true right as a header passes through
-     the middle — this also naturally keeps only one header's flash active
-     at a time (two headers rarely straddle the exact center line
-     together), instead of the old 40%-visible threshold which could let
-     two nearby headers (e.g. #about's "About Us" and "Company Profile")
-     both be >40% visible at once and flash together. Observes each
-     .trace-frame individually so sections with more than one header each
-     flash independently when THEY cross the middle.
+  /* Border-trace flash: fires once a scroll gesture settles, on whichever
+     SECTION is now docked at the top (below the fixed nav) — matching the
+     page's one-section-per-scroll snap behavior, where each scroll ends
+     with exactly one section parked at that position. Previous versions
+     tried crossing-based triggers (40% visible, then viewport middle) but
+     both could mistime relative to where the page actually stopped;
+     tying the flash directly to the 'scrollend' event (the browser's own
+     signal that scrolling — including the snap settle — has finished) is
+     the direct match for "flash when the section arrives at top and the
+     scroll stops". Falls back to a debounced 'scroll' listener on
+     browsers without scrollend support (Safari <16.4).
 
-     Only an 80ms delay now (was 700ms) — confirmed via a real screen
-     recording that the old 700ms delay was long enough for continuous
-     scrolling to carry the header well past the middle before the flash
-     even started, so it fired late and out of sync with scroll position,
-     and on a fast scroll the delayed flash could land around the same
-     moment as the NEXT header's own (also-delayed) flash, reading as
-     multiple runners at once. 80ms is just enough to dodge layout jitter
-     right at the threshold crossing. The .reveal fade-in (650ms) that the
-     700ms value was originally sized for isn't a concern here: reaching
-     the viewport's vertical middle requires scrolling roughly half a
-     screen further than the .reveal trigger point (12% visible from the
-     bottom), which in practice takes longer than the fade-in anyway.
-     The traceQueued guard stops a second intersection event from
-     restarting the animation mid-flight before it reaches its stop
-     position. The animationend listener removes .play once the sweep
-     finishes — .play carries its own "opacity:1" declaration, so without
-     this the element would stay permanently visible (stuck at its final
-     dashoffset) after the very first flash instead of returning to the
-     hidden idle state. */
-  if ('IntersectionObserver' in window) {
-    const traceObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting && !entry.target.dataset.traceQueued) {
-          entry.target.dataset.traceQueued = '1';
-          setTimeout(function() {
-            entry.target.querySelectorAll('.trace-path, .trace-path-b').forEach(function(path) {
-              path.classList.remove('play');
-              void path.getBoundingClientRect();
-              path.classList.add('play');
-              path.addEventListener('animationend', function onDone() {
-                path.classList.remove('play');
-                path.removeEventListener('animationend', onDone);
-              });
-            });
-          }, 80);
-          setTimeout(function() {
-            delete entry.target.dataset.traceQueued;
-          }, 680); // 80ms delay + .55s animation + a small buffer
-        }
+     Detects which *section* is snapped to top, not which *trace-frame*
+     is — the hero's tagline/name sit vertically centered within the hero
+     section (flex-centered, not top-anchored like every other section's
+     header), so its trace-frame never lands near the top even though the
+     hero section itself correctly does. Finding the top-docked section
+     first and then locating its trace-frame handles that case the same
+     way as every other section.
+
+     playFrame() reuses the animationend-cleanup pattern from earlier:
+     without removing .play once the sweep finishes, the element would
+     stay stuck visible at its final dashoffset (.play carries its own
+     opacity:1) instead of returning to the hidden idle state. */
+  (function() {
+    const NAV_OFFSET = 72;
+    const NEAR_TOP_TOLERANCE = 90;
+    const SNAP_TARGETS = '#home, #services, #strengths, #gallery, #about, #area, #instagram, #quote, footer';
+    let lastPlayed = null;
+
+    function playFrame(frame) {
+      if (frame === lastPlayed) return;
+      lastPlayed = frame;
+      frame.querySelectorAll('.trace-path, .trace-path-b').forEach(function(path) {
+        path.classList.remove('play');
+        void path.getBoundingClientRect();
+        path.classList.add('play');
+        path.addEventListener('animationend', function onDone() {
+          path.classList.remove('play');
+          path.removeEventListener('animationend', onDone);
+        });
       });
-    }, { threshold: 0, rootMargin: '-50% 0px -50% 0px' });
-    document.querySelectorAll('.trace-frame').forEach(function(el) { traceObserver.observe(el); });
-  }
+    }
+
+    function flashTopSection() {
+      const sections = document.querySelectorAll(SNAP_TARGETS);
+      let closestSection = null, closestDist = Infinity;
+      sections.forEach(function(section) {
+        const rect = section.getBoundingClientRect();
+        if (rect.bottom <= 0 || rect.top >= window.innerHeight) return; // not on screen at all
+        const dist = Math.abs(rect.top - NAV_OFFSET);
+        if (dist < closestDist) { closestDist = dist; closestSection = section; }
+      });
+      if (!closestSection || closestDist >= NEAR_TOP_TOLERANCE) return;
+      const frame = closestSection.querySelector('.trace-frame');
+      if (frame) playFrame(frame);
+    }
+
+    if ('onscrollend' in window) {
+      window.addEventListener('scrollend', flashTopSection);
+    } else {
+      let t = null;
+      window.addEventListener('scroll', function() {
+        clearTimeout(t);
+        t = setTimeout(flashTopSection, 150);
+      }, { passive: true });
+    }
+
+    // Fire once for whatever's at top on initial load (the hero, normally).
+    setTimeout(flashTopSection, 400);
+  })();
 
   /* Form submission — sends to Formspree via fetch (no page reload) */
   document.getElementById('quoteForm').addEventListener('submit', async function(e) {

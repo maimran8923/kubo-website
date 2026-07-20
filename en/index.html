@@ -11,7 +11,7 @@
   <link rel="alternate" hreflang="x-default" href="https://kubokoumutenn.com/">
   <meta property="og:url" content="https://kubokoumutenn.com/en/">
   <meta property="og:title" content="Renovation Contractor in Tokyo, Osaka &amp; Kitakyushu | English Support – Kubo Koumuten">
-  <meta property="og:description" content="Trusted renovation contractor serving Tokyo, Osaka &amp; Kitakyushu with English-speaking support. Free on-site estimates, 24/7 availability. Interior, exterior &amp; full home renovations.">
+  <meta property="og:description" content="Trusted renovation contractor serving Tokyo, Osaka &amp; Kitakyushu with English-speaking support. Homes, shops &amp; buildings. Free on-site estimates, 24/7 availability.">
   <meta property="og:type" content="website">
   <meta name="description" content="Trusted renovation contractor serving Tokyo, Osaka &amp; Kitakyushu with English-speaking support. Free on-site estimates, 24/7 availability. Interior, exterior &amp; full home renovations.">
   <!-- Structured data: no street address is published anywhere on this
@@ -29,7 +29,7 @@
     "url": "https://kubokoumutenn.com/en/",
     "logo": "https://kubokoumutenn.com/logo.jpg",
     "image": "https://kubokoumutenn.com/logo.jpg",
-    "description": "Trusted renovation contractor serving Tokyo, Osaka and Kitakyushu with English-speaking support. Free on-site estimates. Available 24/7.",
+    "description": "Trusted renovation contractor serving Tokyo, Osaka and Kitakyushu with English-speaking support. Homes, shops and buildings. Free on-site estimates. Available 24/7.",
     "telephone": "+81-80-9572-0846",
     "email": "kubokoumutenn@yahoo.co.jp",
     "sameAs": [
@@ -79,6 +79,14 @@
             "@type": "Service",
             "name": "Full & Exterior Renovation",
             "description": "Layout changes and full gut renovation, insulation and earthquake-resistance upgrades, barrier-free renovation, full apartment renovation, whole-house renovation"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Commercial & Building Renovation",
+            "description": "Tenant interior and shop renovation, office renovation, building exterior and common-area renovation, income-property conversion, asset value and yield improvement plans"
           }
         }
       ]
@@ -679,12 +687,53 @@
 
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1px;
       background: rgba(51,51,51,0.85);
       border: 1px solid #333;
       max-width: 1100px;
       margin: 0 auto;
+    }
+
+    .two-track-label {
+      text-align: center;
+      max-width: 1100px;
+      margin: 2.5rem auto 1rem;
+    }
+    .two-track-label .section-label { color: #ffffff; text-shadow: 0 1px 4px rgba(0,0,0,0.85); }
+    .two-track-label p.two-track-heading {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #ffffff;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.85);
+    }
+
+    .two-track {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(51,51,51,0.85);
+      border: 1px solid #333;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .two-track-item {
+      background: radial-gradient(ellipse at center, rgba(42,42,42,0.85) 0%, rgba(15,15,15,0.85) 100%);
+      padding: 1.5rem 1.2rem;
+      display: flex;
+      gap: .75rem;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .two-track-icon { font-size: 1.6rem; flex-shrink: 0; line-height: 1; }
+    .two-track-text { min-width: 0; }
+    .two-track-text h4 { font-size: .95rem; font-weight: 700; color: #ffffff; margin-bottom: .3rem; }
+    .two-track-text p { font-size: .78rem; color: #cccccc; line-height: 1.6; margin: 0; }
+
+    @media (max-width: 480px) {
+      .two-track { grid-template-columns: 1fr; }
     }
 
     .service-card {
@@ -1830,7 +1879,7 @@
       <img width="400" height="393" src="../logo.jpg" alt="naoking tokyo logo" class="hero-logo-img">
     </div>
     <div class="hero-badge">Kanto, Kansai &amp; Kitakyushu Renovation Specialist</div>
-    <p class="hero-tagline">Your Local Renovation Expert</p>
+    <p class="hero-tagline">Giving Value to Buildings</p>
     <h1 class="hero-name">Kubo Koumuten Co., Ltd.</h1>
     <p class="hero-sub">Reliable Renovation Work — English Support Available</p>
     <p class="hero-free-text">Free On-Site Estimate<br>Feel Free to Reach Out</p>
@@ -1911,6 +1960,47 @@
       </div>
     </div>
 
+    <!-- Card 04 -->
+    <div class="service-card" onclick="toggleService(this)">
+      <div class="service-summary">
+        <span class="service-num">04</span>
+        <span class="service-title-ja">Commercial</span>
+        <span class="service-title-en">SHOPS · OFFICES · BUILDINGS</span>
+        <span class="service-arrow">▼</span>
+      </div>
+      <div class="service-detail">
+        <p class="service-desc">We handle renovations for shops, offices, and income properties — from standard reform to full renovation and conversion (change of use).</p>
+        <ul class="service-list">
+          <li>🏬 Tenant interior &amp; shop renovation</li>
+          <li>💼 Office renovation</li>
+          <li>🏙️ Building exterior &amp; common-area renovation</li>
+          <li>🔄 Income-property conversion (change of use)</li>
+          <li>📈 Asset value &amp; yield improvement plans</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="two-track-label">
+    <p class="section-label">TWO APPROACHES</p>
+    <p class="two-track-heading">Two Ways We Work</p>
+  </div>
+  <div class="two-track">
+    <div class="two-track-item">
+      <div class="two-track-icon">👷</div>
+      <div class="two-track-text">
+        <h4>Budget-Conscious, Beautifully Done</h4>
+        <p>Maximizing the look and function of your space within your budget.</p>
+      </div>
+    </div>
+    <div class="two-track-item">
+      <div class="two-track-icon">📈</div>
+      <div class="two-track-text">
+        <h4>Invest to Increase Value</h4>
+        <p>Full-scale renovation aimed at raising asset value and rental yield.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -2025,7 +2115,7 @@
           <p class="section-label">About Us</p>
           <h2 class="section-title">Trusted Renovation,<br>Rooted in the Community</h2>
         </div>
-        <p>Kubo Koumuten is based in Tokyo, offering renovation services closely tailored to the local community. As your neighborhood renovation company, we handle everything from small repairs to full-scale remodeling with honesty and care.</p>
+        <p>Kubo Koumuten is based in Tokyo, offering renovation services closely tailored to the local community. Under the banner of "giving value to buildings," we handle everything from detached houses and condominiums, of course, to shops and office buildings, with honesty and care.</p>
         <p>Our skilled craftsmen transform your valued home into a better living space. With transparent pricing and dependable technique, you can trust us with confidence.</p>
         <div class="features">
           <div class="feat">
@@ -2221,7 +2311,7 @@
   <div class="footer-top">
     <div class="ft-brand">
       <div class="ft-logo">Kubo Koumuten Co., Ltd.</div>
-      <p>Your Neighborhood Renovation Company</p>
+      <p>Giving Value to Buildings</p>
       <p style="margin-top:.3rem">Serving Tokyo, Osaka &amp; Kitakyushu</p>
     </div>
     <div class="ft-contact">

@@ -507,15 +507,19 @@
       stroke-dashoffset: 100;
     }
     .trace-frame .trace-path.play {
-      animation: sectionTrace 1.05s cubic-bezier(.3,.75,.35,1) 1;
+      animation: sectionTrace .55s cubic-bezier(.3,.75,.35,1) 1;
     }
     .trace-frame.bold .trace-path {
       stroke-width: 3;
       filter: drop-shadow(0 0 4px rgba(255,255,255,.95)) drop-shadow(0 0 14px rgba(255,255,255,.6)) drop-shadow(0 0 22px rgba(255,255,255,.3));
     }
+    /* Runs from the top-right corner to the diagonally opposite corner
+       (bottom-left) and stops there, rather than completing the full
+       loop back to the start — dashoffset 100 -> 50 is exactly half of
+       the pathLength="100" perimeter. */
     @keyframes sectionTrace {
       from { stroke-dashoffset: 100; }
-      to   { stroke-dashoffset: 0; }
+      to   { stroke-dashoffset: 50; }
     }
     @media (prefers-reduced-motion: reduce) {
       .trace-frame .trace-path.play { animation-duration: .01s; }
@@ -2225,8 +2229,11 @@
 
     <div class="company-profile reveal">
       <div class="section-header">
-        <p class="section-label">Company Profile</p>
-        <h2 class="section-title">会社概要</h2>
+        <div class="trace-frame bold">
+          <p class="section-label">Company Profile</p>
+          <h2 class="section-title">会社概要</h2>
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" pathLength="100" vector-effect="non-scaling-stroke" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+        </div>
       </div>
       <table class="cp-table">
         <tbody>
@@ -2485,26 +2492,38 @@
     shineTargets.forEach(function(el) { el.classList.add('shine-play'); });
   }
 
-  /* Border-trace flash: replays every time a major section (re)enters
-     view, unlike the one-shot .reveal/shine-sweep effects above. Delayed
-     700ms so it always fires after the .reveal fade-in (650ms) finishes —
-     several header blocks (about/area/quote) sit inside a .reveal
-     ancestor, and playing the flash at opacity:0 made it invisible. */
+  /* Border-trace flash: replays every time a header block (re)enters
+     view, unlike the one-shot .reveal/shine-sweep effects above. Observes
+     each .trace-frame individually rather than the parent section, so
+     sections with more than one header (e.g. #about's "About Us" and
+     "Company Profile") each flash independently when THEY scroll into
+     view, instead of only the first one firing. Delayed 700ms so it
+     always fires after the .reveal fade-in (650ms) finishes — several
+     header blocks sit inside a .reveal ancestor, and playing the flash
+     at opacity:0 made it invisible. The traceQueued guard stops a second
+     intersection event (e.g. from a sibling .reveal fade nudging layout
+     right as this element crosses the threshold) from restarting the
+     animation mid-flight before it reaches its stop position. */
   if ('IntersectionObserver' in window) {
     const traceObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          const path = entry.target.querySelector('.trace-path');
-          if (!path) return;
+        if (entry.isIntersecting && !entry.target.dataset.traceQueued) {
+          entry.target.dataset.traceQueued = '1';
           setTimeout(function() {
-            path.classList.remove('play');
-            void path.getBoundingClientRect();
-            path.classList.add('play');
+            const path = entry.target.querySelector('.trace-path');
+            if (path) {
+              path.classList.remove('play');
+              void path.getBoundingClientRect();
+              path.classList.add('play');
+            }
           }, 700);
+          setTimeout(function() {
+            delete entry.target.dataset.traceQueued;
+          }, 1300); // 700ms delay + .55s animation + a small buffer
         }
       });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('section').forEach(function(el) { traceObserver.observe(el); });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.trace-frame').forEach(function(el) { traceObserver.observe(el); });
   }
 
   /* Form submission — sends to Formspree via fetch (no page reload) */

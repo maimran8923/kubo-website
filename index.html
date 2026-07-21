@@ -781,8 +781,8 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1px;
-      background: rgba(51,51,51,0.85);
-      border: 1px solid #333;
+      background: rgba(0,0,0,0.10);
+      border: 1px solid rgba(0,0,0,0.10);
       max-width: 1100px;
       margin: 0 auto;
     }
@@ -804,14 +804,14 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1px;
-      background: rgba(51,51,51,0.85);
-      border: 1px solid #333;
+      background: rgba(0,0,0,0.10);
+      border: 1px solid rgba(0,0,0,0.10);
       max-width: 1100px;
       margin: 0 auto;
     }
 
     .two-track-item {
-      background: radial-gradient(ellipse at center, rgba(42,42,42,0.85) 0%, rgba(15,15,15,0.85) 100%);
+      background: rgba(255,255,255,0.94);
       padding: 1.5rem 1.2rem;
       display: flex;
       gap: .75rem;
@@ -821,21 +821,21 @@
 
     .two-track-icon { font-size: 1.6rem; flex-shrink: 0; line-height: 1; }
     .two-track-text { min-width: 0; }
-    .two-track-text h4 { font-size: .95rem; font-weight: 700; color: #ffffff; margin-bottom: .3rem; }
-    .two-track-text p { font-size: .78rem; color: #cccccc; line-height: 1.6; margin: 0; }
+    .two-track-text h4 { font-size: .95rem; font-weight: 700; color: #0f2438; margin-bottom: .3rem; }
+    .two-track-text p { font-size: .78rem; color: #333333; line-height: 1.6; margin: 0; }
 
     @media (max-width: 480px) {
       .two-track { grid-template-columns: 1fr; }
     }
 
     .service-card {
-      background: radial-gradient(ellipse at center, rgba(42,42,42,0.85) 0%, rgba(15,15,15,0.85) 100%);
+      background: rgba(255,255,255,0.94);
       cursor: pointer;
       transition: background 0.2s ease;
       overflow: hidden;
     }
 
-    .service-card:hover { background: rgba(34,34,34,0.85); }
+    .service-card:hover { background: rgba(255,255,255,1); }
 
     .service-summary {
       display: flex;
@@ -851,7 +851,7 @@
     .service-num {
       font-size: 2rem;
       font-weight: 100;
-      color: #fff;
+      color: #0f2438;
       letter-spacing: 0.05em;
       opacity: 0.5;
       line-height: 1;
@@ -860,14 +860,14 @@
     .service-title-ja {
       font-size: 1.3rem;
       font-weight: 700;
-      color: #fff;
+      color: #0f2438;
       letter-spacing: 0.05em;
     }
 
     .service-title-en {
       font-size: 0.6rem;
       font-weight: 400;
-      color: #cccccc;
+      color: #555555;
       letter-spacing: 0.2em;
       text-transform: uppercase;
     }
@@ -875,14 +875,14 @@
     .service-arrow {
       margin-top: 0.5rem;
       font-size: 0.8rem;
-      color: #666;
+      color: #888888;
       transition: transform 0.3s ease, color 0.2s ease;
       line-height: 1;
     }
 
     .service-card.open .service-arrow {
       transform: rotate(180deg);
-      color: #fff;
+      color: #0f2438;
     }
 
     .service-detail {
@@ -890,18 +890,18 @@
       overflow: hidden;
       transition: max-height 0.4s ease, padding 0.3s ease;
       padding: 0 1.2rem;
-      border-top: 0px solid #333;
+      border-top: 0px solid rgba(0,0,0,0.1);
     }
 
     .service-card.open .service-detail {
       max-height: 400px;
       padding: 1.2rem 1.2rem 1.8rem;
-      border-top: 1px solid #333;
+      border-top: 1px solid rgba(0,0,0,0.1);
     }
 
     .service-desc {
       font-size: 0.78rem;
-      color: #cccccc !important;
+      color: #333333 !important;
       line-height: 1.7;
       margin-bottom: 1rem;
       text-shadow: none !important;
@@ -915,9 +915,9 @@
 
     .service-list li {
       font-size: 0.75rem;
-      color: #ccc !important;
+      color: #333333 !important;
       padding: 0.4rem 0;
-      border-bottom: 1px solid #2a2a2a;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
       padding-left: 0.8rem;
       position: relative;
       text-shadow: none !important;
@@ -927,7 +927,7 @@
       content: '・';
       position: absolute;
       left: 0;
-      color: #cccccc;
+      color: #555555;
       font-size: 0.85rem;
       top: 0.25rem;
     }
@@ -935,9 +935,9 @@
     @media (max-width: 480px) {
       .services-grid {
         grid-template-columns: 1fr;
-        background: rgba(26,26,26,0.85);
+        background: rgba(0,0,0,0.10);
       }
-      .service-card { border-bottom: 1px solid #333; }
+      .service-card { border-bottom: 1px solid rgba(0,0,0,0.1); }
       .service-num { font-size: 1.4rem; opacity: 0.4; min-width: 2rem; }
       .service-title-ja { font-size: 1rem; }
       .service-title-en { display: none; }

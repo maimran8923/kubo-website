@@ -768,8 +768,8 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1px;
-      background: rgba(0,0,0,0.10);
-      border: 1px solid rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.18);
       max-width: 1100px;
       margin: 0 auto;
     }
@@ -791,14 +791,14 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1px;
-      background: rgba(0,0,0,0.10);
-      border: 1px solid rgba(0,0,0,0.10);
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.18);
       max-width: 1100px;
       margin: 0 auto;
     }
 
     .two-track-item {
-      background: rgba(255,255,255,0.94);
+      background: transparent;
       padding: 1.5rem 1.2rem;
       display: flex;
       gap: .75rem;
@@ -808,21 +808,21 @@
 
     .two-track-icon { font-size: 1.6rem; flex-shrink: 0; line-height: 1; }
     .two-track-text { min-width: 0; }
-    .two-track-text h4 { font-size: .95rem; font-weight: 700; color: #0f2438; margin-bottom: .3rem; }
-    .two-track-text p { font-size: .78rem; color: #333333; line-height: 1.6; margin: 0; }
+    .two-track-text h4 { font-size: .95rem; font-weight: 700; color: #ffffff; text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); margin-bottom: .3rem; }
+    .two-track-text p { font-size: .78rem; color: #ffffff; text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); line-height: 1.6; margin: 0; }
 
     @media (max-width: 480px) {
       .two-track { grid-template-columns: 1fr; }
     }
 
     .service-card {
-      background: rgba(255,255,255,0.94);
+      background: transparent;
       cursor: pointer;
       transition: background 0.2s ease;
       overflow: hidden;
     }
 
-    .service-card:hover { background: rgba(255,255,255,1); }
+    .service-card:hover { background: rgba(255,255,255,0.08); }
 
     .service-summary {
       display: flex;
@@ -838,23 +838,26 @@
     .service-num {
       font-size: 2rem;
       font-weight: 100;
-      color: #0f2438;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
       letter-spacing: 0.05em;
-      opacity: 0.5;
+      opacity: 0.7;
       line-height: 1;
     }
 
     .service-title-ja {
       font-size: 1.3rem;
       font-weight: 700;
-      color: #0f2438;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
       letter-spacing: 0.05em;
     }
 
     .service-title-en {
       font-size: 0.6rem;
       font-weight: 400;
-      color: #555555;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
       letter-spacing: 0.2em;
       text-transform: uppercase;
     }
@@ -862,14 +865,15 @@
     .service-arrow {
       margin-top: 0.5rem;
       font-size: 0.8rem;
-      color: #888888;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
       transition: transform 0.3s ease, color 0.2s ease;
       line-height: 1;
     }
 
     .service-card.open .service-arrow {
       transform: rotate(180deg);
-      color: #0f2438;
+      color: #ffffff;
     }
 
     .service-detail {
@@ -877,21 +881,21 @@
       overflow: hidden;
       transition: max-height 0.4s ease, padding 0.3s ease;
       padding: 0 1.2rem;
-      border-top: 0px solid rgba(0,0,0,0.1);
+      border-top: 0px solid rgba(255,255,255,0.18);
     }
 
     .service-card.open .service-detail {
       max-height: 400px;
       padding: 1.2rem 1.2rem 1.8rem;
-      border-top: 1px solid rgba(0,0,0,0.1);
+      border-top: 1px solid rgba(255,255,255,0.18);
     }
 
     .service-desc {
       font-size: 0.78rem;
-      color: #333333 !important;
+      color: #ffffff !important;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55) !important;
       line-height: 1.7;
       margin-bottom: 1rem;
-      text-shadow: none !important;
     }
 
     .service-list {
@@ -902,19 +906,19 @@
 
     .service-list li {
       font-size: 0.75rem;
-      color: #333333 !important;
+      color: #ffffff !important;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55) !important;
       padding: 0.4rem 0;
-      border-bottom: 1px solid rgba(0,0,0,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
       padding-left: 0.8rem;
       position: relative;
-      text-shadow: none !important;
     }
 
     .service-list li::before {
       content: '・';
       position: absolute;
       left: 0;
-      color: #555555;
+      color: #ffffff;
       font-size: 0.85rem;
       top: 0.25rem;
     }
@@ -922,9 +926,9 @@
     @media (max-width: 480px) {
       .services-grid {
         grid-template-columns: 1fr;
-        background: rgba(0,0,0,0.10);
+        background: rgba(255,255,255,0.18);
       }
-      .service-card { border-bottom: 1px solid rgba(0,0,0,0.1); }
+      .service-card { border-bottom: 1px solid rgba(255,255,255,0.18); }
       .service-num { font-size: 1.4rem; opacity: 0.4; min-width: 2rem; }
       .service-title-ja { font-size: 1rem; }
       .service-title-en { display: none; }
@@ -1081,18 +1085,18 @@
       width: 100%;
       min-width: 0;
       overflow: hidden;
-      background: rgba(255,255,255,0.94);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+      background: transparent;
       text-align: center;
     }
     .stat-num {
       font-family: 'Montserrat', sans-serif;
       font-size: 1.8rem;
       font-weight: 900;
-      color: #0f2438;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
       line-height: 1;
     }
-    .stat-label { font-size: 0.7rem; color: #555555; margin-top: .3rem; }
+    .stat-label { font-size: 0.7rem; color: #ffffff; text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); margin-top: .3rem; }
 
     .about-text h2 {
       font-size: 2rem;
@@ -1126,16 +1130,16 @@
       height: 42px;
       flex-shrink: 0;
       border-radius: 0;
-      background: rgba(255,255,255,0.92);
-      border: 1px solid rgba(0,0,0,0.08);
-      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.35);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 1.1rem;
+      filter: drop-shadow(0 1px 3px rgba(0,0,0,0.6));
     }
     .feat-text h4 { font-size: .88rem; font-weight: 700; color: #ffffff; text-shadow: 0 1px 4px rgba(0,0,0,0.85); margin-bottom: .2rem; }
-    .feat-text p  { font-size: .78rem; color: var(--muted); margin: 0; }
+    .feat-text p  { font-size: .78rem; color: #ffffff; text-shadow: 0 1px 3px rgba(0,0,0,0.85); margin: 0; }
 
     /* ─── BACKGROUND-IMAGE SECTION TEXT ──────────── */
     /* Applies to hero, services, gallery, about, quote — any section
@@ -1233,34 +1237,36 @@
       font-size: 0.92rem;
     }
     .cp-table tr {
-      border-bottom: 1px solid rgba(0,0,0,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.18);
     }
-    .cp-table tr:first-child { border-top: 1px solid rgba(0,0,0,0.08); }
+    .cp-table tr:first-child { border-top: 1px solid rgba(255,255,255,0.18); }
     .cp-table th {
       width: 30%;
       padding: 1rem 1.2rem;
       text-align: left;
       font-weight: 700;
-      color: #1a1a1a;
-      background: rgba(255,255,255,0.55);
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
+      background: transparent;
       white-space: nowrap;
       vertical-align: top;
     }
     .cp-table td {
       padding: 1rem 1.2rem;
-      color: #232323;
-      background: rgba(255,255,255,0.32);
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
+      background: transparent;
       line-height: 1.7;
       vertical-align: top;
     }
     .cp-table td a {
-      color: #1a3d54;
+      color: #ffffff;
       text-decoration: underline;
       text-underline-offset: 3px;
-      text-decoration-color: rgba(26,61,84,0.4);
+      text-decoration-color: rgba(255,255,255,0.5);
       transition: color .2s, text-decoration-color .2s;
     }
-    .cp-table td a:hover { color: #0a1f2c; text-decoration-color: rgba(10,31,44,0.7); }
+    .cp-table td a:hover { color: #ffffff; text-decoration-color: rgba(255,255,255,0.85); }
     @media (max-width: 560px) {
       .cp-table th { width: 38%; padding: 0.75rem 0.8rem; font-size: 0.82rem; }
       .cp-table td { padding: 0.75rem 0.8rem; font-size: 0.85rem; }
@@ -1288,38 +1294,37 @@
       padding: 2.2rem 1.8rem;
       text-align: center;
       position: relative;
-      background: rgba(255,255,255,0.94);
-      border: 1px solid rgba(0,0,0,0.06);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.22);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.25);
       border-radius: 2px;
       transition: all 0.3s ease;
     }
     .area-card:hover {
-      border-color: rgba(0,0,0,0.14);
+      border-color: rgba(255,255,255,0.45);
     }
     .area-card-region {
       font-family: 'Noto Sans', sans-serif;
       font-size: clamp(1.6rem, 4vw, 2.2rem);
       font-weight: 900;
-      color: #0f2438;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
       letter-spacing: -0.01em;
       margin-bottom: 0.5rem;
     }
     .area-card-note {
       font-size: 0.82rem;
-      color: #555555;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
       letter-spacing: 0.04em;
       line-height: 1.6;
     }
     .area-disclaimer {
       font-size: 0.8rem;
-      color: #666666;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.85);
       font-style: italic;
       line-height: 1.7;
       text-align: center;
-    }
-    @media (max-width: 560px) {
-      .area-card { box-shadow: 0 6px 24px rgba(0,0,0,0.4), inset 0 0 40px rgba(255,255,255,0.02); }
     }
 
     /* ─── STRIP CTA ───────────────────────────────── */
@@ -2092,18 +2097,18 @@
       </div>
     </div>
 
-    <div style="display:flex; flex-direction:column; gap:0; background:rgba(255,255,255,0.94); box-shadow:0 8px 32px rgba(0,0,0,0.18); padding:0.4rem 1.8rem;">
+    <div style="display:flex; flex-direction:column; gap:0;">
 
-      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(0,0,0,0.08);">
-        <h3 style="font-size:1rem; font-weight:700; color:#0f2438; margin-bottom:0.4rem;">In-House, Multi-Skilled Craftsmen</h3>
-        <p style="font-size:0.92rem; color:#333333; line-height:1.8;">We handle demolition, construction, and equipment installation entirely in-house, for smooth coordination and consistent quality control.</p>
+      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(255,255,255,0.18);">
+        <h3 style="font-size:1rem; font-weight:700; color:#ffffff; text-shadow:0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); margin-bottom:0.4rem;">In-House, Multi-Skilled Craftsmen</h3>
+        <p style="font-size:0.92rem; color:#ffffff; text-shadow:0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); line-height:1.8;">We handle demolition, construction, and equipment installation entirely in-house, for smooth coordination and consistent quality control.</p>
       </div>
 
-      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(0,0,0,0.08);">
-        <h3 style="font-size:1rem; font-weight:700; color:#0f2438; margin-bottom:0.4rem;">Fully Licensed &amp; Insured</h3>
-        <p style="font-size:0.92rem; color:#333333; line-height:1.8;">Properly licensed and covered by construction liability insurance, so you're protected both legally and in case of the unexpected.</p>
-        <p style="font-size:0.92rem; color:#0f2438; font-weight:700; line-height:1.8; margin-top:2.4rem; margin-bottom:0.4rem;">Construction Business Licenses Held</p>
-        <ul style="list-style:none; margin:0; padding:0; font-size:0.92rem; color:#333333; line-height:1.8;">
+      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(255,255,255,0.18);">
+        <h3 style="font-size:1rem; font-weight:700; color:#ffffff; text-shadow:0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); margin-bottom:0.4rem;">Fully Licensed &amp; Insured</h3>
+        <p style="font-size:0.92rem; color:#ffffff; text-shadow:0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); line-height:1.8;">Properly licensed and covered by construction liability insurance, so you're protected both legally and in case of the unexpected.</p>
+        <p style="font-size:0.92rem; color:#ffffff; text-shadow:0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); font-weight:700; line-height:1.8; margin-top:2.4rem; margin-bottom:0.4rem;">Construction Business Licenses Held</p>
+        <ul style="list-style:none; margin:0; padding:0; font-size:0.92rem; color:#ffffff; text-shadow:0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); line-height:1.8;">
           <li>・Building Construction Work</li>
           <li>・Carpentry Work</li>
           <li>・Roofing Work</li>
@@ -2111,24 +2116,24 @@
         </ul>
       </div>
 
-      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(0,0,0,0.08);">
-        <h3 style="font-size:1rem; font-weight:700; color:#0f2438; margin-bottom:0.4rem;">Available 24/7, 365 Days a Year</h3>
-        <p style="font-size:0.92rem; color:#333333; line-height:1.8;">Late at night, during holidays, and everything in between — reach out anytime, even in an emergency.</p>
+      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(255,255,255,0.18);">
+        <h3 style="font-size:1rem; font-weight:700; color:#ffffff; text-shadow:0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); margin-bottom:0.4rem;">Available 24/7, 365 Days a Year</h3>
+        <p style="font-size:0.92rem; color:#ffffff; text-shadow:0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); line-height:1.8;">Late at night, during holidays, and everything in between — reach out anytime, even in an emergency.</p>
       </div>
 
-      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(0,0,0,0.08);">
-        <h3 style="font-size:1rem; font-weight:700; color:#0f2438; margin-bottom:0.4rem;">Serving Kanto, Kansai &amp; Kitakyushu</h3>
-        <p style="font-size:0.92rem; color:#333333; line-height:1.8;">Our wide network covers major areas across the Kanto, Kansai, and Kitakyushu regions.</p>
+      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(255,255,255,0.18);">
+        <h3 style="font-size:1rem; font-weight:700; color:#ffffff; text-shadow:0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); margin-bottom:0.4rem;">Serving Kanto, Kansai &amp; Kitakyushu</h3>
+        <p style="font-size:0.92rem; color:#ffffff; text-shadow:0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); line-height:1.8;">Our wide network covers major areas across the Kanto, Kansai, and Kitakyushu regions.</p>
       </div>
 
-      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(0,0,0,0.08);">
-        <h3 style="font-size:1rem; font-weight:700; color:#0f2438; margin-bottom:0.4rem;">Experienced Craftsmen</h3>
-        <p style="font-size:0.92rem; color:#333333; line-height:1.8;">Our team is primarily in their 30s and 40s, bringing solid experience and careful, dependable craftsmanship to every job.</p>
+      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(255,255,255,0.18);">
+        <h3 style="font-size:1rem; font-weight:700; color:#ffffff; text-shadow:0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); margin-bottom:0.4rem;">Experienced Craftsmen</h3>
+        <p style="font-size:0.92rem; color:#ffffff; text-shadow:0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); line-height:1.8;">Our team is primarily in their 30s and 40s, bringing solid experience and careful, dependable craftsmanship to every job.</p>
       </div>
 
       <div style="padding:1.2rem 0;">
-        <h3 style="font-size:1rem; font-weight:700; color:#0f2438; margin-bottom:0.4rem;">Always Improving</h3>
-        <p style="font-size:0.92rem; color:#333333; line-height:1.8;">We learn from every mistake and are committed to continuous improvement, taking each issue seriously to prevent it from happening again.</p>
+        <h3 style="font-size:1rem; font-weight:700; color:#ffffff; text-shadow:0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); margin-bottom:0.4rem;">Always Improving</h3>
+        <p style="font-size:0.92rem; color:#ffffff; text-shadow:0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55); line-height:1.8;">We learn from every mistake and are committed to continuous improvement, taking each issue seriously to prevent it from happening again.</p>
       </div>
 
     </div>

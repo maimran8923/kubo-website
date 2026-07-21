@@ -15,7 +15,7 @@ html {
 body {
   font-family: 'Noto Sans JP', sans-serif;
   background: #111111;
-  color: #cccccc;
+  color: #ffffff;
   max-width: 100% !important;
   width: 100% !important;
   margin: 0;
@@ -53,7 +53,7 @@ nav {
   white-space: nowrap;
   text-decoration: none;
 }
-.nav-logo span { color: #cccccc; }
+.nav-logo span { color: #ffffff; }
 
 .nav-phone {
   color: #ffffff;
@@ -164,7 +164,7 @@ nav {
 }
 #mobile-menu a {
   display: block;
-  color: #cccccc;
+  color: #ffffff;
   text-decoration: none;
   padding: 12px 0;
   border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -196,7 +196,7 @@ nav {
   font-weight: 300;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #cccccc;
+  color: #ffffff;
   text-shadow: 0 1px 4px rgba(0,0,0,0.7);
   margin-bottom: 0.6rem;
 }
@@ -503,7 +503,7 @@ nav {
   display: block;
   width: 100%;
   background: rgba(26,26,26,0.85);
-  color: #cccccc;
+  color: #ffffff;
   font-size: 0.85rem;
   letter-spacing: 0.08em;
   font-weight: 600;
@@ -537,7 +537,7 @@ nav {
 /* ─── FOOTER ──────────────────────────────────── */
 footer {
   background: rgba(0,0,0,0.70);
-  color: #cccccc;
+  color: #ffffff;
   padding: 3.5rem 2rem 0;
 }
 .footer-top {
@@ -558,8 +558,8 @@ footer {
   color: #ffffff;
   margin-bottom: .4rem;
 }
-.ft-brand .ft-logo span { color: #cccccc; }
-.ft-brand p { color: #cccccc; font-size: .85rem; }
+.ft-brand .ft-logo span { color: #ffffff; }
+.ft-brand p { color: #ffffff; font-size: .85rem; }
 .ft-contact { text-align: right; }
 .ft-phone {
   font-family: 'Montserrat', sans-serif;
@@ -573,7 +573,7 @@ footer {
   display: inline-flex;
   align-items: center;
   gap: .5rem;
-  color: #cccccc !important;
+  color: #ffffff !important;
   text-decoration: none;
   font-size: .9rem;
   padding: .5rem 1.1rem;
@@ -587,7 +587,7 @@ footer {
   padding: 1.4rem 0;
   text-align: center;
   font-size: .78rem;
-  color: #cccccc;
+  color: #ffffff;
 }
 
 @media (max-width: 560px) {
@@ -666,7 +666,7 @@ footer {
 }
 .strength-desc {
   font-size: 0.92rem;
-  color: #cccccc;
+  color: #ffffff;
   line-height: 1.8;
   word-break: keep-all;
   overflow-wrap: break-word;

@@ -243,7 +243,7 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.48);
+  background: rgba(0,0,0,0.28);
   pointer-events: none;
 }
 .portfolio-zone-1 {
@@ -272,7 +272,7 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0,0,0,0.28);
 }
 .portfolio-hero-header .section-eyebrow,
 .portfolio-hero-header .section-heading,

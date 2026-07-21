@@ -185,6 +185,8 @@ nav {
 }
 
 .portfolio-section {
+  position: relative;
+  z-index: 1;
   margin: 1.25rem -20px 0;
 }
 
@@ -195,6 +197,7 @@ nav {
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: #cccccc;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.7);
   margin-bottom: 0.6rem;
 }
 
@@ -229,19 +232,27 @@ nav {
 
 /* ─── PORTFOLIO PAGE ZONES ─────────────────── */
 .portfolio-zone {
+  position: relative;
   margin: 0 -20px;
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
   background-color: #0a0a0a;
 }
+.portfolio-zone::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.48);
+  pointer-events: none;
+}
 .portfolio-zone-1 {
   margin-top: -100px;
-  background-image: url('Background/内装.png');
+  background-image: url('Background/bg-sky-office-tower.jpg');
   background-position: center 40%;
 }
 .portfolio-zone-2 {
-  background-image: url('Background/内装.png');
+  background-image: url('Background/bg-sky-office-tower.jpg');
 }
 @media (max-width: 800px) {
   .portfolio-zone-1 { margin-top: -80px; }
@@ -250,8 +261,9 @@ nav {
 /* ─── PORTFOLIO PAGE HERO HEADER ──────────── */
 .portfolio-hero-header {
   position: relative;
+  z-index: 1;
   padding: 130px 20px 1.25rem;
-  background-image: url('Background/内装.png');
+  background-image: url('Background/bg-sky-office-tower.jpg');
   background-size: cover;
   background-position: center 40%;
   background-repeat: no-repeat;
@@ -260,7 +272,7 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.25);
+  background: rgba(0,0,0,0.45);
 }
 .portfolio-hero-header .section-eyebrow,
 .portfolio-hero-header .section-heading,

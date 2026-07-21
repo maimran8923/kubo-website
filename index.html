@@ -166,7 +166,7 @@
       white-space: nowrap;
       text-decoration: none;
     }
-    .nav-logo span { color: #cccccc; }
+    .nav-logo span { color: #ffffff; }
 
     .nav-phone {
       color: #ffffff;
@@ -229,7 +229,7 @@
     }
     #mobile-menu a {
       display: block;
-      color: #cccccc;
+      color: #ffffff;
       text-decoration: none;
       padding: 12px 0;
       border-bottom: 1px solid rgba(255,255,255,0.1);
@@ -263,7 +263,7 @@
     }
     .nav-links a {
       text-decoration: none;
-      color: #cccccc;
+      color: #ffffff;
       font-size: 0.88rem;
       font-weight: 500;
       transition: color .25s;
@@ -274,7 +274,7 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 700;
       font-size: 0.88rem;
-      color: #cccccc;
+      color: #ffffff;
       text-decoration: none;
       white-space: nowrap;
     }
@@ -393,7 +393,7 @@
       font-weight: 300;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #cccccc;
+      color: #ffffff;
       margin-bottom: 0.6rem;
     }
 
@@ -425,9 +425,7 @@
       background-color: #0a0a0a;
     }
     .zone-1 {
-      background-image: url('Background/bg-exterior.png');
-      background-size: 2500px auto !important;
-      background-position: right 75% !important;
+      background-image: url('Background/bg-sky-building-upper.jpg');
     }
     .zone-2 { background-image: url('Background/bg-sky-house-garden.jpg'); }
     .zone-3 { background-image: url('Background/bg-sky-tower-clouds.jpg'); }
@@ -531,9 +529,9 @@
     .trace-frame .trace-path {
       fill: none;
       stroke: #ffffff;
-      stroke-width: 2;
+      stroke-width: 1;
       stroke-linecap: round;
-      filter: drop-shadow(0 0 3px rgba(255,255,255,.85)) drop-shadow(0 0 8px rgba(255,255,255,.35));
+      filter: drop-shadow(0 0 2px rgba(255,255,255,.85)) drop-shadow(0 0 5px rgba(255,255,255,.35));
       stroke-dasharray: 64 336;
       opacity: 0;
     }
@@ -542,8 +540,8 @@
       animation: sectionTrace .9s cubic-bezier(.3,.75,.35,1) 1;
     }
     .trace-frame.bold .trace-path {
-      stroke-width: 3;
-      filter: drop-shadow(0 0 4px rgba(255,255,255,.95)) drop-shadow(0 0 14px rgba(255,255,255,.6)) drop-shadow(0 0 22px rgba(255,255,255,.3));
+      stroke-width: 1.25;
+      filter: drop-shadow(0 0 2px rgba(255,255,255,.95)) drop-shadow(0 0 7px rgba(255,255,255,.5));
     }
     /* Full lap: dashoffset 400 -> 0 travels the entire real path length
        once. Holds full opacity until 85% through the lap, then fades to
@@ -576,19 +574,6 @@
       background-repeat: no-repeat;
     }
 
-    /* fade the bottom of the sky photo to dark so it blends into the
-       services section's exterior-photo background below */
-    .hero::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 22%;
-      background: linear-gradient(180deg, rgba(8,10,14,0) 0%, rgba(8,10,14,0.92) 100%);
-      z-index: 0;
-      pointer-events: none;
-    }
 
     /* warm glow blob */
     .hero::after {
@@ -624,7 +609,7 @@
     .hero-badge {
       display: inline-block;
       background: transparent;
-      color: #cccccc;
+      color: #ffffff;
       font-family: 'Noto Sans JP', sans-serif;
       font-size: .8rem;
       font-weight: 600;
@@ -659,7 +644,7 @@
 
     .hero-sub {
       font-size: 1rem;
-      color: #cccccc;
+      color: #ffffff;
       font-weight: 700;
       margin-bottom: 2.6rem;
       text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
@@ -670,7 +655,7 @@
       border: none;
       box-shadow: none;
       padding: 0;
-      color: #cccccc;
+      color: #ffffff;
       font-weight: 700;
       font-size: 1rem;
       text-decoration: underline;
@@ -691,7 +676,7 @@
       font-family: 'Noto Sans JP', sans-serif;
       font-size: 2rem;
       font-weight: 700;
-      color: #cccccc;
+      color: #ffffff;
       letter-spacing: 0.04em;
       margin-bottom: 2rem;
       text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
@@ -743,7 +728,7 @@
       font-size: 0.65rem;
       font-weight: 400;
       letter-spacing: 0.3em;
-      color: #cccccc;
+      color: #ffffff;
       text-transform: uppercase;
     }
     .scroll-line {
@@ -1115,7 +1100,7 @@
       margin: .5rem 0 1.4rem;
     }
     .about-text p {
-      color: #cccccc;
+      color: #ffffff;
       line-height: 1.7;
       font-size: 0.95rem;
       font-weight: 400;
@@ -1167,7 +1152,7 @@
     #quote     p, #quote     li,
     #area      p, #area      li,
     #instagram p, #instagram li {
-      color: #cccccc;
+      color: #ffffff;
       text-shadow: 0 1px 4px rgba(0,0,0,0.9);
       line-height: 1.7;
     }
@@ -1200,7 +1185,7 @@
     }
     .insta-sub {
       font-size: 1rem;
-      color: #cccccc;
+      color: #ffffff;
       margin-bottom: 2rem;
       letter-spacing: 0.04em;
     }
@@ -1228,7 +1213,7 @@
       margin-bottom: 0;
       padding-bottom: 2rem;
       font-size: 0.82rem;
-      color: #cccccc !important;
+      color: #ffffff !important;
       font-style: italic;
       letter-spacing: 0.03em;
     }
@@ -1408,7 +1393,7 @@
       line-height: 1.2;
       transition: color .2s, text-decoration-color .2s;
     }
-    .contact-phone:hover { color: #cccccc; text-decoration-color: rgba(255,255,255,0.6); }
+    .contact-phone:hover { color: #ffffff; text-decoration-color: rgba(255,255,255,0.6); }
     .contact-email {
       display: block;
       margin-top: 0.75rem;
@@ -1560,8 +1545,8 @@
       color: #ffffff;
       margin-bottom: .4rem;
     }
-    .ft-brand .ft-logo span { color: #cccccc !important; }
-    .ft-brand p { color: #cccccc !important; font-size: .85rem; }
+    .ft-brand .ft-logo span { color: #ffffff !important; }
+    .ft-brand p { color: #ffffff !important; font-size: .85rem; }
 
     .ft-contact { text-align: right; }
     .ft-phone {
@@ -1577,7 +1562,7 @@
       display: inline-flex;
       align-items: center;
       gap: .5rem;
-      color: #cccccc !important;
+      color: #ffffff !important;
       text-decoration: none;
       font-size: .9rem;
       padding: .5rem 1.1rem;
@@ -1597,7 +1582,7 @@
       padding: 1.4rem 0;
       text-align: center;
       font-size: .78rem;
-      color: #cccccc !important;
+      color: #ffffff !important;
     }
 
     /* ─── RESPONSIVE ──────────────────────────────── */
@@ -2014,12 +1999,12 @@
 <section class="services" id="services">
   <div class="services-grid">
 
-    <!-- Card 01 -->
+    <!-- Card 01: was 内装 (Interior) -->
     <div class="service-card" onclick="toggleService(this)">
       <div class="service-summary">
         <span class="service-num">01</span>
-        <span class="service-title-ja">内装</span>
-        <span class="service-title-en">INTERIOR</span>
+        <span class="service-title-ja">家の中</span>
+        <span class="service-title-en">IN THE HOUSE</span>
         <span class="service-arrow">▼</span>
       </div>
       <div class="service-detail">
@@ -2034,37 +2019,22 @@
       </div>
     </div>
 
-    <!-- Card 02 -->
+    <!-- Card 02: was 外装 (Exterior) + 外構 (Landscaping) merged -->
     <div class="service-card" onclick="toggleService(this)">
       <div class="service-summary">
         <span class="service-num">02</span>
-        <span class="service-title-ja">外装</span>
-        <span class="service-title-en">EXTERIOR</span>
+        <span class="service-title-ja">家の外</span>
+        <span class="service-title-en">OUTSIDE THE HOUSE</span>
         <span class="service-arrow">▼</span>
       </div>
       <div class="service-detail">
-        <p class="service-desc">建物の外観を守り、美しく保ちます。耐久性と美観を両立した外装工事をご提供します。</p>
+        <p class="service-desc">建物の外観を守り、美しく保ちます。耐久性と美観を両立した外装工事から、間取り変更を伴う全面リフォームまで幅広く対応します。</p>
         <ul class="service-list">
           <li>🖌️ 外壁塗装・補修</li>
           <li>🏠 屋根工事・防水</li>
           <li>🪟 サッシ・窓リフォーム</li>
           <li>🌧️ 雨樋・軒天補修</li>
           <li>🚪 玄関・アプローチ改修</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Card 03 -->
-    <div class="service-card" onclick="toggleService(this)">
-      <div class="service-summary">
-        <span class="service-num">03</span>
-        <span class="service-title-ja">外構</span>
-        <span class="service-title-en">LANDSCAPING</span>
-        <span class="service-arrow">▼</span>
-      </div>
-      <div class="service-detail">
-        <p class="service-desc">建物まるごとのリフォームも対応可能。トータルコーディネートで理想の住まいを実現します。</p>
-        <ul class="service-list">
           <li>📐 間取り変更・スケルトン工事</li>
           <li>🛡️ 断熱・耐震リフォーム</li>
           <li>♿ バリアフリー化</li>
@@ -2074,10 +2044,10 @@
       </div>
     </div>
 
-    <!-- Card 04 -->
+    <!-- Card 03: was 店舗・ビル (Commercial), unchanged -->
     <div class="service-card" onclick="toggleService(this)">
       <div class="service-summary">
-        <span class="service-num">04</span>
+        <span class="service-num">03</span>
         <span class="service-title-ja">店舗・ビル</span>
         <span class="service-title-en">COMMERCIAL</span>
         <span class="service-arrow">▼</span>
@@ -2123,28 +2093,28 @@
 
 <!-- ══════════ STRENGTHS ══════════ -->
 <section id="strengths" style="padding: 2.5rem 2rem; position: relative;">
-  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.40);z-index:0;"></div>
+  <div style="position:absolute;inset:0;background:rgba(0,0,0,0.18);z-index:0;"></div>
   <div style="position:relative; z-index:1; max-width:1100px; margin:0 auto;">
     <div class="section-header">
       <div class="trace-frame bold">
-        <p class="section-label">WHY CHOOSE US</p>
-        <h2 class="section-title">㍿ 久保工務店の強み</h2>
+        <p class="section-label" style="color:#ffffff; text-shadow:0 1px 4px rgba(0,0,0,0.85);">WHY CHOOSE US</p>
+        <h2 class="section-title" style="color:#ffffff; text-shadow:0 1px 4px rgba(0,0,0,0.85);">㍿ 久保工務店の強み</h2>
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
       </div>
     </div>
 
-    <div style="display:flex; flex-direction:column; gap:0;">
+    <div style="display:flex; flex-direction:column; gap:0; background:rgba(255,255,255,0.94); box-shadow:0 8px 32px rgba(0,0,0,0.18); padding:0.4rem 1.8rem;">
 
-      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(255,255,255,0.08);">
-        <h3 style="font-size:1rem; font-weight:700; color:#ffffff; margin-bottom:0.4rem;">多能工による自社施工</h3>
-        <p style="font-size:0.92rem; color:#cccccc; line-height:1.8;">解体・建築・設備すべて自社対応。連携がスムーズで品質を一貫管理します。</p>
+      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(0,0,0,0.08);">
+        <h3 style="font-size:1rem; font-weight:700; color:#0f2438; margin-bottom:0.4rem;">多能工による自社施工</h3>
+        <p style="font-size:0.92rem; color:#333333; line-height:1.8;">解体・建築・設備すべて自社対応。連携がスムーズで品質を一貫管理します。</p>
       </div>
 
-      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(255,255,255,0.08);">
-        <h3 style="font-size:1rem; font-weight:700; color:#ffffff; margin-bottom:0.4rem;">許認可・保険完備</h3>
-        <p style="font-size:0.92rem; color:#cccccc; line-height:1.8;">許認可取得済、工事損害保険加入済。法的にも万が一の時も安心です。</p>
-        <p style="font-size:0.92rem; color:#ffffff; font-weight:700; line-height:1.8; margin-top:2.4rem; margin-bottom:0.4rem;">建設業免許取得済み</p>
-        <ul style="list-style:none; margin:0; padding:0; font-size:0.92rem; color:#cccccc; line-height:1.8;">
+      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(0,0,0,0.08);">
+        <h3 style="font-size:1rem; font-weight:700; color:#0f2438; margin-bottom:0.4rem;">許認可・保険完備</h3>
+        <p style="font-size:0.92rem; color:#333333; line-height:1.8;">許認可取得済、工事損害保険加入済。法的にも万が一の時も安心です。</p>
+        <p style="font-size:0.92rem; color:#0f2438; font-weight:700; line-height:1.8; margin-top:2.4rem; margin-bottom:0.4rem;">建設業免許取得済み</p>
+        <ul style="list-style:none; margin:0; padding:0; font-size:0.92rem; color:#333333; line-height:1.8;">
           <li>・建築工事業</li>
           <li>・大工工事業</li>
           <li>・屋根工事業</li>
@@ -2152,24 +2122,24 @@
         </ul>
       </div>
 
-      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(255,255,255,0.08);">
-        <h3 style="font-size:1rem; font-weight:700; color:#ffffff; margin-bottom:0.4rem;">24時間365日対応</h3>
-        <p style="font-size:0.92rem; color:#cccccc; line-height:1.8;">深夜・お盆・お正月も対応可能。お急ぎの際もお気軽にご連絡ください。</p>
+      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(0,0,0,0.08);">
+        <h3 style="font-size:1rem; font-weight:700; color:#0f2438; margin-bottom:0.4rem;">24時間365日対応</h3>
+        <p style="font-size:0.92rem; color:#333333; line-height:1.8;">深夜・お盆・お正月も対応可能。お急ぎの際もお気軽にご連絡ください。</p>
       </div>
 
-      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(255,255,255,0.08);">
-        <h3 style="font-size:1rem; font-weight:700; color:#ffffff; margin-bottom:0.4rem;">関東・関西・北九州</h3>
-        <p style="font-size:0.92rem; color:#cccccc; line-height:1.8;">広域ネットワークで関東・関西・北九州の主要エリアにて施工対応いたします。</p>
+      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(0,0,0,0.08);">
+        <h3 style="font-size:1rem; font-weight:700; color:#0f2438; margin-bottom:0.4rem;">関東・関西・北九州</h3>
+        <p style="font-size:0.92rem; color:#333333; line-height:1.8;">広域ネットワークで関東・関西・北九州の主要エリアにて施工対応いたします。</p>
       </div>
 
-      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(255,255,255,0.08);">
-        <h3 style="font-size:1rem; font-weight:700; color:#ffffff; margin-bottom:0.4rem;">経験豊富な職人</h3>
-        <p style="font-size:0.92rem; color:#cccccc; line-height:1.8;">職人は30〜40代が中心。経験値が高く、丁寧で確かな仕上がりをお約束します。</p>
+      <div style="padding:1.2rem 0; border-bottom:1px solid rgba(0,0,0,0.08);">
+        <h3 style="font-size:1rem; font-weight:700; color:#0f2438; margin-bottom:0.4rem;">経験豊富な職人</h3>
+        <p style="font-size:0.92rem; color:#333333; line-height:1.8;">職人は30〜40代が中心。経験値が高く、丁寧で確かな仕上がりをお約束します。</p>
       </div>
 
       <div style="padding:1.2rem 0;">
-        <h3 style="font-size:1rem; font-weight:700; color:#ffffff; margin-bottom:0.4rem;">改善と再発防止</h3>
-        <p style="font-size:0.92rem; color:#cccccc; line-height:1.8;">失敗から学び、改善し続ける会社。再発防止に真摯に取り組んでいます。</p>
+        <h3 style="font-size:1rem; font-weight:700; color:#0f2438; margin-bottom:0.4rem;">改善と再発防止</h3>
+        <p style="font-size:0.92rem; color:#333333; line-height:1.8;">失敗から学び、改善し続ける会社。再発防止に真摯に取り組んでいます。</p>
       </div>
 
     </div>

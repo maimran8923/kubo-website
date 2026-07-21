@@ -179,8 +179,7 @@ nav {
 .portfolio-page {
   padding: 100px 20px 30px;
   text-align: center;
-  background: #111111;
-  min-height: 100vh;
+  background: transparent;
   color: #ffffff;
 }
 
@@ -233,6 +232,7 @@ nav {
 /* ─── PORTFOLIO PAGE ZONES ─────────────────── */
 .portfolio-zone {
   position: relative;
+  overflow: hidden;
   margin: 0 -20px;
   background-size: cover;
   background-position: center top;

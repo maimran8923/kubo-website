@@ -557,7 +557,24 @@
       overflow: hidden;
       width: 100%;
       padding: 7rem 2rem 5rem;
-      background: linear-gradient(180deg, #1592d6 0%, #1ea1e0 70%, #2baee6 92%, rgba(43,174,230,0) 100%);
+      background-image: url('Background/bg-sky-hero.jpg');
+      background-size: cover;
+      background-position: center 20%;
+      background-repeat: no-repeat;
+    }
+
+    /* fade the bottom of the sky photo to dark so it blends into the
+       services section's exterior-photo background below */
+    .hero::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 22%;
+      background: linear-gradient(180deg, rgba(8,10,14,0) 0%, rgba(8,10,14,0.92) 100%);
+      z-index: 0;
+      pointer-events: none;
     }
 
     /* warm glow blob */

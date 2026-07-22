@@ -260,6 +260,15 @@ nav {
 .portfolio-zone-2 {
   background-image: url('Background/bg-sky-roofline.jpg');
 }
+/* The zone wrapping the footer doesn't need .portfolio-zone::before's own
+   dark tint on top of footer's own rgba(0,0,0,0.22) background -- stacking
+   both made the portfolio footer noticeably darker than the homepage
+   footer (which only has its own single tint over the zone-3 photo, no
+   zone-level overlay of its own). Removing this one keeps the footer
+   photo/text brightness consistent with index.html's footer. */
+.portfolio-zone-footer::before {
+  background: transparent;
+}
 @media (max-width: 800px) {
   .portfolio-zone-1 { margin-top: -80px; }
 }

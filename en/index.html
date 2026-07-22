@@ -1843,22 +1843,24 @@
     }
 
     /* ═══ AFTER-PHOTO GLOW + SHINE SWEEP (matches portfolio.html) ═══
-       The 2nd .portfolio-item is always the "after" photo in this
-       preview pair. Same outline/glow/studio-light/shine-sweep treatment
-       as the gallery page's after-photos -- see styles.css for the full
-       rationale on the two rendering gotchas (stacking context from the
-       img's filter property, and the bright-core/dark-edge gradient
-       needed so the beam still reads against near-white photos). */
-    .portfolio-item:nth-child(2) {
+       Both .portfolio-item photos in this preview pair are "after" shots
+       (no genuine before photo for this teaser), so both get the same
+       outline/glow/studio-light/shine-sweep treatment as the gallery
+       page's after-photos, rather than singling out just the 2nd one --
+       see styles.css for the full rationale on the two rendering gotchas
+       (stacking context from the img's filter property, and the
+       bright-core/dark-edge gradient needed so the beam still reads
+       against near-white photos). */
+    .portfolio-item {
       z-index: 2;
     }
-    .portfolio-item:nth-child(2) .photo-wrapper {
+    .portfolio-item .photo-wrapper {
       outline: 3px solid rgba(255, 255, 255, 0.95);
       outline-offset: -1px;
       box-shadow: 0 0 34px 8px rgba(255, 255, 255, 0.55);
       transition: box-shadow 0.35s ease;
     }
-    .portfolio-item:nth-child(2) .photo-wrapper::after {
+    .portfolio-item .photo-wrapper::after {
       content: '';
       position: absolute;
       inset: 0;
@@ -1866,7 +1868,7 @@
       pointer-events: none;
       z-index: 2;
     }
-    .portfolio-item:nth-child(2) .photo-wrapper::before {
+    .portfolio-item .photo-wrapper::before {
       content: '';
       position: absolute;
       top: -60%;
@@ -1883,7 +1885,7 @@
       opacity: 0;
       z-index: 1;
     }
-    .portfolio-item:nth-child(2) .photo-wrapper.shine-play::before {
+    .portfolio-item .photo-wrapper.shine-play::before {
       animation: photoShineSweep 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
     @keyframes photoShineSweep {
@@ -1892,14 +1894,14 @@
       55%  { opacity: 1; }
       100% { left: 130%; opacity: 0; }
     }
-    .portfolio-item:nth-child(2) .photo-wrapper img {
+    .portfolio-item .photo-wrapper img {
       filter: brightness(1.16) saturate(1.18) contrast(1.04) !important;
       transition: transform 0.45s ease, filter 0.35s ease !important;
     }
-    .portfolio-item:nth-child(2) .photo-wrapper:hover img {
+    .portfolio-item .photo-wrapper:hover img {
       transform: scale(1.045);
     }
-    .portfolio-item:nth-child(2) .photo-wrapper:hover {
+    .portfolio-item .photo-wrapper:hover {
       box-shadow: 0 0 34px 8px rgba(255, 255, 255, 0.55), 0 14px 32px rgba(0,0,0,0.5);
     }
   </style>
@@ -2452,12 +2454,14 @@
 
   /* One-time "shine sweep" on the homepage's after-photo preview, once
      it's mostly in view (matches the portfolio page's after-photo effect).
+     Both photos in the pair are "after" shots (no genuine before photo
+     for this teaser), so both get the sweep, not just the 2nd one.
      0.8 -- note a taller-than-viewport photo (possible on wide desktop
      windows, since neither .portfolio-item nor its ancestors cap the
      photo's width) can never reach 80% simultaneous visibility, silently
      skipping the sweep; this is why the threshold was previously lowered
      to 0.5, raised back up on request. */
-  const shineTargets = document.querySelectorAll('.portfolio-item:nth-child(2) .photo-wrapper');
+  const shineTargets = document.querySelectorAll('.portfolio-item .photo-wrapper');
   if ('IntersectionObserver' in window) {
     const shineObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {

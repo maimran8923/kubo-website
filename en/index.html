@@ -532,12 +532,23 @@
       overflow: hidden;
       width: 100%;
       padding: 7rem 2rem 5rem;
+    }
+
+    /* soft-focus sky, matching the blurred look used elsewhere on the site --
+       blurred on its own layer (not the whole .hero) so the text stays sharp,
+       and overscanned past the edges so the blur's soft border is clipped
+       off by .hero's overflow:hidden instead of showing as a visible fringe. */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: -20px;
       background-image: url('../Background/bg-sky-hero.jpg');
       background-size: cover;
       background-position: center 20%;
       background-repeat: no-repeat;
+      filter: blur(8px);
+      z-index: 0;
     }
-
 
     /* warm glow blob */
     .hero::after {

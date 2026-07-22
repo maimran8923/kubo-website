@@ -388,24 +388,24 @@
       background-repeat: no-repeat;
       background-color: #0a0a0a;
     }
+    /* Sitewide: one tall image (a soft-focus modern house + building,
+       fading from open sky at its top down to street level at its
+       bottom) reused across every zone via a different background-
+       position instead of a different photo per zone -- no more seam to
+       blend between zones, since it's the same photo throughout. Each
+       zone's own position just picks which vertical band of that one
+       image shows through its box. */
     .zone-1 {
-      background-image: url('Background/bg-sky-roofline.jpg');
+      background-image: url('Background/bg-long-index.jpg');
+      background-position: center 0%;
     }
     .zone-2 {
-      background-image:
-        linear-gradient(to bottom, rgba(255,255,255,0.6) 0, transparent 200px, transparent calc(100% - 200px), rgba(255,255,255,0.6) 100%),
-        url('Background/bg-wood-floor-window.jpg');
-      background-size: 100% 100%, cover;
-      background-position: center top, center top;
-      background-repeat: no-repeat, no-repeat;
+      background-image: url('Background/bg-long-index.jpg');
+      background-position: center 45%;
     }
     .zone-3 {
-      background-image:
-        linear-gradient(to bottom, rgba(255,255,255,0.6) 0, transparent 200px),
-        url('Background/bg-dusk-skyline.jpg');
-      background-size: 100% 100%, cover;
-      background-position: center top, center top;
-      background-repeat: no-repeat, no-repeat;
+      background-image: url('Background/bg-long-index.jpg');
+      background-position: center 70%;
     }
 
     /* buttons */
@@ -556,9 +556,9 @@
       content: '';
       position: absolute;
       inset: -20px;
-      background-image: url('Background/bg-sky-hero.jpg');
+      background-image: url('Background/bg-long-index.jpg');
       background-size: cover;
-      background-position: center 20%;
+      background-position: center 0%;
       background-repeat: no-repeat;
       filter: blur(8px);
       z-index: 0;
@@ -749,9 +749,9 @@
       padding: 2rem 1.5rem;
       position: relative;
       z-index: 1;
-      background-image: url('Background/bg-sky-roofline.jpg');
+      background-image: url('Background/bg-long-index.jpg');
       background-size: cover;
-      background-position: center top;
+      background-position: center 10%;
     }
 
     .services-grid {
@@ -2073,7 +2073,7 @@
 </section>
 
 <!-- ══════════ STRENGTHS ══════════ -->
-<section id="strengths" style="padding: 2.5rem 2rem; position: relative; background-image: linear-gradient(to bottom, transparent calc(100% - 200px), rgba(255,255,255,0.6) 100%), url('Background/bg-sky-roofline.jpg'); background-size: 100% 100%, cover; background-position: center top, center top; background-repeat: no-repeat, no-repeat;">
+<section id="strengths" style="padding: 2.5rem 2rem; position: relative; background-image: url('Background/bg-long-index.jpg'); background-size: cover; background-position: center 25%;">
   <div style="position:absolute;inset:0;background:rgba(0,0,0,0.18);z-index:0;"></div>
   <div style="position:relative; z-index:1; max-width:1100px; margin:0 auto;">
     <div class="section-header">

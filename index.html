@@ -391,8 +391,22 @@
     .zone-1 {
       background-image: url('Background/bg-sky-roofline.jpg');
     }
-    .zone-2 { background-image: url('Background/bg-wood-floor-window.jpg'); }
-    .zone-3 { background-image: url('Background/bg-dusk-skyline.jpg'); }
+    .zone-2 {
+      background-image:
+        linear-gradient(to bottom, rgba(255,255,255,0.6) 0, transparent 200px, transparent calc(100% - 200px), rgba(255,255,255,0.6) 100%),
+        url('Background/bg-wood-floor-window.jpg');
+      background-size: 100% 100%, cover;
+      background-position: center top, center top;
+      background-repeat: no-repeat, no-repeat;
+    }
+    .zone-3 {
+      background-image:
+        linear-gradient(to bottom, rgba(255,255,255,0.6) 0, transparent 200px),
+        url('Background/bg-dusk-skyline.jpg');
+      background-size: 100% 100%, cover;
+      background-position: center top, center top;
+      background-repeat: no-repeat, no-repeat;
+    }
 
     /* buttons */
     .btn {
@@ -2057,7 +2071,7 @@
 </section>
 
 <!-- ══════════ STRENGTHS ══════════ -->
-<section id="strengths" style="padding: 2.5rem 2rem; position: relative; background-image: url('Background/bg-sky-roofline.jpg'); background-size: cover; background-position: center top;">
+<section id="strengths" style="padding: 2.5rem 2rem; position: relative; background-image: linear-gradient(to bottom, transparent calc(100% - 200px), rgba(255,255,255,0.6) 100%), url('Background/bg-sky-roofline.jpg'); background-size: 100% 100%, cover; background-position: center top, center top; background-repeat: no-repeat, no-repeat;">
   <div style="position:absolute;inset:0;background:rgba(0,0,0,0.18);z-index:0;"></div>
   <div style="position:relative; z-index:1; max-width:1100px; margin:0 auto;">
     <div class="section-header">

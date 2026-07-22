@@ -126,8 +126,11 @@
 <main class="portfolio-page">
   <div class="portfolio-zone portfolio-zone-1">
   <div class="portfolio-hero-header">
-    <p class="section-eyebrow">OUR WORK</p>
-    <h1 class="section-heading">Portfolio Gallery</h1>
+    <div class="trace-frame bold">
+      <p class="section-eyebrow">OUR WORK</p>
+      <h1 class="section-heading">Portfolio Gallery</h1>
+      <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
+    </div>
   </div>
 
   <!-- ── Residential (interior + exterior merged, per client request to stop splitting by interior/exterior) ── -->
@@ -645,6 +648,35 @@
     shineTargets.forEach(function(el) { shineObserver.observe(el); });
   } else {
     shineTargets.forEach(function(el) { el.classList.add('shine-play'); });
+  }
+
+  /* Border-trace flash on the "OUR WORK" header, same mechanism as the
+     homepage (see index.html for the full history/gotchas). Fired once
+     directly on load rather than via scroll-triggered IntersectionObserver
+     -- .portfolio-hero-header is the first thing on the page, already on
+     screen with no scroll needed, so it can never cross a scroll-based
+     trigger line the way lower-page headers do. */
+  function runTrace(frame) {
+    if (frame.dataset.traceQueued) return;
+    frame.dataset.traceQueued = '1';
+    setTimeout(function() {
+      frame.querySelectorAll('.trace-path').forEach(function(path) {
+        path.classList.remove('play');
+        void path.getBoundingClientRect();
+        path.classList.add('play');
+        path.addEventListener('animationend', function onDone() {
+          path.classList.remove('play');
+          path.removeEventListener('animationend', onDone);
+        });
+      });
+    }, 80);
+    setTimeout(function() {
+      delete frame.dataset.traceQueued;
+    }, 1030);
+  }
+  const heroTrace = document.querySelector('.portfolio-hero-header .trace-frame');
+  if (heroTrace) {
+    setTimeout(function() { runTrace(heroTrace); }, 400);
   }
 </script>
 <a href="index.html" class="floating-back-btn">← Home</a>

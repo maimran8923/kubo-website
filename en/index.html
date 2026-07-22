@@ -2513,29 +2513,43 @@
      this the element would stay permanently visible (stuck at its final
      dashoffset) after the very first flash instead of returning to the
      hidden idle state. */
+  function runTrace(frame) {
+    if (frame.dataset.traceQueued) return;
+    frame.dataset.traceQueued = '1';
+    setTimeout(function() {
+      frame.querySelectorAll('.trace-path').forEach(function(path) {
+        path.classList.remove('play');
+        void path.getBoundingClientRect();
+        path.classList.add('play');
+        path.addEventListener('animationend', function onDone() {
+          path.classList.remove('play');
+          path.removeEventListener('animationend', onDone);
+        });
+      });
+    }, 80);
+    setTimeout(function() {
+      delete frame.dataset.traceQueued;
+    }, 1030); // 80ms delay + .9s animation + a small buffer
+  }
+
   if ('IntersectionObserver' in window) {
     const traceObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
-        if (entry.isIntersecting && !entry.target.dataset.traceQueued) {
-          entry.target.dataset.traceQueued = '1';
-          setTimeout(function() {
-            entry.target.querySelectorAll('.trace-path').forEach(function(path) {
-              path.classList.remove('play');
-              void path.getBoundingClientRect();
-              path.classList.add('play');
-              path.addEventListener('animationend', function onDone() {
-                path.classList.remove('play');
-                path.removeEventListener('animationend', onDone);
-              });
-            });
-          }, 80);
-          setTimeout(function() {
-            delete entry.target.dataset.traceQueued;
-          }, 1030); // 80ms delay + .9s animation + a small buffer
-        }
+        if (entry.isIntersecting) runTrace(entry.target);
       });
     }, { threshold: 0, rootMargin: '-66.67% 0px -33.33% 0px' });
     document.querySelectorAll('.trace-frame').forEach(function(el) { traceObserver.observe(el); });
+  }
+
+  /* The hero's trace-frame is vertically centered inside a full-viewport-
+     height section that's already on screen at page load (no scroll
+     needed to see it), so it can never scroll DOWN to cross the 2/3-down
+     trigger line above -- scrolling only carries it further up, away from
+     that line. Fire it once directly on load instead of relying on the
+     scroll observer for this one frame. */
+  const heroTrace = document.querySelector('.hero .trace-frame');
+  if (heroTrace) {
+    setTimeout(function() { runTrace(heroTrace); }, 400);
   }
 
   /* Form submission — sends to Formspree via fetch (no page reload) */

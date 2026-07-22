@@ -147,9 +147,9 @@
       width: 100%;
       padding: 0.9rem 20px;
       box-sizing: border-box;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(0,0,0,0.1);
+      background: rgba(255,255,255,0.30);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid rgba(255,255,255,0.25);
       display: flex;
       align-items: center;
       min-height: 60px;
@@ -160,16 +160,18 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;
       font-size: 0.95rem;
-      color: #0f2438;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
       letter-spacing: 0.15em;
       text-transform: lowercase;
       white-space: nowrap;
       text-decoration: none;
     }
-    .nav-logo span { color: #0f2438; }
+    .nav-logo span { color: #ffffff; }
 
     .nav-phone {
-      color: #0f2438;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
       text-decoration: none;
       font-size: 0.85rem;
       letter-spacing: 0.05em;
@@ -188,10 +190,11 @@
       align-items: center;
       justify-content: center;
       padding: 0.2rem 0.6rem;
-      border: 1px solid rgba(15,36,56,0.4);
+      border: 1px solid rgba(255,255,255,0.5);
       border-radius: 999px;
-      background: rgba(15,36,56,0.06);
-      color: #0f2438;
+      background: rgba(255,255,255,0.15);
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
       text-decoration: none;
       font-family: 'Montserrat', sans-serif;
       font-size: 0.72rem;
@@ -201,14 +204,15 @@
       transition: background 0.2s ease, border-color 0.2s ease;
     }
     .nav-lang:hover {
-      background: rgba(15,36,56,0.12);
-      border-color: rgba(15,36,56,0.85);
+      background: rgba(255,255,255,0.28);
+      border-color: rgba(255,255,255,0.9);
     }
 
     #hamburger {
       background: none;
       border: none;
-      color: #0f2438;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
       font-size: 1.5rem;
       cursor: pointer;
       z-index: 1100;
@@ -222,23 +226,25 @@
       top: 100%;
       left: 0;
       right: 0;
-      background: rgba(255,255,255,0.97);
+      background: rgba(255,255,255,0.45);
+      backdrop-filter: blur(10px);
       padding: 20px;
       z-index: 999;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.25);
     }
     #mobile-menu a {
       display: block;
-      color: #0f2438;
+      color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
       text-decoration: none;
       padding: 12px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.25);
       font-size: 0.85rem;
       letter-spacing: 0.1em;
       font-family: 'Noto Sans JP', sans-serif;
     }
     #mobile-menu a:last-child { border-bottom: none; }
-    #mobile-menu a:hover { color: #555555; }
+    #mobile-menu a:hover { color: rgba(255,255,255,0.7); }
 
     .nav-logo-img {
       display: block;
@@ -250,8 +256,8 @@
       border-radius: 50%;
       object-fit: contain;
       object-position: center;
-      border: 2px solid rgba(15,36,56,0.15);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      border: 2px solid rgba(255,255,255,0.6);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
       background: transparent;
       mix-blend-mode: multiply;
     }

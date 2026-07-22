@@ -259,18 +259,18 @@ nav {
 .portfolio-zone-1 {
   margin-top: -100px;
   background-image: url('Background/bg-long-portfolio.jpg');
-  background-position: center 25%;
+  background-position: center 35%;
 }
 .portfolio-zone-2 {
   background-image: url('Background/bg-long-portfolio.jpg');
-  background-position: center 55%;
+  background-position: center 65%;
 }
 /* Ground-level crop for the footer specifically, overriding the
    .portfolio-zone-2 position it also carries -- keeps the footer showing
    street level like index.html's footer, instead of the gallery zone's
    building-reveal crop. */
 .portfolio-zone-footer {
-  background-position: center 90%;
+  background-position: center 92%;
 }
 /* The zone wrapping the footer doesn't need .portfolio-zone::before's own
    dark tint on top of footer's own rgba(0,0,0,0.22) background -- stacking
@@ -292,7 +292,7 @@ nav {
   padding: 130px 20px 1.25rem;
   background-image: url('Background/bg-long-portfolio.jpg');
   background-size: cover;
-  background-position: center 8%;
+  background-position: center 12%;
   background-repeat: no-repeat;
 }
 .portfolio-hero-header::before {

@@ -151,9 +151,9 @@
       width: 100%;
       padding: 0.9rem 20px;
       box-sizing: border-box;
-      background: rgba(10,10,10,0.95);
+      background: rgba(255,255,255,0.95);
       backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(255,255,255,.1);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
       display: flex;
       align-items: center;
       min-height: 60px;
@@ -164,16 +164,16 @@
       font-family: 'Montserrat', sans-serif;
       font-weight: 400;
       font-size: 0.95rem;
-      color: #ffffff;
+      color: #0f2438;
       letter-spacing: 0.15em;
       text-transform: lowercase;
       white-space: nowrap;
       text-decoration: none;
     }
-    .nav-logo span { color: #ffffff; }
+    .nav-logo span { color: #0f2438; }
 
     .nav-phone {
-      color: #ffffff;
+      color: #0f2438;
       text-decoration: none;
       font-family: 'Noto Sans JP', sans-serif;
       font-size: 0.85rem;
@@ -193,10 +193,10 @@
       align-items: center;
       justify-content: center;
       padding: 0.2rem 0.6rem;
-      border: 1px solid rgba(255,255,255,0.5);
+      border: 1px solid rgba(15,36,56,0.4);
       border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      color: #ffffff;
+      background: rgba(15,36,56,0.06);
+      color: #0f2438;
       text-decoration: none;
       font-family: 'Montserrat', sans-serif;
       font-size: 0.72rem;
@@ -206,14 +206,14 @@
       transition: background 0.2s ease, border-color 0.2s ease;
     }
     .nav-lang:hover {
-      background: rgba(255,255,255,0.18);
-      border-color: rgba(255,255,255,0.85);
+      background: rgba(15,36,56,0.12);
+      border-color: rgba(15,36,56,0.85);
     }
 
     #hamburger {
       background: none;
       border: none;
-      color: #ffffff;
+      color: #0f2438;
       font-size: 1.5rem;
       cursor: pointer;
       z-index: 1100;
@@ -227,23 +227,23 @@
       top: 100%;
       left: 0;
       right: 0;
-      background: rgba(26,26,26,0.92);
+      background: rgba(255,255,255,0.97);
       padding: 20px;
       z-index: 999;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
     }
     #mobile-menu a {
       display: block;
-      color: #ffffff;
+      color: #0f2438;
       text-decoration: none;
       padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
       font-size: 0.85rem;
       letter-spacing: 0.1em;
       font-family: 'Noto Sans', sans-serif;
     }
     #mobile-menu a:last-child { border-bottom: none; }
-    #mobile-menu a:hover { color: #aaaaaa; }
+    #mobile-menu a:hover { color: #555555; }
 
     .nav-logo-img {
       display: block;
@@ -255,52 +255,10 @@
       border-radius: 50%;
       object-fit: contain;
       object-position: center;
-      border: 2px solid #ffffff;
-      box-shadow: 0 0 8px rgba(255,255,255,0.3);
+      border: 2px solid rgba(15,36,56,0.15);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       background: transparent;
       mix-blend-mode: multiply;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.8rem;
-      list-style: none;
-    }
-    .nav-links a {
-      text-decoration: none;
-      color: #ffffff;
-      font-size: 0.88rem;
-      font-weight: 500;
-      transition: color .25s;
-    }
-    .nav-links a:hover { color: #aaaaaa; }
-
-    .nav-cta {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 0.88rem;
-      color: #ffffff;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-    .nav-cta:hover { color: #888888; text-decoration: none; }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--primary);
-      transition: .3s;
-      border-radius: 2px;
     }
 
     @media (max-width: 768px) {
@@ -1611,9 +1569,6 @@
     }
 
     @media (max-width: 800px) {
-      .nav-links, .nav-cta { display: none; }
-      .hamburger { display: flex; }
-
       .gallery-grid {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 200px 200px 200px;

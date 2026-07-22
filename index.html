@@ -2489,31 +2489,40 @@
     shineTargets.forEach(function(el) { el.classList.add('shine-play'); });
   }
 
-  /* Border-trace flash: replays every time a header block crosses the
-     vertical middle of the viewport, unlike the one-shot .reveal/
-     shine-sweep effects above. rootMargin "-50% 0px -50% 0px" shrinks the
-     observer's effective viewport to a zero-height line at screen center,
-     so isIntersecting only flips true right as a header passes through
-     the middle — this also naturally keeps only one header's flash active
-     at a time (two headers rarely straddle the exact center line
+  /* Border-trace flash: replays every time a header block crosses a
+     horizontal trigger line 2/3 of the way down the viewport, unlike the
+     one-shot .reveal/shine-sweep effects above. rootMargin
+     "-66.67% 0px -33.33% 0px" shrinks the observer's effective viewport to
+     a zero-height line at that 2/3-down point (shrink 66.67% off the top,
+     33.33% off the bottom -- the two edges meet at 66.67% down from the
+     original top), so isIntersecting only flips true right as a header
+     passes through it — this also naturally keeps only one header's flash
+     active at a time (two headers rarely straddle the exact line
      together), instead of the old 40%-visible threshold which could let
      two nearby headers (e.g. #about's "About Us" and "Company Profile")
      both be >40% visible at once and flash together. Observes each
      .trace-frame individually so sections with more than one header each
-     flash independently when THEY cross the middle.
+     flash independently when THEY cross the line.
+
+     Moved from dead-center (50%) to 2/3-down (66.67%) on request: a header
+     scrolls up into view from the BOTTOM of the viewport, so the trigger
+     line needs to sit closer to the bottom edge (a higher % from the top)
+     to fire soon after the user first sees the header, not after they've
+     already been looking at it for a while waiting for it to reach the
+     exact middle.
 
      Only an 80ms delay now (was 700ms) — confirmed via a real screen
      recording that the old 700ms delay was long enough for continuous
-     scrolling to carry the header well past the middle before the flash
-     even started, so it fired late and out of sync with scroll position,
-     and on a fast scroll the delayed flash could land around the same
-     moment as the NEXT header's own (also-delayed) flash, reading as
+     scrolling to carry the header well past the trigger line before the
+     flash even started, so it fired late and out of sync with scroll
+     position, and on a fast scroll the delayed flash could land around the
+     same moment as the NEXT header's own (also-delayed) flash, reading as
      multiple runners at once. 80ms is just enough to dodge layout jitter
      right at the threshold crossing. The .reveal fade-in (650ms) that the
      700ms value was originally sized for isn't a concern here: reaching
-     the viewport's vertical middle requires scrolling roughly half a
-     screen further than the .reveal trigger point (12% visible from the
-     bottom), which in practice takes longer than the fade-in anyway.
+     the 2/3-down trigger line still requires scrolling further than the
+     .reveal trigger point (12% visible from the bottom), which in practice
+     takes longer than the fade-in anyway.
      The traceQueued guard stops a second intersection event from
      restarting the animation mid-flight before it reaches its stop
      position. The animationend listener removes .play once the sweep
@@ -2542,7 +2551,7 @@
           }, 1030); // 80ms delay + .9s animation + a small buffer
         }
       });
-    }, { threshold: 0, rootMargin: '-50% 0px -50% 0px' });
+    }, { threshold: 0, rootMargin: '-66.67% 0px -33.33% 0px' });
     document.querySelectorAll('.trace-frame').forEach(function(el) { traceObserver.observe(el); });
   }
 

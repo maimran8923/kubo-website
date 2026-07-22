@@ -225,13 +225,19 @@
       padding: 4px 8px;
     }
 
+    /* Dark scrim (not the light glass used on the thin nav bar) -- white
+       text needs a genuinely dark backdrop to stay legible, and a light
+       translucent background stops providing that once it sits over a
+       bright part of the photo, since white-on-near-white barely shows
+       even with a shadow. This dropdown needs to work reliably over any
+       part of the page, so it gets its own solid-ish dark tint. */
     #mobile-menu {
       display: none;
       position: absolute;
       top: 100%;
       left: 0;
       right: 0;
-      background: rgba(255,255,255,0.45);
+      background: rgba(10,14,20,0.75);
       backdrop-filter: blur(10px);
       padding: 20px;
       z-index: 999;
@@ -363,13 +369,19 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
       margin-bottom: 0.6rem;
     }
 
+    /* Standard header size sitewide -- matches the footer's ㍿ 久保工務店
+       wordmark (.ft-logo, 1.5rem) so every major heading reads at one
+       consistent size instead of the mix of 2rem/1.75rem/1.625rem/etc that
+       had accumulated across different sections. */
     .section-title {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: #ffffff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
       line-height: 1.25;
     }
 
@@ -610,9 +622,12 @@
       text-shadow: 0 1px 3px rgba(0,0,0,0.9), 0 2px 10px rgba(0,0,0,0.55);
     }
 
+    /* Matches the footer's ㍿ 久保工務店 wordmark (.ft-logo) size, since
+       it's the same brand text -- part of the sitewide header-size
+       standard. */
     .hero-name {
       font-family: 'Noto Sans', sans-serif;
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: #ffffff;
       letter-spacing: 0.05em;
@@ -770,13 +785,6 @@
       text-align: center;
       max-width: 1100px;
       margin: 2.5rem auto 1rem;
-    }
-    .two-track-label .section-label { color: #ffffff; text-shadow: 0 1px 4px rgba(0,0,0,0.85); }
-    .two-track-label p.two-track-heading {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #ffffff;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.85);
     }
 
     .two-track {
@@ -1135,16 +1143,14 @@
 
     /* ─── BACKGROUND-IMAGE SECTION TEXT ──────────── */
     /* Applies to hero, services, gallery, about, quote — any section
-       with a background photo. Ensures minimum legibility. */
-    #gallery   h2, #gallery   .section-title,
-    #about     h2, #about     .section-title,
-    #quote     h2, #quote     .section-title,
-    #area      h2, #area      .section-title,
-    #instagram h2, #instagram .section-title {
-      color: #ffffff;
-      text-shadow: 0 1px 8px rgba(0,0,0,0.85);
-    }
-
+       with a background photo. Ensures minimum legibility. Headers
+       (.section-title/.section-label) now get their color/shadow from
+       their own base rule instead of being repeated per-section here --
+       this used to also override h2/.section-title/.section-label color
+       and shadow per-section, at slightly different values each time,
+       which is exactly the inconsistency that made headers look "all
+       over the place." Only general paragraph/list text still needs a
+       per-section rule, since that isn't covered by a single shared class. */
     #gallery   p, #gallery   li,
     #about     p, #about     li,
     #quote     p, #quote     li,
@@ -1153,15 +1159,6 @@
       color: #ffffff;
       text-shadow: 0 1px 4px rgba(0,0,0,0.9);
       line-height: 1.7;
-    }
-
-    /* Section labels (small uppercase tags above headings) */
-    #gallery   .section-label,
-    #about     .section-label,
-    #quote     .section-label,
-    #area      .section-label,
-    #instagram .section-label {
-      text-shadow: 0 1px 4px rgba(0,0,0,0.85);
     }
 
     /* ─── INSTAGRAM ──────────────────────────────── */
@@ -1365,9 +1362,6 @@
       background: rgba(0,0,0,0.20);
       z-index: 0;
     }
-    #quote .section-label { color: #ffffff; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
-    #quote .section-title { color: #ffffff; }
-
     .contact-info {
       text-align: center;
       margin-bottom: 3rem;
@@ -1592,11 +1586,8 @@
         min-height: 140px;
         margin-bottom: 1.25rem;
       }
-      .hero-name { font-size: 1.3rem; }
       .hero-free-text { font-size: 1.3rem; }
       .hero-tagline { font-size: 1.9rem; }
-      .section-title { font-size: 1.75rem; }
-      #quote .section-title { font-size: 1.625rem; }
     }
 
     @media (max-width: 800px) {
@@ -2038,7 +2029,7 @@
   <div class="two-track-label">
     <div class="trace-frame bold">
       <p class="section-label">TWO APPROACHES</p>
-      <p class="two-track-heading">Two Ways We Work</p>
+      <h2 class="section-title">Two Ways We Work</h2>
       <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
     </div>
   </div>
@@ -2067,7 +2058,7 @@
     <div class="section-header">
       <div class="trace-frame bold">
         <p class="section-label" style="color:#ffffff; text-shadow:0 1px 4px rgba(0,0,0,0.85);">WHY CHOOSE US</p>
-        <h2 class="section-title" style="color:#ffffff; text-shadow:0 1px 4px rgba(0,0,0,0.85);">Kubo Koumuten's Strengths</h2>
+        <h2 class="section-title">Kubo Koumuten's Strengths</h2>
         <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path class="trace-path" d="M 100 0 L 100 100 L 0 100 L 0 0 L 100 0 Z" /></svg>
       </div>
     </div>

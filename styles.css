@@ -189,7 +189,7 @@ nav {
 
 /* ─── PORTFOLIO PAGE ──────────────────────────── */
 .portfolio-page {
-  padding: 100px 20px 30px;
+  padding: 100px 20px 0;
   text-align: center;
   background: transparent;
   color: #ffffff;
@@ -233,14 +233,6 @@ nav {
 
 @media (max-width: 800px) {
   .portfolio-page { padding-top: 80px; }
-}
-
-@media (min-width: 801px) {
-  /* The 30px bottom padding left a visible flat-color strip between the
-     last gallery photo and the footer on desktop, since photos here
-     don't reach the very edge of .portfolio-page the way they do on
-     narrower/taller mobile layouts. */
-  .portfolio-page { padding-bottom: 0; }
 }
 
 /* ─── PORTFOLIO PAGE ZONES ─────────────────── */
@@ -297,7 +289,7 @@ nav {
 .portfolio-hero-header {
   position: relative;
   z-index: 1;
-  padding: 130px 20px 1.25rem;
+  padding: 95px 20px 0.5rem;
   background-image: url('Background/bg-long-portfolio.jpg');
   background-size: cover;
   background-position: center 12%;
@@ -316,7 +308,7 @@ nav {
   z-index: 1;
 }
 @media (max-width: 800px) {
-  .portfolio-hero-header { padding-top: 110px; }
+  .portfolio-hero-header { padding-top: 85px; }
 }
 
 /* ─── BORDER-TRACE FLASH (see index.html for the full history/gotchas) ───

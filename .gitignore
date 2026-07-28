@@ -1,0 +1,9 @@
+# Internal/reference files that must never be published on this public repo.
+# None of these are part of the live site build.
+Info/
+Screenshot/
+Blog page/
+Background/Portfolio Page/
+
+# Local Claude Code tool configuration -- not secret, but not project content.
+.claude/

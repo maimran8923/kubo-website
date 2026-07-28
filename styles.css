@@ -602,7 +602,7 @@ nav {
   letter-spacing: 0.12em;
   text-decoration: underline !important;
   text-underline-offset: 4px;
-  text-decoration-color: rgba(255,255,255,0.35) !important;
+  text-decoration-color: rgba(15,36,56,0.35) !important;
   opacity: 1 !important;
   pointer-events: auto !important;
   cursor: pointer;
